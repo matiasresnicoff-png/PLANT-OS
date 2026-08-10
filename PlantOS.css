@@ -1,0 +1,357 @@
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: #f5f6f5;
+    color: #26352d;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+h1 {
+    color: #246b4a;
+    font-size: 28px;
+    text-align: center;
+    margin: 25px 0 10px;
+}
+
+h2 {
+    color: #246b4a;
+    text-align: center;
+    font-size: 20px;
+}
+
+
+/* =========================
+   CONTENEDOR DE LOGIN
+========================= */
+
+form {
+    width: 350px;
+    margin: 30px auto;
+    padding: 30px;
+
+    background-color: white;
+
+    border: 1px solid #e0e5e1;
+    border-radius: 10px;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+input {
+    width: 100%;
+
+    padding: 12px;
+    margin: 7px 0;
+
+    border: 1px solid #b8d9c7;
+    border-radius: 5px;
+
+    background-color: #ffffff;
+
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid #4fd19b;
+}
+
+
+/* =========================
+   BOTONES
+========================= */
+
+button {
+    padding: 12px 25px;
+
+    margin: 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #4fd19b;
+    color: white;
+
+    font-size: 13px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #39b984;
+}
+
+
+/* =========================
+   BOTÓN SECUNDARIO
+========================= */
+
+.boton-secundario {
+    background-color: white;
+
+    color: #318b65;
+
+    border: 1px solid #4fd19b;
+}
+
+.boton-secundario:hover {
+    background-color: #eafff5;
+}
+
+
+/* =========================
+   MENÚ PRINCIPAL
+   FLEXBOX
+========================= */
+
+nav {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px;
+
+    background-color: white;
+
+    border-bottom: 1px solid #e1e7e3;
+}
+
+nav button {
+    margin: 0;
+
+    background-color: transparent;
+    color: #246b4a;
+
+    border: none;
+
+    font-size: 13px;
+}
+
+nav button:hover {
+    background-color: #e9fff4;
+    color: #2f9b6c;
+}
+
+
+/* =========================
+   CONTENIDO PRINCIPAL
+========================= */
+
+.contenido {
+    width: 90%;
+    max-width: 1000px;
+
+    margin: 30px auto;
+
+    text-align: center;
+}
+
+
+/* =========================
+   TARJETAS
+   CSS GRID
+========================= */
+
+.tarjetas {
+    width: 90%;
+    max-width: 1000px;
+
+    margin: 30px auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.tarjeta {
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 10px;
+
+    border: 1px solid #e1e8e3;
+
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+
+    text-align: center;
+}
+
+.tarjeta h3 {
+    color: #287b55;
+}
+
+.tarjeta p {
+    color: #6b756f;
+    font-size: 13px;
+}
+
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+p {
+    max-width: 600px;
+
+    margin: 10px auto;
+
+    color: #5d6962;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   PERFIL
+========================= */
+
+.perfil {
+    width: 350px;
+
+    margin: 40px auto;
+
+    padding: 30px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    border: 1px solid #e0e7e2;
+
+    text-align: center;
+}
+
+.perfil h2 {
+    margin-bottom: 20px;
+}
+
+
+/* =========================
+   MEDIDORES
+   HUMEDAD / TEMPERATURA /
+   CONDUCTIVIDAD
+========================= */
+
+.medidor {
+    width: 350px;
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    border: 1px solid #e0e7e2;
+
+    text-align: center;
+}
+
+.valor {
+    color: #287b55;
+
+    font-size: 35px;
+
+    font-weight: bold;
+
+    margin: 15px 0;
+}
+
+
+/* =========================
+   GRÁFICOS / HISTORIAL
+========================= */
+
+.historial {
+    width: 90%;
+    max-width: 800px;
+
+    margin: 30px auto;
+
+    padding: 25px;
+
+    background-color: white;
+
+    border-radius: 12px;
+
+    border: 1px solid #e0e7e2;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: auto;
+
+    width: 100%;
+
+    padding: 15px;
+
+    background-color: white;
+
+    border-top: 1px solid #e0e7e2;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    color: #718078;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    nav {
+        flex-direction: column;
+    }
+
+    .tarjetas {
+        grid-template-columns: 1fr;
+    }
+
+    form,
+    .perfil,
+    .medidor {
+        width: 90%;
+    }
+}
