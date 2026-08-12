@@ -4,16 +4,14 @@
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-
-    font-family: Arial, Helvetica, sans-serif;
-
-    background-color: #f4f6f4;
-    color: #26382f;
-
-    text-align: center;
+    width: 500px;
+    height: 715px;
+    background: #F7FFF8;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 500;
+    word-wrap: break-word
 }
 
 h1 {
