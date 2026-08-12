@@ -1,5 +1,0 @@
-[
-{"idSensor":1,"tipoSensor":"húmedad","unidad":"%","Estado":"activo","microprocesador":"Arduino uno"}
-,{"idSensor":2,"tipoSensor":"temperatura","unidad":"°C","Estado":"activo","microprocesador":"Arduino uno"}
-,{"idSensor":3,"tipoSensor":"conductividad del suelo","unidad":"dS/m","Estado":"activo","microprocesador":"Arduino uno"}
-]
