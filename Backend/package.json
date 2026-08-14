@@ -1,26 +1,13 @@
 {
-  "name": "plant-os",
+  "name": "backend",
   "version": "1.0.0",
-  "description": "este es el repositorio del frontend y backend de nuestro proyecto de 3er año",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --experimental-strip-types src/pruebas/pruebasfs.ts"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/matiasresnicoff-png/PLANT-OS.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/matiasresnicoff-png/PLANT-OS/issues"
-  },
-  "homepage": "https://github.com/matiasresnicoff-png/PLANT-OS#readme",
+  "dependencies": {},
   "devDependencies": {
-    "@types/node": "^26.2.0",
-    "tsx": "^4.23.12",
-    "typescript": "^7.0.2"
+    "@types/node": "^...",
+    "typescript": "^..."
   }
 }
