@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "node --experimental-strip-types src/pruebas/pruebasfs.ts"
+    "simulador": "node --experimental-strip-types src/pruebas/simuladorArduino.ts",
+    "principal": "node --experimental-strip-types src/pruebas/end1.ts"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^5.2.1",
+    "serialport": "^12.0.0"
+  },
   "devDependencies": {
-    "@types/node": "^...",
-    "typescript": "^..."
+    "@types/express": "^5.0.6",
+    "@types/node": "^20.0.0",
+    "@types/serialport": "^8.0.5",
+    "typescript": "^5.0.0"
   }
 }
