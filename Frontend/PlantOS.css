@@ -1,10 +1,8 @@
-body {
+.wireframe {
     width: 500px;
-    height: 715px;
+    height: 750px;
+    position: relative;
     background: #F7FFF8;
-    color: #2D6A4F;
-    font-size: 20px;
-    font-family: Poppins;
-    font-weight: 500;
-    word-wrap: break-word
+    overflow: hidden;
+    margin: 0 auto;
 }
