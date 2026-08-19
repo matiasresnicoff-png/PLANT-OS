@@ -1,7 +1,7 @@
 .wireframe {
     width: 500px;
     height: 750px;
-    position: relative;
+    display: flex;
     background: #F7FFF8;
     overflow: hidden;
     margin: 0 auto;
