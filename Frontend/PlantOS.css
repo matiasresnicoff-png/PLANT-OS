@@ -49,21 +49,11 @@
     background: #656A67;
 }
 
-
-.texto-bienvenido {
-    width: 437px;
-    height: 117px;
-
-    color: #2D6A4F;
-    font-size: 20px;
-    font-family: Poppins;
-    font-weight: 500;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
+.logo-tarjeta {
+    width: 100px;
+    height: 100px;
+    background: #656A67;
+    border-radius: 9999px;
 }
 
 .bloque-imagen {
@@ -189,8 +179,6 @@
     width: 26px;
     height: 19px;
     background: #D9D9D9;
-    top: 21px;
-    left: 17px;
 }
 
 
@@ -355,29 +343,6 @@
 }
 
 .icono-volver {
-    width: 27px;
-    height: 27px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    overflow: hidden;
-}
-
-.linea-icono {
-    width: 18.56px;
-    height: 1.69px;
-    background: black;
-}
-
-.flecha-icono {
-    width: 9.29px;
-    height: 16.88px;
-    background: black;
-}
-
-.fondo-icono {
     width: 26px;
     height: 19px;
     background: #D9D9D9;
@@ -588,4 +553,150 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.acerca-proyecto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.logo-acerca {
+    width: 45px;
+    height: 45px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-acerca {
+    width: 252px;
+    height: 36px;
+    background: #D9D9D9;
+}
+
+
+.perfil-acerca {
+    width: 132px;
+    height: 116px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.subtitulo-acerca {
+    width: 300px;
+    height: 24px;
+    background: #D9D9D9;
+}
+
+
+.tarjeta-proyecto {
+    width: 392px;
+    height: 183px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.contenido-proyecto {
+    width: 242px;
+    height: 143px;
+    background: #656A67;
+}
+
+
+.tarjeta-informacion-proyecto {
+    width: 392px;
+    height: 154px;
+
+    background: #D9D9D9;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.informacion-proyecto {
+    width: 322px;
+    height: 117px;
+    background: #656A67;
+}
+
+.mi-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.foto-perfil {
+    width: 114.99px;
+    height: 114.41px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.nombre-perfil {
+    width: 102px;
+    height: 23px;
+    background: #D9D9D9;
+}
+
+
+.descripcion-perfil {
+    width: 159px;
+    height: 16px;
+    background: #D9D9D9;
+}
+
+.tarjeta-datos-perfil {
+    width: 439px;
+    height: 258px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.dato-perfil {
+    width: 228px;
+    height: 32px;
+    background: #656A67;
+}
+
+.tarjeta-extra-perfil {
+    width: 438.41px;
+    height: 71.51px;
+
+    background: #D9D9D9;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenido-extra-perfil {
+    width: 176px;
+    height: 32px;
+    background: #656A67;
 }
