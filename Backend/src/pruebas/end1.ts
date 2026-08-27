@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import pkg from 'express';
 const express = pkg;
 import type { Request, Response } from 'express';
+import usuariosRutas from '../rutas/rutasUsuarios.ts';
 
 // Definimos __dirname para módulos ES
 const __filename = fileURLToPath(import.meta.url);
@@ -18,6 +19,7 @@ const app = express();
 const PORT_HTTP = 3000;
 
 app.use(express.json());
+app.use('/api', usuariosRutas);
 
 const filePath = path.join(__dirname, 'sensores.json');
 
