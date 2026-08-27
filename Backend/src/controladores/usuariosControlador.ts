@@ -59,3 +59,36 @@ export async function loginUsuario(req: Request, res: Response) {
     },
   });
 }
+export function verPerfil(req: Request, res: Response) {
+  const { idUsuario } = (req as any).usuario;
+  const usuarios = leerUsuarios();
+  const usuario = usuarios.find((u) => u.idUsuario === idUsuario);
+
+  if (!usuario) {
+    return res.status(404).json({ error: 'Usuario no encontrado' });
+  }
+
+  const { contraseña: _, ...usuarioSinContraseña } = usuario;
+  res.status(200).json(usuarioSinContraseña);
+}
+
+export function editarPerfil(req: Request, res: Response) {
+  const { idUsuario } = (req as any).usuario;
+  const { nombre, fechaNacimiento, mail } = req.body;
+
+  const usuarios = leerUsuarios();
+  const index = usuarios.findIndex((u) => u.idUsuario === idUsuario);
+
+  if (index === -1) {
+    return res.status(404).json({ error: 'Usuario no encontrado' });
+  }
+
+  if (nombre) usuarios[index].nombre = nombre;
+  if (fechaNacimiento) usuarios[index].fechaNacimiento = fechaNacimiento;
+  if (mail) usuarios[index].mail = mail;
+
+  guardarUsuarios(usuarios);
+
+  const { contraseña: _, ...usuarioActualizado } = usuarios[index];
+  res.status(200).json(usuarioActualizado);
+}
