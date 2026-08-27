@@ -111,7 +111,6 @@ function processarBloque(lineas: string[]) {
   let conductividad: number | null = null;
 
   for (const l of lineas) {
-    // Buscamos patrones de números (enteros o decimales)
     const match = l.match(/-?\d+(\.\d+)?/);
     if (!match) continue;
 

@@ -1,0 +1,22 @@
+# Dependencias
+node_modules/
+
+# Compilación de TypeScript (si generas carpeta dist/ o build/)
+dist/
+build/
+
+# Variables de entorno y credenciales
+.env
+.env.*
+
+# Logs de npm o yarn
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Archivos del sistema operativo y editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
