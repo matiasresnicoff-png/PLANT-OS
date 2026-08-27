@@ -1,10 +1,718 @@
-body {
-    width: 500px;
-    height: 715px;
-    background: #F7FFF8;
-    color: #2D6A4F;
-    font-size: 20px;
-    font-family: Poppins;
-    font-weight: 500;
-    word-wrap: break-word
+
+.wireframe {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.bienvenido {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.logo-bienvenido {
+    width: 100px;
+    height: 100px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-bienvenido {
+    width: 257px;
+    height: 19px;
+    background: #D9D9D9;
+}
+
+
+.tarjeta-bienvenido {
+    width: 458px;
+    height: 422px;
+    background: #D9D9D9;
+    border-radius: 25px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    padding-top: 19px;
+    box-sizing: border-box;
+}
+
+.bloque-titulo {
+    width: 349px;
+    height: 38px;
+    background: #656A67;
+}
+
+.logo-tarjeta {
+    width: 100px;
+    height: 100px;
+    background: #656A67;
+    border-radius: 9999px;
+}
+
+.bloque-imagen {
+    width: 234px;
+    height: 169px;
+    background: #656A67;
+}
+
+.boton-bienvenido {
+    width: 348px;
+    height: 62px;
+    background: #656A67;
+}
+
+.pantalla-inicial {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.logo-inicial {
+    width: 164px;
+    height: 156px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-inicial {
+    width: 340px;
+    height: 27px;
+    background: #D9D9D9;
+}
+
+
+.circulo-inicial {
+    width: 210px;
+    height: 182px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.contenedor-botones {
+    width: 500px;
+    height: 346px;
+    background: #D9D9D9;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 50px;
+}
+
+.boton-inicial {
+    width: 440.75px;
+    height: 64.18px;
+    background: #656A67;
+    border-radius: 14px;
+}
+
+.registrarse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+
+.logo-registrarse {
+    width: 164px;
+    height: 156px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-registrarse {
+    width: 340px;
+    height: 27px;
+    background: #D9D9D9;
+}
+
+
+.campo-registro {
+    width: 440.75px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.etiqueta-registro {
+    width: 56px;
+    height: 9px;
+    background: #D9D9D9;
+}
+
+.input-registro {
+    width: 440.75px;
+    height: 64.18px;
+    background: #D9D9D9;
+}
+
+.boton-registro {
+    width: 440.75px;
+    height: 64.18px;
+    background: #D9D9D9;
+}
+
+.texto-registro {
+    width: 230px;
+    height: 11px;
+    background: #D9D9D9;
+}
+
+.icono-registro {
+    width: 26px;
+    height: 19px;
+    background: #D9D9D9;
+    align-self: flex-start;
+}
+
+
+.iniciar-sesion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo-login {
+    width: 164px;
+    height: 156px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-login {
+    width: 340px;
+    height: 27px;
+    background: #D9D9D9;
+}
+
+
+.imagen-login {
+    width: 163px;
+    height: 149px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.campo-login {
+    width: 440.75px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+.etiqueta-login {
+    width: 56px;
+    height: 9px;
+    background: #D9D9D9;
+}
+
+
+.input-login {
+    width: 440.75px;
+    height: 64.18px;
+    background: #D9D9D9;
+}
+
+.texto-login {
+    width: 230px;
+    height: 11px;
+    background: #D9D9D9;
+}
+
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.logo-inicio {
+    width: 125px;
+    height: 42px;
+    background: #D9D9D9;
+}
+
+
+.titulo-inicio {
+    width: 214px;
+    height: 21px;
+    background: #D9D9D9;
+}
+.perfil-circulo{
+    width: 67px;
+    height: 68px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+    display: flex;
+  justify-content: space-between; 
+  align-items: center;
+}
+
+.logo-circulo{
+    width: 67px;
+    height: 68px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.circulo-inicio {
+    width: 202px;
+    height: 204px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.tarjetas-inicio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+
+
+.tarjeta-inicio {
+    width: 146.59px;
+    height: 149px;
+    background: #D9D9D9;
+    border-radius: 12px;
+}
+
+
+.barra-navegacion {
+    width: 509.60px;
+    height: 42.87px;
+    background: #D9D9D9;
+
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.icono-navegacion {
+    width: 17.91px;
+    height: 17.91px;
+}
+
+
+.opcion-navegacion {
+    background: #656A67;
+}
+
+.opcion-centro {
+    width: 151px;
+    height: 22px;
+}
+
+.opcion-izquierda {
+    width: 79px;
+    height: 26px;
+}
+
+.opcion-derecha {
+    width: 81px;
+    height: 25px;
+}
+
+.detalle-humedad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.icono-volver {
+    width: 26px;
+    height: 19px;
+    background: #D9D9D9;
+}
+
+
+.perfil-humedad {
+    width: 45px;
+    height: 45px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-humedad {
+    width: 252px;
+    height: 36px;
+    background: #D9D9D9;
+}
+
+
+.tarjeta-estado {
+    width: 392.40px;
+    height: 119.43px;
+
+    background: #D9D9D9;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 15px;
+}
+
+.dato-estado {
+    width: 162px;
+    height: 25px;
+    background: #656A67;
+}
+
+.valor-estado {
+    width: 90px;
+    height: 37px;
+    background: #656A67;
+}
+
+
+.subtitulo-humedad {
+    width: 122px;
+    height: 22px;
+    background: #656A67;
+}
+
+
+.grafico-humedad {
+    width: 392px;
+    height: 231px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.grafico-interior {
+    width: 327px;
+    height: 157px;
+    background: #656A67;
+}
+
+
+.texto-grafico {
+    width: 188px;
+    height: 21px;
+    background: #656A67;
+}
+
+
+.tarjeta-informacion {
+    width: 392px;
+    height: 68px;
+
+    background: #D9D9D9;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.informacion-interior {
+    width: 361px;
+    height: 37px;
+    background: #656A67;
+}
+
+
+.barra-navegacion {
+    width: 509.60px;
+    height: 42.87px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
+.icono-navegacion {
+    width: 17.91px;
+    height: 17.91px;
+}
+
+
+.opcion-navegacion {
+    background: #656A67;
+}
+
+.opcion-centro {
+    width: 151px;
+    height: 22px;
+}
+
+.opcion-izquierda {
+    width: 79px;
+    height: 26px;
+}
+
+.opcion-derecha {
+    width: 81px;
+    height: 25px;
+}
+
+.perfil-temperatura {
+    width: 45px;
+    height: 45px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-temperatura {
+    width: 252px;
+    height: 36px;
+    background: #D9D9D9;
+}
+
+.subtitulo-temperatura {
+    width: 122px;
+    height: 22px;
+    background: #656A67;
+}
+
+.grafico-temperatura {
+    width: 392px;
+    height: 231px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.perfil-conductividad {
+    width: 45px;
+    height: 45px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-conductividad {
+    width: 252px;
+    height: 36px;
+    background: #D9D9D9;
+}
+
+.subtitulo-conductividad {
+    width: 122px;
+    height: 22px;
+    background: #656A67;
+}
+
+
+.grafico-conductividad {
+    width: 392px;
+    height: 231px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.acerca-proyecto {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.logo-acerca {
+    width: 45px;
+    height: 45px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.titulo-acerca {
+    width: 252px;
+    height: 36px;
+    background: #D9D9D9;
+}
+
+
+.perfil-acerca {
+    width: 132px;
+    height: 116px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.subtitulo-acerca {
+    width: 300px;
+    height: 24px;
+    background: #D9D9D9;
+}
+
+
+.tarjeta-proyecto {
+    width: 392px;
+    height: 183px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.contenido-proyecto {
+    width: 242px;
+    height: 143px;
+    background: #656A67;
+}
+
+
+.tarjeta-informacion-proyecto {
+    width: 392px;
+    height: 154px;
+
+    background: #D9D9D9;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.informacion-proyecto {
+    width: 322px;
+    height: 117px;
+    background: #656A67;
+}
+
+.mi-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.foto-perfil {
+    width: 114.99px;
+    height: 114.41px;
+    background: #D9D9D9;
+    border-radius: 9999px;
+}
+
+
+.nombre-perfil {
+    width: 102px;
+    height: 23px;
+    background: #D9D9D9;
+}
+
+
+.descripcion-perfil {
+    width: 159px;
+    height: 16px;
+    background: #D9D9D9;
+}
+
+.tarjeta-datos-perfil {
+    width: 439px;
+    height: 258px;
+
+    background: #D9D9D9;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.dato-perfil {
+    width: 228px;
+    height: 32px;
+    background: #656A67;
+}
+
+.tarjeta-extra-perfil {
+    width: 438.41px;
+    height: 71.51px;
+
+    background: #D9D9D9;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contenido-extra-perfil {
+    width: 176px;
+    height: 32px;
+    background: #656A67;
+}
+@media (max-width: 768px) {
+    body {
+      background-color: lightblue; 
+    }
+  }
