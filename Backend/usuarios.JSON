@@ -1,7 +1,16 @@
 [
-{"idUsuario":"1"
-,"nombre":"Matias"
-,"fechaNacimiento":"05/08/2008"
-,"mail":"mati@gmail.com"
-,"contraseña":"*******"}
+  {
+    "idUsuario": "1",
+    "nombre": "Matias",
+    "fechaNacimiento": "05/08/2008",
+    "mail": "mati@gmail.com",
+    "contraseña": "*******"
+  },
+  {
+    "idUsuario": "2",
+    "nombre": "Test",
+    "fechaNacimiento": "01/01/2000",
+    "mail": "test@gmail.com",
+    "contraseña": "$2b$10$pWuMtgjZk0rk05V8uOg3e.cL5mnrnY27ALwKs7BYmyGoms7JrECSS"
+  }
 ]
