@@ -4,9 +4,6 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// usuarios.JSON está en Backend, y este archivo está en Backend/src,
-// por eso subimos un nivel con '..'
 const rutaArchivo = path.join(__dirname, '..', 'usuarios.JSON');
 
 export function leerUsuarios(): any[] {
