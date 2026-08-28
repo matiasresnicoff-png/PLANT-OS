@@ -43,22 +43,16 @@
     box-sizing: border-box;
 }
 
-.bloque-titulo {
-    width: 349px;
-    height: 38px;
-    background: #656A67;
-}
-
 .logo-tarjeta {
-    width: 100px;
-    height: 100px;
+    width: 152px;
+    height: 153px;
     background: #656A67;
     border-radius: 9999px;
 }
 
 .bloque-imagen {
-    width: 234px;
-    height: 169px;
+    width: 415px;
+    height: 150px;
     background: #656A67;
 }
 
@@ -182,8 +176,17 @@
     background: #D9D9D9;
     align-self: flex-start;
 }
-.header-bajo {
-    display: none;
+.header-superior {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.blanco {
+    width: 26px;
+    height: 19px;
+    background: #D9D9D9;
+    align-self: flex-start;
 }
 .LOGO {
     width: 45px;
@@ -438,8 +441,6 @@
     align-items: center;
     justify-content: center;
 }
-
-
 
 .grafico-interior {
     width: 327px;
