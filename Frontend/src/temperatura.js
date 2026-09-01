@@ -120,3 +120,4 @@ function dibujarGrafico(historial) {
 }
 
 cargarTemperatura();
+setInterval(cargarTemperatura, 15 * 60 * 1000);

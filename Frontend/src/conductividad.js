@@ -120,3 +120,4 @@ function dibujarGrafico(historial) {
 }
 
 cargarConductividad();
+setInterval(cargarConductividad, 15 * 60 * 1000);

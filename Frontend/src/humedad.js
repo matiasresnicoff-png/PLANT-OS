@@ -120,3 +120,4 @@ function dibujarGrafico(historial) {
 }
 
 cargarHumedad();
+setInterval(cargarHumedad, 15 * 60 * 1000);
