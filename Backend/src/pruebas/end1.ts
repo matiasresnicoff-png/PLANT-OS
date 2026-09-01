@@ -7,6 +7,7 @@ import pkg from 'express';
 const express = pkg;
 import type { Request, Response } from 'express';
 import usuariosRutas from '../rutas/rutasUsuarios.ts';
+import cors from 'cors';
 
 // Definimos __dirname para módulos ES
 const __filename = fileURLToPath(import.meta.url);
@@ -17,8 +18,8 @@ const __dirname = path.dirname(__filename);
 // ==========================================
 const app = express();
 const PORT_HTTP = 3000;
-
-app.use(express.json());
+app.use(cors());
+app.use(express.json()); 
 app.use('/api', usuariosRutas);
 
 const filePath = path.join(__dirname, 'sensores.json');
