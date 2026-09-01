@@ -57,7 +57,7 @@ function dibujarGrafico(historial) {
     linea.style.right = '0';
     linea.style.bottom = posicion + '%';
     linea.style.borderTop = '1px dashed rgba(255,255,255,0.7)';
-    linea.style.zIndex = '1';
+    etiquetaLinea.style.zIndex = '5';
     contenedor.appendChild(linea);
 
     const etiquetaLinea = document.createElement('div');
