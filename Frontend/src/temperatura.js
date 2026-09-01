@@ -1,5 +1,5 @@
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
-const ESCALA_TEMPERATURA = 40; // techo del eje, en °C, solo para escalar el gráfico
+const ESCALA_TEMPERATURA = 40;
 
 function calcularEstadoTemperatura(valor) {
   if (valor < UMBRAL_TEMPERATURA.bajo) return 'Bajo';
@@ -49,15 +49,15 @@ function dibujarGrafico(historial) {
     { valor: UMBRAL_TEMPERATURA.bajo, texto: `Bajo ${UMBRAL_TEMPERATURA.bajo}°C` },
     { valor: UMBRAL_TEMPERATURA.alto, texto: `Alto ${UMBRAL_TEMPERATURA.alto}°C` },
   ].forEach(({ valor, texto }) => {
-     const posicion = (valor / ESCALA_HUMEDAD) * 100;
-     const linea = document.createElement('div');
+    const posicion = (valor / ESCALA_TEMPERATURA) * 100;
+
+    const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
     linea.style.bottom = posicion + '%';
     linea.style.borderTop = '1px dashed rgba(255,255,255,0.7)';
     contenedor.appendChild(linea);
-
 
     const etiquetaLinea = document.createElement('div');
     etiquetaLinea.textContent = texto;
@@ -70,7 +70,7 @@ function dibujarGrafico(historial) {
     etiquetaLinea.style.background = 'rgba(0,0,0,0.45)';
     etiquetaLinea.style.padding = '1px 5px';
     etiquetaLinea.style.borderRadius = '8px';
-    etiquetaLinea.style.zIndex = '2';
+    etiquetaLinea.style.zIndex = '5';
     contenedor.appendChild(etiquetaLinea);
   });
 
