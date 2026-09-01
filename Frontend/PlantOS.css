@@ -1,4 +1,3 @@
-
 .wireframe {
     display: flex;
     justify-content: center;
@@ -9,62 +8,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
-
 
 .logo-bienvenido {
-    width: 100px;
-    height: 100px;
+    width: 6.25rem;
+    height: 6.25rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .titulo-bienvenido {
-    width: 257px;
-    height: 19px;
+    width: 16.0625rem;
+    height: 1.1875rem;
     background: #D9D9D9;
 }
 
-
 .tarjeta-bienvenido {
-    width: 458px;
-    height: 422px;
+    width: 28.625rem;
+    height: 26.375rem;
     background: #D9D9D9;
-    border-radius: 25px;
+    border-radius: 1.5625rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 
-    padding-top: 19px;
+    padding-top: 1.1875rem;
     box-sizing: border-box;
 }
 
-.bloque-titulo {
-    width: 349px;
-    height: 38px;
-    background: #656A67;
-}
-
 .logo-tarjeta {
-    width: 100px;
-    height: 100px;
+    width: 9.5rem;
+    height: 9.5625rem;
     background: #656A67;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
 
 .bloque-imagen {
-    width: 234px;
-    height: 169px;
+    width: 25.9375rem;
+    height: 9.375rem;
     background: #656A67;
 }
 
 .boton-bienvenido {
-    width: 348px;
-    height: 62px;
+    width: 21.75rem;
+    height: 3.875rem;
     background: #656A67;
 }
 
@@ -72,36 +62,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
-
 
 .logo-inicial {
-    width: 164px;
-    height: 156px;
+    width: 10.25rem;
+    height: 9.75rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .titulo-inicial {
-    width: 340px;
-    height: 27px;
+    width: 21.25rem;
+    height: 1.6875rem;
     background: #D9D9D9;
 }
-
 
 .circulo-inicial {
-    width: 210px;
-    height: 182px;
+    width: 13.125rem;
+    height: 11.375rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
 
-
 .contenedor-botones {
-    width: 500px;
-    height: 346px;
+    width: 31.25rem;
+    height: 21.625rem;
     background: #D9D9D9;
 
     display: flex;
@@ -109,221 +95,231 @@
     align-items: center;
     justify-content: center;
 
-    gap: 50px;
+    gap: 3.125rem;
 }
 
 .boton-inicial {
-    width: 440.75px;
-    height: 64.18px;
+    width: 27.546875rem;
+    height: 4.01125rem;
     background: #656A67;
-    border-radius: 14px;
+    border-radius: 0.875rem;
 }
 
 .registrarse {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 1.125rem;
 }
-
 
 .logo-registrarse {
-    width: 164px;
-    height: 156px;
+    width: 10.25rem;
+    height: 9.75rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .titulo-registrarse {
-    width: 340px;
-    height: 27px;
+    width: 21.25rem;
+    height: 1.6875rem;
     background: #D9D9D9;
 }
 
-
 .campo-registro {
-    width: 440.75px;
+    width: 27.546875rem;
 
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3125rem;
 }
 
-
 .etiqueta-registro {
-    width: 56px;
-    height: 9px;
+    width: 3.5rem;
+    height: 0.5625rem;
     background: #D9D9D9;
 }
 
 .input-registro {
-    width: 440.75px;
-    height: 64.18px;
+    width: 27.546875rem;
+    height: 4.01125rem;
     background: #D9D9D9;
 }
 
 .boton-registro {
-    width: 440.75px;
-    height: 64.18px;
+    width: 27.546875rem;
+    height: 4.01125rem;
     background: #D9D9D9;
 }
 
 .texto-registro {
-    width: 230px;
-    height: 11px;
+    width: 14.375rem;
+    height: 0.6875rem;
     background: #D9D9D9;
 }
 
 .icono-registro {
-    width: 26px;
-    height: 19px;
+    grid-area: icono;
+    width: 1.625rem;
+    height: 1.1875rem;
     background: #D9D9D9;
     align-self: flex-start;
 }
 
+.header-superior {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.blanco {
+    width: 1.625rem;
+    height: 1.1875rem;
+    background: #D9D9D9;
+    align-self: flex-start;
+}
+
+.LOGO {
+    width: 2.8125rem;
+    height: 2.8125rem;
+    background: #D9D9D9;
+    border-radius: 100%;
+    align-self: flex-end;
+}
 
 .iniciar-sesion {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px;
+    gap: 1.125rem;
 }
 
 .logo-login {
-    width: 164px;
-    height: 156px;
+    width: 10.25rem;
+    height: 9.75rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .titulo-login {
-    width: 340px;
-    height: 27px;
+    width: 21.25rem;
+    height: 1.6875rem;
     background: #D9D9D9;
 }
-
 
 .imagen-login {
-    width: 163px;
-    height: 149px;
+    width: 10.1875rem;
+    height: 9.3125rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
 
-
 .campo-login {
-    width: 440.75px;
+    width: 27.546875rem;
 
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.3125rem;
 }
 
-
 .etiqueta-login {
-    width: 56px;
-    height: 9px;
+    width: 3.5rem;
+    height: 0.5625rem;
     background: #D9D9D9;
 }
 
-
 .input-login {
-    width: 440.75px;
-    height: 64.18px;
+    width: 27.546875rem;
+    height: 4.01125rem;
     background: #D9D9D9;
 }
 
 .texto-login {
-    width: 230px;
-    height: 11px;
+    width: 14.375rem;
+    height: 0.6875rem;
     background: #D9D9D9;
 }
-
 
 .inicio {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
-
 
 .logo-inicio {
-    width: 125px;
-    height: 42px;
+    width: 7.8125rem;
+    height: 2.625rem;
     background: #D9D9D9;
 }
-
 
 .titulo-inicio {
-    width: 214px;
-    height: 21px;
+    width: 13.375rem;
+    height: 1.3125rem;
     background: #D9D9D9;
 }
+
 .header-arriba {
     display: flex;
     justify-content: space-between; 
     align-items: center;            
     width: 100%;
-    padding: 15px 20px;
+    padding: 0.9375rem 1.25rem;
     box-sizing: border-box;
-  }
-  
-  .logo-circulo{
-    width: 67px;
-    height: 68px;
+}
+
+.logo-circulo {
+    width: 4.1875rem;
+    height: 4.25rem;
     background: #D9D9D9;
-    border-radius: 50%;
+    border-radius: 100%;
     flex-shrink: 0; 
-  }
-  .perfil-circulo {
-    width: 67px;
-    height: 68px;
+}
+
+.perfil-circulo {
+    width: 4.1875rem;
+    height: 4.25rem;
     background: #D9D9D9;
-    border-radius: 50%;
+    border-radius: 100%;
     flex-shrink: 0; 
-  }
-  .circulo-inicio {
-    width: 202px;
-    height: 204px;
+}
+
+.circulo-inicio {
+    width: 12.625rem;
+    height: 12.75rem;
     background: #D9D9D9;
-    border-radius: 50%;
-    margin: 15px auto; 
-  }
-  
-  .centro-titulos {
+    border-radius: 100%;
+    margin: 0.9375rem auto; 
+}
+
+.centro-titulos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
-  }
-
+    gap: 0.5rem;
+}
 
 .tarjetas-inicio {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 22px;
+    gap: 1.375rem;
 }
-
 
 .tarjeta-inicio {
-    width: 146.59px;
-    height: 149px;
+    width: 9.161875rem;
+    height: 9.3125rem;
     background: #D9D9D9;
-    border-radius: 12px;
+    border-radius: 0.75rem; 
 }
 
-
 .barra-navegacion {
-    width: 509.60px;
-    height: 42.87px;
+    width: 31.85rem;
+    height: 2.679375rem;
     background: #D9D9D9;
 
-    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
 
     display: flex;
     flex-direction: row;
@@ -331,137 +327,126 @@
     justify-content: space-around;
 }
 
-
 .icono-navegacion {
-    width: 17.91px;
-    height: 17.91px;
+    width: 1.119375rem;
+    height: 1.119375rem;
 }
-
 
 .opcion-navegacion {
     background: #656A67;
 }
 
 .opcion-centro {
-    width: 151px;
-    height: 22px;
+    width: 9.4375rem;
+    height: 1.375rem;
 }
 
 .opcion-izquierda {
-    width: 79px;
-    height: 26px;
+    width: 4.9375rem;
+    height: 1.625rem;
 }
 
 .opcion-derecha {
-    width: 81px;
-    height: 25px;
+    width: 5.0625rem;
+    height: 1.5625rem;
 }
 
 .detalle-humedad {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .perfil-humedad {
-    width: 45px;
-    height: 45px;
+    width: 2.8125rem;
+    height: 2.8125rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
 
-
 .titulo-humedad {
-    grid-column: 2;
-    grid-row: 2; 
-    width: 180px;
-    height: 25px;
+    grid-area: icono;
+    width: 11.25rem;
+    height: 1.5625rem;
     background-color: #D9D9D9;
     justify-self: center;
-  }
+}
 
 .tarjeta-estado {
-    width: 392.40px;
-    height: 119.43px;
+    width: 24.525rem;
+    height: 7.464375rem;
 
     background: #D9D9D9;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 15px;
+    gap: 0.9375rem;
 }
 
 .dato-estado {
-    width: 162px;
-    height: 25px;
+    width: 10.125rem;
+    height: 1.5625rem;
     background: #656A67;
 }
 
 .valor-estado {
-    width: 90px;
-    height: 37px;
+    width: 5.625rem;
+    height: 2.3125rem;
     background: #656A67;
 }
-
 
 .subtitulo-humedad {
-    width: 122px;
-    height: 22px;
+    width: 7.625rem;
+    height: 1.375rem;
     background: #656A67;
 }
-
 
 .grafico-humedad {
-    width: 392px;
-    height: 231px;
+    width: 24.5rem;
+    height: 14.4375rem;
 
     background: #D9D9D9;
-    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem; 
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-
 
 .grafico-interior {
-    width: 327px;
-    height: 157px;
+    width: 20.4375rem;
+    height: 9.8125rem;
     background: #656A67;
 }
-
 
 .texto-grafico {
-    width: 188px;
-    height: 21px;
+    width: 11.75rem;
+    height: 1.3125rem;
     background: #656A67;
 }
 
-
 .tarjeta-informacion {
-    width: 392px;
-    height: 68px;
+    width: 24.5rem;
+    height: 4.25rem;
 
     background: #D9D9D9;
-    border-radius: 12px;
+    border-radius: 0.75rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
 .informacion-interior {
-    width: 361px;
-    height: 37px;
+    width: 22.5625rem;
+    height: 2.3125rem;
     background: #656A67;
 }
 
@@ -470,62 +455,63 @@
     justify-content: space-around; 
     align-items: center;
     width: 100%;
-    height: 50px;
+    height: 3.125rem;
     background-color: #E0E0E0; 
-    padding: 0 10px;
-    margin-top: 20px;
-  }
-  
-  .icono-navegacion {
-    display: none; 
-  }
-  
-  .opcion-navegacion {
-    height: 18px;
-    background-color: #555555;    
-    border-radius: 2px;
-  }
-  .opcion-izquierda {
-    width: 22%;    
-    background-color: #555555;                
-  }
-  .opcion-derecha {
-    width: 22%;     
-    background-color: #555555;               
-  }
-  
-  .opcion-centro {
-    width: 40%;     
-    background-color: #555555;               
-  }
-
-.perfil-temperatura {
-    width: 45px;
-    height: 45px;
-    background: #D9D9D9;
-    border-radius: 9999px;
+    padding: 0 0.625rem;
+    margin-top: 1.25rem;
 }
 
+.icono-navegacion {
+    display: none; 
+}
+
+.opcion-navegacion {
+    height: 1.125rem;
+    background-color: #555555;    
+    border-radius: 0.125rem;
+}
+
+.opcion-izquierda {
+    width: 22%;    
+    background-color: #555555;                
+}
+
+.opcion-derecha {
+    width: 22%;     
+    background-color: #555555;                
+}
+
+.opcion-centro {
+    width: 40%;     
+    background-color: #555555;                
+}
+
+.perfil-temperatura {
+    width: 2.8125rem;
+    height: 2.8125rem;
+    background: #D9D9D9;
+    border-radius: 100%;
+}
 
 .titulo-temperatura {
-    width: 252px;
-    height: 36px;
+    width: 15.75rem;
+    height: 2.25rem;
     background: #D9D9D9;
 }
 
 .subtitulo-temperatura {
-    width: 122px;
-    height: 22px;
+    width: 7.625rem;
+    height: 1.375rem;
     background: #656A67;
 }
 
 .grafico-temperatura {
-    width: 392px;
-    height: 231px;
+    width: 24.5rem;
+    height: 14.4375rem;
 
     background: #D9D9D9;
-    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem;
 
     display: flex;
     align-items: center;
@@ -533,33 +519,31 @@
 }
 
 .perfil-conductividad {
-    width: 45px;
-    height: 45px;
+    width: 2.8125rem;
+    height: 2.8125rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
 
-
 .titulo-conductividad {
-    width: 252px;
-    height: 36px;
+    width: 15.75rem;
+    height: 2.25rem;
     background: #D9D9D9;
 }
 
 .subtitulo-conductividad {
-    width: 122px;
-    height: 22px;
+    width: 7.625rem;
+    height: 1.375rem;
     background: #656A67;
 }
 
-
 .grafico-conductividad {
-    width: 392px;
-    height: 231px;
+    width: 24.5rem;
+    height: 14.4375rem;
 
     background: #D9D9D9;
-    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem;
 
     display: flex;
     align-items: center;
@@ -570,77 +554,69 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
-
 
 .logo-acerca {
-    width: 45px;
-    height: 45px;
+    width: 2.8125rem;
+    height: 2.8125rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .titulo-acerca {
-    width: 252px;
-    height: 36px;
+    width: 15.75rem;
+    height: 2.25rem;
     background: #D9D9D9;
 }
-
 
 .perfil-acerca {
-    width: 132px;
-    height: 116px;
+    width: 8.25rem;
+    height: 7.25rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .subtitulo-acerca {
-    width: 300px;
-    height: 24px;
+    width: 18.75rem;
+    height: 1.5rem;
     background: #D9D9D9;
 }
 
-
 .tarjeta-proyecto {
-    width: 392px;
-    height: 183px;
+    width: 24.5rem;
+    height: 11.4375rem;
 
     background: #D9D9D9;
-    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
 .contenido-proyecto {
-    width: 242px;
-    height: 143px;
+    width: 15.125rem;
+    height: 8.9375rem;
     background: #656A67;
 }
 
-
 .tarjeta-informacion-proyecto {
-    width: 392px;
-    height: 154px;
+    width: 24.5rem;
+    height: 9.625rem;
 
     background: #D9D9D9;
-    border-radius: 12px;
+    border-radius: 0.75rem;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-
 .informacion-proyecto {
-    width: 322px;
-    height: 117px;
+    width: 20.125rem;
+    height: 7.3125rem;
     background: #656A67;
 }
 
@@ -648,58 +624,56 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .foto-perfil {
-    width: 114.99px;
-    height: 114.41px;
+    width: 7.186875rem;
+    height: 7.150625rem;
     background: #D9D9D9;
-    border-radius: 9999px;
+    border-radius: 100%;
 }
-
 
 .nombre-perfil {
-    width: 102px;
-    height: 23px;
+    width: 6.375rem;
+    height: 1.4375rem;
     background: #D9D9D9;
 }
 
-
 .descripcion-perfil {
-    width: 159px;
-    height: 16px;
+    width: 9.9375rem;
+    height: 1rem;
     background: #D9D9D9;
 }
 
 .tarjeta-datos-perfil {
-    width: 439px;
-    height: 258px;
+    width: 27.4375rem;
+    height: 16.125rem;
 
     background: #D9D9D9;
-    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
-    border-radius: 16px;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 20px;
+    gap: 1.25rem;
 }
 
 .dato-perfil {
-    width: 228px;
-    height: 32px;
+    width: 14.25rem;
+    height: 2rem;
     background: #656A67;
 }
 
 .tarjeta-extra-perfil {
-    width: 438.41px;
-    height: 71.51px;
+    width: 27.400625rem;
+    height: 4.469375rem;
 
     background: #D9D9D9;
-    border-radius: 12px;
+    border-radius: 0.75rem;
 
     display: flex;
     align-items: center;
@@ -707,12 +681,13 @@
 }
 
 .contenido-extra-perfil {
-    width: 176px;
-    height: 32px;
+    width: 11rem;
+    height: 2rem;
     background: #656A67;
 }
-@media (max-width: 768px) {
+
+@media (max-width: 48rem) {
     body {
-      background-color: lightblue; 
+        background-color: lightblue; 
     }
-  }
+}
