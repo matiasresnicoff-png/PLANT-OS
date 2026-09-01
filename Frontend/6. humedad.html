@@ -7,32 +7,31 @@
     <link rel="stylesheet" href="PlantOS.css">
 </head>
 <body>
-    <main class="wireframe">
-        <section class="detalle-humedad">
-            <header class="header-superior">
-             <section class="icono-registro"></section>
-             <section class="LOGO"></section>
-            </header>
-            <section class="titulo-humedad"></section>
-            <section class="tarjeta-estado">
-                <section class="dato-estado"></section>
-                <section class="valor-estado"></section>
-                <section class="subtitulo-humedad"></section>
-            </section>
-            <section class="subtitulo-humedad"></section>
-            <section class="grafico-humedad">
-                <section class="grafico-interior"></section>
-            </section>
-            <section class="tarjeta-informacion">
-                <section class="informacion-interior"></section>
-            </section>
-            <section class="barra-navegacion">
-                <section class="icono-navegacion"></section>
-                <section class="opcion-izquierda"></section>
-                <section class="opcion-centro"></section>
-                <section class="opcion-derecha"></section>
-            </section>
-        </section>
-    </main>
+    <div class="wireframe">
+        <div class="detalle-humedad">
+
+            <div class="titulo-humedad">Detalle Humedad</div>
+            <div class="tarjeta-estado">
+                <div class="dato-estado" id="estado-humedad">Cargando...</div>
+                <div class="valor-estado" id="valor-humedad">--</div>
+                <div class="subtitulo-humedad">Humedad del suelo</div>
+            </div>
+            <div class="subtitulo-humedad">Historial (últimas 24 hs)</div>
+            <div class="grafico-humedad">
+                <div class="grafico-interior" id="grafico-humedad"></div>
+            </div>
+            <div class="tarjeta-informacion">
+                <div class="informacion-interior" id="recomendacion-humedad">Cargando recomendación...</div>
+            </div>
+            <div class="barra-navegacion">
+                <div class="icono-navegacion"></div>
+                <div class="opcion-izquierda"></div>
+                <div class="opcion-centro"></div>
+                <div class="opcion-derecha"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="src/humedad.js" defer></script>
 </body>
 </html>
