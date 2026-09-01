@@ -691,3 +691,31 @@
         background-color: lightblue; 
     }
 }
+/* Ajustes agregados para que estas cajas puedan mostrar texto real (datos dinámicos) */
+.titulo-humedad,
+.dato-estado,
+.valor-estado,
+.subtitulo-humedad,
+.grafico-interior,
+.informacion-interior {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.25rem 0.5rem;
+    box-sizing: border-box;
+    height: auto;
+    min-height: fit-content;
+}
+
+.titulo-humedad {
+    color: #333333;
+}
+
+.dato-estado,
+.valor-estado,
+.subtitulo-humedad,
+.grafico-interior,
+.informacion-interior {
+    color: #ffffff;
+}
