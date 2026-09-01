@@ -49,16 +49,15 @@ function dibujarGrafico(historial) {
     { valor: UMBRAL_TEMPERATURA.bajo, texto: `Bajo ${UMBRAL_TEMPERATURA.bajo}°C` },
     { valor: UMBRAL_TEMPERATURA.alto, texto: `Alto ${UMBRAL_TEMPERATURA.alto}°C` },
   ].forEach(({ valor, texto }) => {
-    const posicion = (valor / ESCALA_TEMPERATURA) * 100;
-
-    const linea = document.createElement('div');
+     const posicion = (valor / ESCALA_HUMEDAD) * 100;
+     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
     linea.style.bottom = posicion + '%';
     linea.style.borderTop = '1px dashed rgba(255,255,255,0.7)';
-    etiquetaLinea.style.zIndex = '5';
     contenedor.appendChild(linea);
+
 
     const etiquetaLinea = document.createElement('div');
     etiquetaLinea.textContent = texto;
