@@ -39,25 +39,41 @@ function dibujarGrafico(historial) {
   contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
   contenedor.style.alignItems = 'flex-end';
-  contenedor.style.justifyContent = 'space-between';
-  contenedor.style.borderBottom = '3px solid #1a1a1a';
-  contenedor.style.paddingTop = '20px';
+  contenedor.style.gap = '4%';
+  contenedor.style.borderBottom = '2px solid rgba(255,255,255,0.6)';
+  contenedor.style.padding = '28px 6px 0';
   contenedor.style.boxSizing = 'border-box';
+  contenedor.style.fontFamily = 'Arial, sans-serif';
 
-  [UMBRAL_HUMEDAD.bajo, UMBRAL_HUMEDAD.alto].forEach((umbral) => {
+  // Líneas de referencia de los umbrales, con etiqueta tipo "pill"
+  [
+    { valor: UMBRAL_HUMEDAD.bajo, texto: `Bajo ${UMBRAL_HUMEDAD.bajo}%` },
+    { valor: UMBRAL_HUMEDAD.alto, texto: `Alto ${UMBRAL_HUMEDAD.alto}%` },
+  ].forEach(({ valor, texto }) => {
+    const posicion = (valor / ESCALA_HUMEDAD) * 100;
+
     const linea = document.createElement('div');
-    const posicion = (umbral / ESCALA_HUMEDAD) * 100;
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
     linea.style.bottom = posicion + '%';
-    linea.style.borderTop = '1px dashed #fff';
-    linea.style.fontSize = '9px';
-    linea.style.fontWeight = 'bold';
-    linea.style.color = '#fff';
-    linea.style.paddingLeft = '2px';
-    linea.textContent = umbral + '%';
+    linea.style.borderTop = '1px dashed rgba(255,255,255,0.7)';
+    linea.style.zIndex = '1';
     contenedor.appendChild(linea);
+
+    const etiquetaLinea = document.createElement('div');
+    etiquetaLinea.textContent = texto;
+    etiquetaLinea.style.position = 'absolute';
+    etiquetaLinea.style.left = '4px';
+    etiquetaLinea.style.bottom = `calc(${posicion}% + 3px)`;
+    etiquetaLinea.style.fontSize = '9px';
+    etiquetaLinea.style.fontWeight = '600';
+    etiquetaLinea.style.color = '#fff';
+    etiquetaLinea.style.background = 'rgba(0,0,0,0.45)';
+    etiquetaLinea.style.padding = '1px 5px';
+    etiquetaLinea.style.borderRadius = '8px';
+    etiquetaLinea.style.zIndex = '2';
+    contenedor.appendChild(etiquetaLinea);
   });
 
   const ultimos = historial.slice(-8);
@@ -72,22 +88,32 @@ function dibujarGrafico(historial) {
     columna.style.alignItems = 'center';
     columna.style.justifyContent = 'flex-end';
     columna.style.height = '100%';
-    columna.style.width = '10%';
-    columna.style.boxSizing = 'border-box';
+    columna.style.flex = '1';
+    columna.style.zIndex = '3';
 
     const etiqueta = document.createElement('div');
     etiqueta.textContent = valor + '%';
-    etiqueta.style.fontSize = '10px';
+    etiqueta.style.fontSize = '11px';
     etiqueta.style.fontWeight = 'bold';
-    etiqueta.style.marginBottom = '2px';
+    etiqueta.style.marginBottom = '4px';
     etiqueta.style.color = '#fff';
+    etiqueta.style.textShadow = '0 1px 2px rgba(0,0,0,0.5)';
 
     const barra = document.createElement('div');
     const alturaPorcentaje = (valor / ESCALA_HUMEDAD) * 100;
+    barra.title = `${valor}% — ${estadoBarra}`;
     barra.style.height = alturaPorcentaje + '%';
-    barra.style.width = '100%';
-    barra.style.minHeight = '4px';
-    barra.style.background = estadoBarra === 'Óptimo' ? '#4caf50' : '#ff9800';
+    barra.style.width = '70%';
+    barra.style.minHeight = '6px';
+    barra.style.borderRadius = '6px 6px 2px 2px';
+    barra.style.boxShadow = '0 2px 4px rgba(0,0,0,0.25)';
+    barra.style.transition = 'transform 0.15s ease';
+    barra.style.background = estadoBarra === 'Óptimo'
+      ? 'linear-gradient(180deg, #6fd07f, #2f8f45)'
+      : 'linear-gradient(180deg, #ffb15c, #e07a1f)';
+
+    barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
+    barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
 
     columna.appendChild(etiqueta);
     columna.appendChild(barra);
