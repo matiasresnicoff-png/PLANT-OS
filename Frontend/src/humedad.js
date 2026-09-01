@@ -45,21 +45,19 @@ function dibujarGrafico(historial) {
   contenedor.style.boxSizing = 'border-box';
   contenedor.style.fontFamily = 'Arial, sans-serif';
 
-  // Líneas de referencia de los umbrales, con etiqueta tipo "pill"
   [
     { valor: UMBRAL_HUMEDAD.bajo, texto: `Bajo ${UMBRAL_HUMEDAD.bajo}%` },
     { valor: UMBRAL_HUMEDAD.alto, texto: `Alto ${UMBRAL_HUMEDAD.alto}%` },
   ].forEach(({ valor, texto }) => {
     const posicion = (valor / ESCALA_HUMEDAD) * 100;
-     const linea = document.createElement('div');
+
+    const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
     linea.style.bottom = posicion + '%';
     linea.style.borderTop = '1px dashed rgba(255,255,255,0.7)';
     contenedor.appendChild(linea);
-
-    const etiquetaLinea = document.createElement('div');
 
     const etiquetaLinea = document.createElement('div');
     etiquetaLinea.textContent = texto;
@@ -72,7 +70,7 @@ function dibujarGrafico(historial) {
     etiquetaLinea.style.background = 'rgba(0,0,0,0.45)';
     etiquetaLinea.style.padding = '1px 5px';
     etiquetaLinea.style.borderRadius = '8px';
-    etiquetaLinea.style.zIndex = '2';
+    etiquetaLinea.style.zIndex = '5';
     contenedor.appendChild(etiquetaLinea);
   });
 
