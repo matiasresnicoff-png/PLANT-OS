@@ -4,6 +4,14 @@
     align-items: center;
 }
 
+/* Adaptación a pantallas más chicas — no cambia ninguna medida original,
+   solo les pone un techo para que se achiquen en vez de desbordar */
+.wireframe * {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
 .bienvenido {
     display: flex;
     flex-direction: column;
