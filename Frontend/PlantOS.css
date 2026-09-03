@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #EFFEF2;
 }
 
 /* Adaptación a pantallas más chicas — no cambia ninguna medida original,
@@ -22,20 +23,21 @@
 .logo-bienvenido {
     width: 6.25rem;
     height: 6.25rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
 .titulo-bienvenido {
-    width: 16.0625rem;
-    height: 1.1875rem;
-    background: #D9D9D9;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    word-wrap: break-word
 }
 
 .tarjeta-bienvenido {
     width: 28.625rem;
     height: 26.375rem;
-    background: #D9D9D9;
+    background: white;
     border-radius: 1.5625rem;
 
     display: flex;
@@ -48,22 +50,36 @@
 }
 
 .logo-tarjeta {
-    width: 9.5rem;
-    height: 9.5625rem;
-    background: #656A67;
+    width: 100%;
+    height: 100%;
     border-radius: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .bloque-imagen {
-    width: 25.9375rem;
-    height: 9.375rem;
-    background: #656A67;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 500;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .boton-bienvenido {
-    width: 21.75rem;
-    height: 3.875rem;
-    background: #656A67;
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background: #56DA9F;
+    color: white;
+    font-size: 15px;
+    font-family: Inter;
+    font-weight: 800;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .pantalla-inicial {
