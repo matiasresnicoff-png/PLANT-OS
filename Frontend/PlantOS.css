@@ -1,3 +1,4 @@
+@media screen and (min-width: 1024px) {
 .wireframe {
     display: flex;
     justify-content: center;
@@ -709,9 +710,5 @@
     height: 2rem;
     background: #656A67;
 }
-
-@media (max-width: 48rem) {
-    body {
-        background-color: #EFFEF2; 
-    }
+    
 }
