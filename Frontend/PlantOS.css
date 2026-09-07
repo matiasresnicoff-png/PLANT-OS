@@ -1,118 +1,101 @@
-@media screen and (min-width: 1024px) {
+
 .wireframe {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #EFFEF2;
-}
-
-/* Adaptación a pantallas más chicas — no cambia ninguna medida original,
-   solo les pone un techo para que se achiquen en vez de desbordar */
-.wireframe * {
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
 }
 
 .bienvenido {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 }
+
 
 .logo-bienvenido {
-    width: 6.25rem;
-    height: 6.25rem;
-    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    background: #D9D9D9;
+    border-radius: 9999px;
 }
+
 
 .titulo-bienvenido {
-    color: #2D6A4F;
-    font-size: 20px;
-    font-family: "Inter", sans-serif;
-    font-weight: 400;
-    word-wrap: break-word
+    width: 257px;
+    height: 19px;
+    background: #D9D9D9;
 }
 
+
 .tarjeta-bienvenido {
-    width: 28.625rem;
-    height: 26.375rem;
-    background: white;
-    border-radius: 1.5625rem;
+    width: 458px;
+    height: 422px;
+    background: #D9D9D9;
+    border-radius: 25px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 
-    padding-top: 1.1875rem;
+    padding-top: 19px;
     box-sizing: border-box;
 }
 
 .logo-tarjeta {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+    width: 152px;
+    height: 153px;
+    background: #656A67;
+    border-radius: 9999px;
 }
 
 .bloque-imagen {
-    color: #2D6A4F;
-    font-size: 20px;
-    font-family: Poppins;
-    font-weight: 500;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+    width: 415px;
+    height: 150px;
+    background: #656A67;
 }
 
 .boton-bienvenido {
-    width: 21.5625rem;
-    height: 3.125rem;
-    border-radius: 1.25rem;
-    background: #56DA9F;
-    color: white;
-    font-size: 15px;
-    font-family: Inter;
-    font-weight: 800;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+    width: 348px;
+    height: 62px;
+    background: #656A67;
 }
 
 .pantalla-inicial {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 }
+
 
 .logo-inicial {
-    width: 10.25rem;
-    height: 9.75rem;
+    width: 164px;
+    height: 156px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .titulo-inicial {
-    width: 21.25rem;
-    height: 1.6875rem;
+    width: 340px;
+    height: 27px;
     background: #D9D9D9;
 }
+
 
 .circulo-inicial {
-    width: 13.125rem;
-    height: 11.375rem;
+    width: 210px;
+    height: 182px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
 
+
 .contenedor-botones {
-    width: 31.25rem;
-    height: 21.625rem;
+    width: 500px;
+    height: 346px;
     background: #D9D9D9;
 
     display: flex;
@@ -120,95 +103,96 @@
     align-items: center;
     justify-content: center;
 
-    gap: 3.125rem;
+    gap: 50px;
 }
 
 .boton-inicial {
-    width: 27.546875rem;
-    height: 4.01125rem;
+    width: 440.75px;
+    height: 64.18px;
     background: #656A67;
-    border-radius: 0.875rem;
+    border-radius: 14px;
 }
 
 .registrarse {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.125rem;
+    gap: 18px;
 }
+
 
 .logo-registrarse {
-    width: 10.25rem;
-    height: 9.75rem;
+    width: 164px;
+    height: 156px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .titulo-registrarse {
-    width: 21.25rem;
-    height: 1.6875rem;
+    width: 340px;
+    height: 27px;
     background: #D9D9D9;
 }
 
+
 .campo-registro {
-    width: 27.546875rem;
+    width: 440.75px;
 
     display: flex;
     flex-direction: column;
-    gap: 0.3125rem;
+    gap: 5px;
 }
 
+
 .etiqueta-registro {
-    width: 3.5rem;
-    height: 0.5625rem;
+    width: 56px;
+    height: 9px;
     background: #D9D9D9;
 }
 
 .input-registro {
-    width: 27.546875rem;
-    height: 4.01125rem;
+    width: 440.75px;
+    height: 64.18px;
     background: #D9D9D9;
 }
 
 .boton-registro {
-    width: 27.546875rem;
-    height: 4.01125rem;
+    width: 440.75px;
+    height: 64.18px;
     background: #D9D9D9;
 }
 
 .texto-registro {
-    width: 14.375rem;
-    height: 0.6875rem;
+    width: 230px;
+    height: 11px;
     background: #D9D9D9;
 }
 
 .icono-registro {
     grid-area: icono;
-    width: 1.625rem;
-    height: 1.1875rem;
+    width: 26px;
+    height: 19px;
     background: #D9D9D9;
     align-self: flex-start;
 }
-
 .header-superior {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .blanco {
-    width: 1.625rem;
-    height: 1.1875rem;
+    width: 26px;
+    height: 19px;
     background: #D9D9D9;
     align-self: flex-start;
 }
-
 .LOGO {
-    width: 2.8125rem;
-    height: 2.8125rem;
+    width: 45px;
+    height: 45px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
     align-self: flex-end;
 }
 
@@ -216,135 +200,143 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.125rem;
+    gap: 18px;
 }
 
 .logo-login {
-    width: 10.25rem;
-    height: 9.75rem;
+    width: 164px;
+    height: 156px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .titulo-login {
-    width: 21.25rem;
-    height: 1.6875rem;
+    width: 340px;
+    height: 27px;
     background: #D9D9D9;
 }
+
 
 .imagen-login {
-    width: 10.1875rem;
-    height: 9.3125rem;
+    width: 163px;
+    height: 149px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
 
+
 .campo-login {
-    width: 27.546875rem;
+    width: 440.75px;
 
     display: flex;
     flex-direction: column;
-    gap: 0.3125rem;
+    gap: 5px;
 }
 
+
 .etiqueta-login {
-    width: 3.5rem;
-    height: 0.5625rem;
+    width: 56px;
+    height: 9px;
     background: #D9D9D9;
 }
 
+
 .input-login {
-    width: 27.546875rem;
-    height: 4.01125rem;
+    width: 440.75px;
+    height: 64.18px;
     background: #D9D9D9;
 }
 
 .texto-login {
-    width: 14.375rem;
-    height: 0.6875rem;
+    width: 230px;
+    height: 11px;
     background: #D9D9D9;
 }
+
 
 .inicio {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 }
+
 
 .logo-inicio {
-    width: 7.8125rem;
-    height: 2.625rem;
+    width: 125px;
+    height: 42px;
     background: #D9D9D9;
 }
+
 
 .titulo-inicio {
-    width: 13.375rem;
-    height: 1.3125rem;
+    width: 214px;
+    height: 21px;
     background: #D9D9D9;
 }
-
 .header-arriba {
     display: flex;
     justify-content: space-between; 
     align-items: center;            
     width: 100%;
-    padding: 0.9375rem 1.25rem;
+    padding: 15px 20px;
     box-sizing: border-box;
-}
-
-.logo-circulo {
-    width: 4.1875rem;
-    height: 4.25rem;
+  }
+  
+  .logo-circulo{
+    width: 67px;
+    height: 68px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 50%;
     flex-shrink: 0; 
-}
-
-.perfil-circulo {
-    width: 4.1875rem;
-    height: 4.25rem;
+  }
+  .perfil-circulo {
+    width: 67px;
+    height: 68px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 50%;
     flex-shrink: 0; 
-}
-
-.circulo-inicio {
-    width: 12.625rem;
-    height: 12.75rem;
+  }
+  .circulo-inicio {
+    width: 202px;
+    height: 204px;
     background: #D9D9D9;
-    border-radius: 100%;
-    margin: 0.9375rem auto; 
-}
-
-.centro-titulos {
+    border-radius: 50%;
+    margin: 15px auto; 
+  }
+  
+  .centro-titulos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.5rem;
-}
+    gap: 8px;
+  }
+
 
 .tarjetas-inicio {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1.375rem;
+    gap: 22px;
 }
+
 
 .tarjeta-inicio {
-    width: 9.161875rem;
-    height: 9.3125rem;
+    width: 146.59px;
+    height: 149px;
     background: #D9D9D9;
-    border-radius: 0.75rem; 
+    border-radius: 12px;
 }
 
+
 .barra-navegacion {
-    width: 31.85rem;
-    height: 2.679375rem;
+    width: 509.60px;
+    height: 42.87px;
     background: #D9D9D9;
 
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
 
     display: flex;
     flex-direction: row;
@@ -352,93 +344,98 @@
     justify-content: space-around;
 }
 
+
 .icono-navegacion {
-    width: 1.119375rem;
-    height: 1.119375rem;
+    width: 17.91px;
+    height: 17.91px;
 }
+
 
 .opcion-navegacion {
     background: #656A67;
 }
 
 .opcion-centro {
-    width: 9.4375rem;
-    height: 1.375rem;
+    width: 151px;
+    height: 22px;
 }
 
 .opcion-izquierda {
-    width: 4.9375rem;
-    height: 1.625rem;
+    width: 79px;
+    height: 26px;
 }
 
 .opcion-derecha {
-    width: 5.0625rem;
-    height: 1.5625rem;
+    width: 81px;
+    height: 25px;
 }
 
 .detalle-humedad {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 }
 
 .perfil-humedad {
-    width: 2.8125rem;
-    height: 2.8125rem;
+    width: 45px;
+    height: 45px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .titulo-humedad {
     grid-area: icono;
-    width: 11.25rem;
-    height: 1.5625rem;
+    width: 180px;
+    height: 25px;
     background-color: #D9D9D9;
     justify-self: center;
-}
+  }
 
 .tarjeta-estado {
-    width: 24.525rem;
-    height: 7.464375rem;
+    width: 392.40px;
+    height: 119.43px;
 
     background: #D9D9D9;
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 0.9375rem;
+    gap: 15px;
 }
 
 .dato-estado {
-    width: 10.125rem;
-    height: 1.5625rem;
+    width: 162px;
+    height: 25px;
     background: #656A67;
 }
 
 .valor-estado {
-    width: 5.625rem;
-    height: 2.3125rem;
+    width: 90px;
+    height: 37px;
     background: #656A67;
 }
+
 
 .subtitulo-humedad {
-    width: 7.625rem;
-    height: 1.375rem;
+    width: 122px;
+    height: 22px;
     background: #656A67;
 }
 
+
 .grafico-humedad {
-    width: 24.5rem;
-    height: 14.4375rem;
+    width: 392px;
+    height: 231px;
 
     background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem; 
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
 
     display: flex;
     align-items: center;
@@ -446,32 +443,35 @@
 }
 
 .grafico-interior {
-    width: 20.4375rem;
-    height: 9.8125rem;
+    width: 327px;
+    height: 157px;
     background: #656A67;
 }
+
 
 .texto-grafico {
-    width: 11.75rem;
-    height: 1.3125rem;
+    width: 188px;
+    height: 21px;
     background: #656A67;
 }
 
+
 .tarjeta-informacion {
-    width: 24.5rem;
-    height: 4.25rem;
+    width: 392px;
+    height: 68px;
 
     background: #D9D9D9;
-    border-radius: 0.75rem;
+    border-radius: 12px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+
 .informacion-interior {
-    width: 22.5625rem;
-    height: 2.3125rem;
+    width: 361px;
+    height: 37px;
     background: #656A67;
 }
 
@@ -480,63 +480,62 @@
     justify-content: space-around; 
     align-items: center;
     width: 100%;
-    height: 3.125rem;
+    height: 50px;
     background-color: #E0E0E0; 
-    padding: 0 0.625rem;
-    margin-top: 1.25rem;
-}
-
-.icono-navegacion {
+    padding: 0 10px;
+    margin-top: 20px;
+  }
+  
+  .icono-navegacion {
     display: none; 
-}
-
-.opcion-navegacion {
-    height: 1.125rem;
+  }
+  
+  .opcion-navegacion {
+    height: 18px;
     background-color: #555555;    
-    border-radius: 0.125rem;
-}
-
-.opcion-izquierda {
+    border-radius: 2px;
+  }
+  .opcion-izquierda {
     width: 22%;    
     background-color: #555555;                
-}
-
-.opcion-derecha {
+  }
+  .opcion-derecha {
     width: 22%;     
-    background-color: #555555;                
-}
-
-.opcion-centro {
+    background-color: #555555;               
+  }
+  
+  .opcion-centro {
     width: 40%;     
-    background-color: #555555;                
-}
+    background-color: #555555;               
+  }
 
 .perfil-temperatura {
-    width: 2.8125rem;
-    height: 2.8125rem;
+    width: 45px;
+    height: 45px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
 
+
 .titulo-temperatura {
-    width: 15.75rem;
-    height: 2.25rem;
+    width: 252px;
+    height: 36px;
     background: #D9D9D9;
 }
 
 .subtitulo-temperatura {
-    width: 7.625rem;
-    height: 1.375rem;
+    width: 122px;
+    height: 22px;
     background: #656A67;
 }
 
 .grafico-temperatura {
-    width: 24.5rem;
-    height: 14.4375rem;
+    width: 392px;
+    height: 231px;
 
     background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
 
     display: flex;
     align-items: center;
@@ -544,31 +543,33 @@
 }
 
 .perfil-conductividad {
-    width: 2.8125rem;
-    height: 2.8125rem;
+    width: 45px;
+    height: 45px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
 
+
 .titulo-conductividad {
-    width: 15.75rem;
-    height: 2.25rem;
+    width: 252px;
+    height: 36px;
     background: #D9D9D9;
 }
 
 .subtitulo-conductividad {
-    width: 7.625rem;
-    height: 1.375rem;
+    width: 122px;
+    height: 22px;
     background: #656A67;
 }
 
+
 .grafico-conductividad {
-    width: 24.5rem;
-    height: 14.4375rem;
+    width: 392px;
+    height: 231px;
 
     background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
 
     display: flex;
     align-items: center;
@@ -579,69 +580,77 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 }
+
 
 .logo-acerca {
-    width: 2.8125rem;
-    height: 2.8125rem;
+    width: 45px;
+    height: 45px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .titulo-acerca {
-    width: 15.75rem;
-    height: 2.25rem;
+    width: 252px;
+    height: 36px;
     background: #D9D9D9;
 }
+
 
 .perfil-acerca {
-    width: 8.25rem;
-    height: 7.25rem;
+    width: 132px;
+    height: 116px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .subtitulo-acerca {
-    width: 18.75rem;
-    height: 1.5rem;
+    width: 300px;
+    height: 24px;
     background: #D9D9D9;
 }
 
+
 .tarjeta-proyecto {
-    width: 24.5rem;
-    height: 11.4375rem;
+    width: 392px;
+    height: 183px;
 
     background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+
 .contenido-proyecto {
-    width: 15.125rem;
-    height: 8.9375rem;
+    width: 242px;
+    height: 143px;
     background: #656A67;
 }
 
+
 .tarjeta-informacion-proyecto {
-    width: 24.5rem;
-    height: 9.625rem;
+    width: 392px;
+    height: 154px;
 
     background: #D9D9D9;
-    border-radius: 0.75rem;
+    border-radius: 12px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+
 .informacion-proyecto {
-    width: 20.125rem;
-    height: 7.3125rem;
+    width: 322px;
+    height: 117px;
     background: #656A67;
 }
 
@@ -649,56 +658,58 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.25rem;
+    gap: 20px;
 }
 
 .foto-perfil {
-    width: 7.186875rem;
-    height: 7.150625rem;
+    width: 114.99px;
+    height: 114.41px;
     background: #D9D9D9;
-    border-radius: 100%;
+    border-radius: 9999px;
 }
+
 
 .nombre-perfil {
-    width: 6.375rem;
-    height: 1.4375rem;
+    width: 102px;
+    height: 23px;
     background: #D9D9D9;
 }
 
+
 .descripcion-perfil {
-    width: 9.9375rem;
-    height: 1rem;
+    width: 159px;
+    height: 16px;
     background: #D9D9D9;
 }
 
 .tarjeta-datos-perfil {
-    width: 27.4375rem;
-    height: 16.125rem;
+    width: 439px;
+    height: 258px;
 
     background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
+    box-shadow: 0px -4px 12px rgba(0, 0, 0, 0.06);
+    border-radius: 16px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 1.25rem;
+    gap: 20px;
 }
 
 .dato-perfil {
-    width: 14.25rem;
-    height: 2rem;
+    width: 228px;
+    height: 32px;
     background: #656A67;
 }
 
 .tarjeta-extra-perfil {
-    width: 27.400625rem;
-    height: 4.469375rem;
+    width: 438.41px;
+    height: 71.51px;
 
     background: #D9D9D9;
-    border-radius: 0.75rem;
+    border-radius: 12px;
 
     display: flex;
     align-items: center;
@@ -706,9 +717,12 @@
 }
 
 .contenido-extra-perfil {
-    width: 11rem;
-    height: 2rem;
+    width: 176px;
+    height: 32px;
     background: #656A67;
 }
-    
-}
+@media (max-width: 768px) {
+    body {
+      background-color: white; 
+    }
+  }
