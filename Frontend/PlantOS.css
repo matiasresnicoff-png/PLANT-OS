@@ -721,8 +721,10 @@
     height: 32px;
     background: #656A67;
 }
-@media (max-width: 768px) {
-    body {
-      background-color: white; 
+@media (min-width: 1024px) {
+    .contenedor {
+      width: 1200px;
+      margin: 0 auto;
+      flex-direction: row; /* Cambia a filas en PC */
     }
   }
