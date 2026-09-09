@@ -19,7 +19,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT_HTTP = 3000;
 app.use(cors());
-app.use(express.json()); 
+app.use(express.json());
 app.use('/api', usuariosRutas);
 
 const filePath = path.join(__dirname, 'sensores.json');
@@ -128,19 +128,21 @@ function processarBloque(lineas: string[]) {
     }
   }
 
-  // Si pudimos capturar al menos los datos principales, armamos el registro
-  if (temperatura !== null && humedad !== null && conductividad !== null) {
+  // TEMPORAL: mientras los sensores de conductividad y temperatura (BME280)
+  // no lleguen al colegio, solo exigimos que haya llegado la humedad.
+  // Cuando conectes los otros sensores, podés volver a pedir los 3 si querés.
+  if (humedad !== null) {
     const registro = {
       timestamp: new Date().toISOString(),
       humedadSuelo: humedad,
-      conductividad: conductividad,
-      temperaturaBME280: temperatura,
+      conductividad: conductividad, // queda en null hasta que conectes ese sensor
+      temperaturaBME280: temperatura, // queda en null hasta que conectes ese sensor
     };
 
     guardarEnJson(registro);
     console.log('¡Bloque procesado y guardado con éxito!', registro);
   } else {
-    console.log('No se pudieron extraer todos los datos del bloque:', lineas);
+    console.log('No se pudo extraer el dato de humedad del bloque:', lineas);
   }
 }
 
