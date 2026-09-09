@@ -9,24 +9,42 @@
 <body>
     <main class="wireframe">
         <section class="iniciar-sesion">
-            <section class="icono-registro"></section>
-            <section class="logo-login"></section>
-            <section class="titulo-login"></section>
-            <section class="imagen-login"></section>
+            <section class="icono-registro">
+                <button id="flecha" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img style="width: 1.875rem; height: 1.875rem;" src="./src/img/flecha.png" alt="Flecha"/>
+            </section>
+            <section class="logo-login">
+                <img style="width: 10.25rem; height: 9.75rem" src="./src/img/PLANTA.png" />
+            </section>
+            <section class="titulo-login">
+                <p>El sistema operativo de las plantas</p>
+            </section>
+            <section class="imagen-login">
+                <img style="width: 8.375rem; height: 9.625rem" src="./src/img/planta4.png" />
+            </section>
             <section class="campo-login">
-                <section class="etiqueta-login"></section>
+                <section class="etiqueta-login">
+                    <p>Correo electrónico</p>
+                </section>
                 <input class="input-login" id="input-mail-login" type="email" placeholder="Mail">
             </section>
             <section class="campo-login">
-                <section class="etiqueta-login"></section>
+                <section class="etiqueta-login">
+                    <p>Contraseña</p>
+                </section>
                 <input class="input-login" id="input-contrasena-login" type="password" placeholder="Contraseña">
-                <section class="input-login"></section>
+                <section class="input-login">
+                    <button id="input-login"><p>Registrarme</p>
+                </section>
             </section>
-            <section class="texto-login"></section>
-            <section class="texto-login"></section>
+            <section class="texto-login">
+                <p>¿Olvidaste tu contraseña?</p>
+            </section>
+            <section class="texto-login">
+                <p>¿No tenés cuenta? Registrate</p>
+            </section>
         </section>
     </main>
-
     <script src="src/login.js" defer></script>
 </body>
 </html>
