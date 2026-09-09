@@ -14,11 +14,21 @@ function recomendacionTemperatura(estado) {
 }
 
 async function cargarTemperatura() {
+  document.getElementById('valor-temperatura').textContent = 'Cargando...';
+  document.getElementById('recomendacion-temperatura').textContent = '';
+
   try {
     const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo');
     const ultimo = await resUltimo.json();
-    const valor = ultimo.temperaturaBME280;
 
+    if (ultimo.mensaje) {
+      document.getElementById('valor-temperatura').textContent = '--';
+      document.getElementById('estado-temperatura').textContent = 'Sin datos';
+      document.getElementById('recomendacion-temperatura').textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+      return;
+    }
+
+    const valor = ultimo.temperaturaBME280;
     document.getElementById('valor-temperatura').textContent = valor + '°C';
 
     const estado = calcularEstadoTemperatura(valor);
@@ -30,6 +40,9 @@ async function cargarTemperatura() {
     dibujarGrafico(historial);
   } catch (error) {
     console.error('Error cargando datos de temperatura:', error);
+    document.getElementById('valor-temperatura').textContent = '--';
+    document.getElementById('estado-temperatura').textContent = 'Error';
+    document.getElementById('recomendacion-temperatura').textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
 

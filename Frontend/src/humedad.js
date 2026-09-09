@@ -14,11 +14,21 @@ function recomendacionHumedad(estado) {
 }
 
 async function cargarHumedad() {
+  document.getElementById('valor-humedad').textContent = 'Cargando...';
+  document.getElementById('recomendacion-humedad').textContent = '';
+
   try {
     const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo');
     const ultimo = await resUltimo.json();
-    const valor = ultimo.humedadSuelo;
 
+    if (ultimo.mensaje) {
+      document.getElementById('valor-humedad').textContent = '--';
+      document.getElementById('estado-humedad').textContent = 'Sin datos';
+      document.getElementById('recomendacion-humedad').textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+      return;
+    }
+
+    const valor = ultimo.humedadSuelo;
     document.getElementById('valor-humedad').textContent = valor + '%';
 
     const estado = calcularEstadoHumedad(valor);
@@ -30,6 +40,9 @@ async function cargarHumedad() {
     dibujarGrafico(historial);
   } catch (error) {
     console.error('Error cargando datos de humedad:', error);
+    document.getElementById('valor-humedad').textContent = '--';
+    document.getElementById('estado-humedad').textContent = 'Error';
+    document.getElementById('recomendacion-humedad').textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
 
