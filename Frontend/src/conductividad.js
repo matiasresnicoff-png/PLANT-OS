@@ -14,11 +14,21 @@ function recomendacionConductividad(estado) {
 }
 
 async function cargarConductividad() {
+  document.getElementById('valor-conductividad').textContent = 'Cargando...';
+  document.getElementById('recomendacion-conductividad').textContent = '';
+
   try {
     const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo');
     const ultimo = await resUltimo.json();
-    const valor = ultimo.conductividad;
 
+    if (ultimo.mensaje) {
+      document.getElementById('valor-conductividad').textContent = '--';
+      document.getElementById('estado-conductividad').textContent = 'Sin datos';
+      document.getElementById('recomendacion-conductividad').textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+      return;
+    }
+
+    const valor = ultimo.conductividad;
     document.getElementById('valor-conductividad').textContent = valor + ' µS/cm';
 
     const estado = calcularEstadoConductividad(valor);
@@ -30,6 +40,9 @@ async function cargarConductividad() {
     dibujarGrafico(historial);
   } catch (error) {
     console.error('Error cargando datos de conductividad:', error);
+    document.getElementById('valor-conductividad').textContent = '--';
+    document.getElementById('estado-conductividad').textContent = 'Error';
+    document.getElementById('recomendacion-conductividad').textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
 
