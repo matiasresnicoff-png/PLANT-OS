@@ -2,11 +2,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #EFFEF2;
+    background-color: #C5FFDD;
 }
 
 /* Adaptación a pantallas más chicas — no cambia ninguna medida original,
    solo les pone un techo para que se achiquen en vez de desbordar */
+.title{
+    width: 5.625rem;
+    height: 2.5rem;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 .wireframe * {
     max-width: 100%;
     min-width: 0;
@@ -68,7 +78,7 @@
     align-items: center;
 }
 
-.boton-bienvenido {
+.Configuracion {
     width: 21.5625rem;
     height: 3.125rem;
     border-radius: 1.25rem;
@@ -124,7 +134,7 @@
     gap: 3.125rem;
 }
 
-.boton-inicial {
+.Iniciar-sesion {
     width: 21.5625rem;
     height: 3.125rem;
     border-radius: 1.25rem;
@@ -137,7 +147,7 @@
     display: flex;
     align-items: center;
 }
-.boton-registrarse{
+.Registrarse{
     width: 21.5625rem;
     height: 3.125rem;
     border-radius: 1.25rem;
@@ -207,7 +217,7 @@
     line-height: normal;
 }
 
-.boton-registro {
+.Registrarme {
     width: 21.5625rem;
     height: 3.125rem;
     border-radius: 1.25rem;
@@ -325,8 +335,9 @@
     width: 21.5625rem;
     height: 3.125rem;
     border-radius: 1.25rem;
-    background: #56DA9F;
-    color: white;
+    background: white;
+    color: black;
+    border:1px solid #56DA9F;
     font-size: 15px;
     font-family: "Inter", sans-serif;
     font-weight: 800;
@@ -359,13 +370,17 @@
 .logo-inicio {
     width: 7.8125rem;
     height: 2.625rem;
-    background: #D9D9D9;
 }
 
 .titulo-inicio {
     width: 13.375rem;
     height: 1.3125rem;
-    background: #D9D9D9;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .header-arriba {
@@ -378,16 +393,15 @@
 }
 
 .logo-circulo {
-    width: 4.1875rem;
-    height: 4.25rem;
-    background: #D9D9D9;
+    width:  3.8125rem;
+    height: 3.875rem;
     border-radius: 100%;
     flex-shrink: 0; 
 }
 
 .perfil-circulo {
-    width: 4.1875rem;
-    height: 4.25rem;
+    width:  3.8125rem;
+    height: 3.875rem;
     background: #D9D9D9;
     border-radius: 100%;
     flex-shrink: 0; 
