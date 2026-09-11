@@ -2,10 +2,21 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #C5FFDD;
 }
 
 /* Adaptación a pantallas más chicas — no cambia ninguna medida original,
    solo les pone un techo para que se achiquen en vez de desbordar */
+.title{
+    width: 5.625rem;
+    height: 2.5rem;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 .wireframe * {
     max-width: 100%;
     min-width: 0;
@@ -22,20 +33,21 @@
 .logo-bienvenido {
     width: 6.25rem;
     height: 6.25rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
 .titulo-bienvenido {
-    width: 16.0625rem;
-    height: 1.1875rem;
-    background: #D9D9D9;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    word-wrap: break-word
 }
 
 .tarjeta-bienvenido {
     width: 28.625rem;
     height: 26.375rem;
-    background: #D9D9D9;
+    background: white;
     border-radius: 1.5625rem;
 
     display: flex;
@@ -48,22 +60,36 @@
 }
 
 .logo-tarjeta {
-    width: 9.5rem;
-    height: 9.5625rem;
-    background: #656A67;
+    width: 100%;
+    height: 100%;
     border-radius: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .bloque-imagen {
-    width: 25.9375rem;
-    height: 9.375rem;
-    background: #656A67;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: Poppins;
+    font-weight: 500;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
-.boton-bienvenido {
-    width: 21.75rem;
-    height: 3.875rem;
-    background: #656A67;
+.Configuracion {
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background: #56DA9F;
+    color: white;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .pantalla-inicial {
@@ -76,27 +102,29 @@
 .logo-inicial {
     width: 10.25rem;
     height: 9.75rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
 .titulo-inicial {
     width: 21.25rem;
     height: 1.6875rem;
-    background: #D9D9D9;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    word-wrap: break-word
 }
 
 .circulo-inicial {
     width: 13.125rem;
     height: 11.375rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
 .contenedor-botones {
     width: 31.25rem;
     height: 21.625rem;
-    background: #D9D9D9;
+    background: white;
 
     display: flex;
     flex-direction: column;
@@ -106,11 +134,29 @@
     gap: 3.125rem;
 }
 
-.boton-inicial {
-    width: 27.546875rem;
-    height: 4.01125rem;
-    background: #656A67;
-    border-radius: 0.875rem;
+.Iniciar-sesion {
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background: #56DA9F;
+    color: white;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+.Registrarse{
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    border: 1.5px solid #56DA9F;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .registrarse {
@@ -123,14 +169,19 @@
 .logo-registrarse {
     width: 10.25rem;
     height: 9.75rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
 .titulo-registrarse {
     width: 21.25rem;
     height: 1.6875rem;
-    background: #D9D9D9;
+    width: 21.25rem;
+    height: 1.6875rem;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    word-wrap: break-word
 }
 
 .campo-registro {
@@ -142,34 +193,71 @@
 }
 
 .etiqueta-registro {
-    width: 3.5rem;
-    height: 0.5625rem;
-    background: #D9D9D9;
+    width: 4.29538rem;
+    height: 2.47625rem;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
 .input-registro {
-    width: 27.546875rem;
-    height: 4.01125rem;
-    background: #D9D9D9;
+    width: 25.99825rem;
+    height: 3.30163rem;
+    border-radius: 0.5rem;
+    border: 1px solid #56DA9F;
+    background: #FFF;
+    color: #9E9E9E;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.boton-registro {
-    width: 27.546875rem;
-    height: 4.01125rem;
-    background: #D9D9D9;
+.Registrarme {
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background: #56DA9F;
+    color: white;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .texto-registro {
-    width: 14.375rem;
-    height: 0.6875rem;
-    background: #D9D9D9;
+    width: 14.5625rem;
+    height: 1.0625rem;
+    color: rgba(0, 0, 0, 0.71);
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    color: #56DA9F;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    text-decoration-skip-ink: auto;
+    text-decoration-thickness: auto;
+    text-underline-offset: auto;
+    text-underline-position: from-font;
 }
 
 .icono-registro {
     grid-area: icono;
     width: 1.625rem;
     height: 1.1875rem;
-    background: #D9D9D9;
     align-self: flex-start;
 }
 
@@ -205,20 +293,22 @@
 .logo-login {
     width: 10.25rem;
     height: 9.75rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
 .titulo-login {
     width: 21.25rem;
     height: 1.6875rem;
-    background: #D9D9D9;
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    word-wrap: break-word
 }
 
 .imagen-login {
     width: 10.1875rem;
     height: 9.3125rem;
-    background: #D9D9D9;
     border-radius: 100%;
 }
 
@@ -231,21 +321,43 @@
 }
 
 .etiqueta-login {
-    width: 3.5rem;
-    height: 0.5625rem;
-    background: #D9D9D9;
+    width: 4.29538rem;
+    height: 2.47625rem;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;;
 }
 
 .input-login {
-    width: 27.546875rem;
-    height: 4.01125rem;
-    background: #D9D9D9;
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background: white;
+    color: black;
+    border:1px solid #56DA9F;
+    font-size: 15px;
+    font-family: "Inter", sans-serif;
+    font-weight: 800;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .texto-login {
-    width: 14.375rem;
-    height: 0.6875rem;
-    background: #D9D9D9;
+    width: 11.25rem;
+    height: 1.375rem;
+    color: rgba(0, 0, 0, 0.71);
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .inicio {
@@ -258,13 +370,17 @@
 .logo-inicio {
     width: 7.8125rem;
     height: 2.625rem;
-    background: #D9D9D9;
 }
 
 .titulo-inicio {
     width: 13.375rem;
     height: 1.3125rem;
-    background: #D9D9D9;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .header-arriba {
@@ -277,16 +393,15 @@
 }
 
 .logo-circulo {
-    width: 4.1875rem;
-    height: 4.25rem;
-    background: #D9D9D9;
+    width:  3.8125rem;
+    height: 3.875rem;
     border-radius: 100%;
     flex-shrink: 0; 
 }
 
 .perfil-circulo {
-    width: 4.1875rem;
-    height: 4.25rem;
+    width:  3.8125rem;
+    height: 3.875rem;
     background: #D9D9D9;
     border-radius: 100%;
     flex-shrink: 0; 
@@ -696,6 +811,6 @@
 
 @media (max-width: 48rem) {
     body {
-        background-color: lightblue; 
+        background-color: #EFFEF2; 
     }
 }
