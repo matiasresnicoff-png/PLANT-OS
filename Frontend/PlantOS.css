@@ -809,6 +809,28 @@
     background: #656A67;
 }
 
+/* Los botones de navegación ahora son <a>, que por defecto vienen
+   subrayados y azules — esto los deja iguales a como se veían con <button> */
+.Configuracion,
+.Iniciar-sesion,
+.Registrarse,
+.Registrarme {
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+}
+
+.Registrarse {
+    color: #2D6A4F;
+}
+
+.texto-registro a,
+.texto-login a {
+    color: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 @media (max-width: 48rem) {
     body {
         background-color: #EFFEF2; 
