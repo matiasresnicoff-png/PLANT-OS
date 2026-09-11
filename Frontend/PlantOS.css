@@ -2,7 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #C5FFDD;
+    background: linear-gradient(180deg, #EAFBF0 0%, #DCF6E6 100%);
+    min-height: 100vh;
+    width: 100%;
 }
 
 /* Adaptación a pantallas más chicas — no cambia ninguna medida original,
@@ -31,58 +33,46 @@
 }
 
 .logo-bienvenido {
-    width: 6.25rem;
-    height: 6.25rem;
-    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.logo-bienvenido .logo-img {
+    width: 10rem;
+    height: auto;
 }
 
 .titulo-bienvenido {
-    color: #2D6A4F;
-    font-size: 20px;
+    color: #6B7280;
+    font-size: 0.9rem;
     font-family: "Inter", sans-serif;
     font-weight: 400;
+    text-align: center;
+    margin-top: -0.75rem;
     word-wrap: break-word
 }
 
 .tarjeta-bienvenido {
-    width: 28.625rem;
-    height: 26.375rem;
+    width: 19rem;
     background: white;
-    border-radius: 1.5625rem;
+    border-radius: 1.75rem;
+    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.06);
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.25rem;
-
-    padding-top: 1.1875rem;
+    padding: 2rem 1.5rem;
     box-sizing: border-box;
-}
 
-.logo-tarjeta {
-    width: 100%;
-    height: 100%;
-    border-radius: 100%;
-    justify-content: center;
-    display: flex;
-    align-items: center;
-}
-
-.bloque-imagen {
-    color: #2D6A4F;
-    font-size: 20px;
-    font-family: Poppins;
+    color: #1F5C3F;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
     font-weight: 500;
-    justify-content: center;
-    display: flex;
-    align-items: center;
+    line-height: 1.6;
+    text-align: center;
 }
 
 .Configuracion {
-    width: 21.5625rem;
-    height: 3.125rem;
-    border-radius: 1.25rem;
-    background: #56DA9F;
+    padding: 0.9rem 2.5rem;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #56DA9F 0%, #2D9C6F 100%);
     color: white;
     font-size: 15px;
     font-family: "Inter", sans-serif;
