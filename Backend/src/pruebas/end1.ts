@@ -7,6 +7,7 @@ import pkg from 'express';
 const express = pkg;
 import type { Request, Response } from 'express';
 import usuariosRutas from '../rutas/rutasUsuarios.ts';
+import { verificarToken } from '../middlewares/verificarToken.ts';
 import cors from 'cors';
 
 // Definimos __dirname para módulos ES
@@ -43,7 +44,7 @@ function guardarEnJson(datosNuevos: object) {
 // ------------------------------------------
 // ENDPOINTS
 // ------------------------------------------
-app.get('/api/sensores', (req: Request, res: Response) => {
+app.get('/api/sensores', verificarToken, (req: Request, res: Response) => {
   if (!fs.existsSync(filePath)) {
     return res.json([]);
   }
@@ -55,7 +56,7 @@ app.get('/api/sensores', (req: Request, res: Response) => {
   }
 });
 
-app.get('/api/sensores/ultimo', (req: Request, res: Response) => {
+app.get('/api/sensores/ultimo', verificarToken, (req: Request, res: Response) => {
   if (!fs.existsSync(filePath)) {
     return res.json({ mensaje: 'No hay datos todavía' });
   }
