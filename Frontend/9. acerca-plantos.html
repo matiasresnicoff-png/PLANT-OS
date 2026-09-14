@@ -11,25 +11,43 @@
     <main class="wireframe">
         <section class="acerca-proyecto">
             <header class="header-superior">
-            <section class="Blanco"></section> 
-             <section class="LOGO"></section>
+            <section class="Blanco">
+                <button onclick="location.href='5. inicio.html'" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="./src/img/flecha.png" alt="Volver" style="width: 1.875rem; height: 1.875rem;"/>
+                </button>
+            </section>
+             <img class="LOGO" src="./src/img/plantos-icon.png" alt="PlantOS" />
             </header>
-            <section class="titulo-acerca"></section>
-            <section class="perfil-acerca"></section>
-            <section class="subtitulo-acerca"></section>
+            <section class="titulo-acerca">Acerca de PlantOS</section>
+            <section class="perfil-acerca">
+                <img src="./src/img/plantos-logo.png" alt="PlantOS" />
+            </section>
+            <section class="subtitulo-acerca">El sistema operativo de las plantas</section>
             <section class="tarjeta-proyecto">
-                <section class="contenido-proyecto"></section>
+                <section class="contenido-proyecto">
+                    PlantOS monitorea la humedad, la temperatura y la conductividad de la tierra con sensores conectados a un Arduino, para que sepas en todo momento cómo está tu planta.
+                </section>
             </section>
             <section class="tarjeta-informacion-proyecto">
-                <section class="informacion-proyecto"></section>
+                <section class="informacion-proyecto">
+                    Proyecto académico de monitoreo de plantas, desarrollado por Matías y Tomás.
+                </section>
             </section>
             <section class="barra-navegacion">
-                <section class="icono-navegacion"></section>
-                <section class=" opcion-izquierda"></section>
-                <section class="opcion-centro"></section>
-                <section class="opcion-derecha"></section>
+                <a class="opcion-navegacion" href="5. inicio.html">
+                    <svg class="icono-navegacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+                    Inicio
+                </a>
+                <a class="opcion-navegacion activo" href="9. acerca-plantos.html">
+                    <svg class="icono-navegacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+                    Acerca de
+                </a>
+                <a class="opcion-navegacion" href="10. perfil.html">
+                    <svg class="icono-navegacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                    Perfil
+                </a>
             </section>
-            </section>
+        </section>
     </main>
 </body>
 </html>

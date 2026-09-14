@@ -10,26 +10,48 @@
     <main class="wireframe">
         <section class="mi-perfil">
              <header class="header-superior">
-             <section class="icono-registro"></section>
+             <section class="icono-registro">
+                <button onclick="location.href='5. inicio.html'" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img src="./src/img/flecha.png" alt="Volver" style="width: 1.875rem; height: 1.875rem;"/>
+                </button>
+             </section>
+             <img class="LOGO" src="./src/img/plantos-icon.png" alt="PlantOS" />
             </header>
-            <section class="foto-perfil"></section>
+            <img class="foto-perfil" src="./src/img/avatar.jpg" alt="Foto de perfil" />
             <section class="nombre-perfil" id="nombre-perfil-valor"></section>
-            <section class="descripcion-perfil"></section>
+            <section class="descripcion-perfil">Cuenta de PlantOS</section>
             <section class="tarjeta-datos-perfil">
-                <input class="dato-perfil" id="input-nombre-perfil" type="text">
-                <input class="dato-perfil" id="input-fecha-perfil" type="date">
-                <input class="dato-perfil" id="input-mail-perfil" type="email">
+                <section class="campo-perfil">
+                    <label for="input-nombre-perfil">Nombre</label>
+                    <input class="dato-perfil" id="input-nombre-perfil" type="text">
+                </section>
+                <section class="campo-perfil">
+                    <label for="input-fecha-perfil">Fecha de nacimiento</label>
+                    <input class="dato-perfil" id="input-fecha-perfil" type="date">
+                </section>
+                <section class="campo-perfil">
+                    <label for="input-mail-perfil">Correo electrónico</label>
+                    <input class="dato-perfil" id="input-mail-perfil" type="email">
+                </section>
             </section>
             <section class="tarjeta-extra-perfil">
                 <section class="contenido-extra-perfil" id="boton-guardar-perfil" style="cursor: pointer;"></section>
             </section>
             <section class="barra-navegacion">
-                <section class="icono-navegacion"></section>
-                <section class=" opcion-izquierda"></section>
-                <section class=" opcion-centro"></section>
-                <section class=" opcion-derecha"></section>
+                <a class="opcion-navegacion" href="5. inicio.html">
+                    <svg class="icono-navegacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"/></svg>
+                    Inicio
+                </a>
+                <a class="opcion-navegacion" href="9. acerca-plantos.html">
+                    <svg class="icono-navegacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+                    Acerca de
+                </a>
+                <a class="opcion-navegacion activo" href="10. perfil.html">
+                    <svg class="icono-navegacion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+                    Perfil
+                </a>
             </section>
-            </section>
+        </section>
     </main>
 
     <script src="src/perfil.js" defer></script>
