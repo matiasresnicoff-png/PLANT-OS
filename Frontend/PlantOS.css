@@ -205,6 +205,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    padding: 0 1rem;
+    box-sizing: border-box;
 }
 
 .Registrarme {
