@@ -2,9 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, #EAFBF0 0%, #DCF6E6 100%);
-    min-height: 100vh;
-    width: 100%;
+    background-color: #C5FFDD;
 }
 
 /* Adaptación a pantallas más chicas — no cambia ninguna medida original,
@@ -33,46 +31,58 @@
 }
 
 .logo-bienvenido {
-    display: flex;
-    justify-content: center;
-}
-
-.logo-bienvenido .logo-img {
-    width: 10rem;
-    height: auto;
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 100%;
 }
 
 .titulo-bienvenido {
-    color: #6B7280;
-    font-size: 0.9rem;
+    color: #2D6A4F;
+    font-size: 20px;
     font-family: "Inter", sans-serif;
     font-weight: 400;
-    text-align: center;
-    margin-top: -0.75rem;
     word-wrap: break-word
 }
 
 .tarjeta-bienvenido {
-    width: 19rem;
+    width: 28.625rem;
+    height: 26.375rem;
     background: white;
-    border-radius: 1.75rem;
-    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.06);
+    border-radius: 1.5625rem;
 
-    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+
+    padding-top: 1.1875rem;
     box-sizing: border-box;
+}
 
-    color: #1F5C3F;
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
+.logo-tarjeta {
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+}
+
+.bloque-imagen {
+    color: #2D6A4F;
+    font-size: 20px;
+    font-family: Poppins;
     font-weight: 500;
-    line-height: 1.6;
-    text-align: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
 }
 
 .Configuracion {
-    padding: 0.9rem 2.5rem;
-    border-radius: 3.125rem;
-    background: linear-gradient(90deg, #56DA9F 0%, #2D9C6F 100%);
+    width: 21.5625rem;
+    height: 3.125rem;
+    border-radius: 1.25rem;
+    background: #56DA9F;
     color: white;
     font-size: 15px;
     font-family: "Inter", sans-serif;
@@ -113,12 +123,8 @@
 
 .contenedor-botones {
     width: 31.25rem;
-    max-width: 100%;
     height: 21.625rem;
     background: white;
-    border-radius: 1.75rem;
-    box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.06);
-    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
@@ -187,8 +193,8 @@
 }
 
 .etiqueta-registro {
-    width: auto;
-    height: auto;
+    width: 4.29538rem;
+    height: 2.47625rem;
     color: #000;
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
@@ -198,20 +204,17 @@
 }
 
 .input-registro {
-    width: 21.5625rem;
-    max-width: 100%;
-    height: 3.125rem;
-    border-radius: 1.25rem;
+    width: 25.99825rem;
+    height: 3.30163rem;
+    border-radius: 0.5rem;
     border: 1px solid #56DA9F;
     background: #FFF;
-    color: #1F5C3F;
+    color: #9E9E9E;
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    padding: 0 1rem;
-    box-sizing: border-box;
 }
 
 .Registrarme {
@@ -265,29 +268,19 @@
     align-items: center;
 }
 
-.Blanco,
 .blanco {
-    width: 1.875rem;
-    height: 1.875rem;
+    width: 1.625rem;
+    height: 1.1875rem;
+    background: #D9D9D9;
     align-self: flex-start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.Blanco img,
-.blanco img {
-    width: 1.875rem;
-    height: 1.875rem;
 }
 
 .LOGO {
     width: 2.8125rem;
     height: 2.8125rem;
+    background: #D9D9D9;
     border-radius: 100%;
     align-self: flex-end;
-    object-fit: cover;
-    background: white;
 }
 
 .iniciar-sesion {
@@ -328,8 +321,8 @@
 }
 
 .etiqueta-login {
-    width: auto;
-    height: auto;
+    width: 4.29538rem;
+    height: 2.47625rem;
     color: #000;
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
@@ -375,36 +368,25 @@
 }
 
 .logo-inicio {
-    width: auto;
-    height: auto;
-}
-
-.logo-inicio .title {
-    width: auto;
-    height: auto;
-    font-size: 1.375rem;
-    font-weight: 700;
+    width: 7.8125rem;
+    height: 2.625rem;
 }
 
 .titulo-inicio {
-    width: auto;
-    height: auto;
-    color: #6B7280;
+    width: 13.375rem;
+    height: 1.3125rem;
+    color: #2D6A4F;
     font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
+    font-size: 1.25rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
 }
 
-.titulo-inicio .title2 {
-    margin: 0;
-}
-
 .header-arriba {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; 
+    align-items: center;            
     width: 100%;
     padding: 0.9375rem 1.25rem;
     box-sizing: border-box;
@@ -414,126 +396,81 @@
     width:  3.8125rem;
     height: 3.875rem;
     border-radius: 100%;
-    flex-shrink: 0;
-    object-fit: cover;
+    flex-shrink: 0; 
 }
 
 .perfil-circulo {
     width:  3.8125rem;
     height: 3.875rem;
+    background: #D9D9D9;
     border-radius: 100%;
-    flex-shrink: 0;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: white;
-    box-shadow: 0 0.125rem 0.5rem rgba(0,0,0,0.08);
-}
-
-.perfil-circulo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    flex-shrink: 0; 
 }
 
 .circulo-inicio {
-    width: 8.5rem;
-    height: 8.5rem;
-    background: linear-gradient(160deg, #56DA9F 0%, #2D6A4F 100%);
+    width: 12.625rem;
+    height: 12.75rem;
     border-radius: 100%;
-    margin: 0.625rem auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0.625rem 1.875rem rgba(45, 106, 79, 0.25);
-}
-
-.circulo-inicio svg {
-    width: 3.75rem;
-    height: 3.75rem;
+    margin: 0.9375rem auto; 
 }
 
 .centro-titulos {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.125rem;
+    gap: 0.5rem;
 }
 
 .tarjetas-inicio {
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
-    gap: 0.75rem;
-    width: 100%;
-    padding: 0 1.25rem;
-    box-sizing: border-box;
+    gap: 1.375rem;
 }
 
 .tarjeta-inicio {
-    flex: 1;
-    min-width: 0;
-    background: white;
-    border-radius: 1rem;
-    box-shadow: 0 0.375rem 1.25rem rgba(0, 0, 0, 0.06);
-    padding: 1rem 0.5rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    text-decoration: none;
-    color: inherit;
-}
-
-.tarjeta-inicio svg {
-    width: 1.5rem;
-    height: 1.5rem;
-    color: #2D9C6F;
-}
-
-.tarjeta-inicio .tarjeta-inicio-label {
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #2D6A4F;
-    text-align: center;
+    width: 9.161875rem;
+    height: 9.3125rem;
+    background: #D9D9D9;
+    border-radius: 0.75rem; 
 }
 
 .barra-navegacion {
-    width: 100%;
-    background: white;
+    width: 31.85rem;
+    height: 2.679375rem;
+    background: #D9D9D9;
+
     box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-    padding: 0.625rem 0.625rem;
-    box-sizing: border-box;
-    margin-top: 1.25rem;
-}
-
-.barra-navegacion a.opcion-navegacion {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.1875rem;
-    text-decoration: none;
-    color: #9CA3AF;
-    font-family: "Inter", sans-serif;
-    font-size: 0.625rem;
-    font-weight: 600;
-}
-
-.barra-navegacion a.opcion-navegacion.activo {
-    color: #2D9C6F;
 }
 
 .icono-navegacion {
-    width: 1.375rem;
+    width: 1.119375rem;
+    height: 1.119375rem;
+}
+
+.opcion-navegacion {
+    background: #656A67;
+}
+
+.opcion-centro {
+    width: 9.4375rem;
     height: 1.375rem;
+}
+
+.opcion-izquierda {
+    width: 4.9375rem;
+    height: 1.625rem;
+}
+
+.opcion-derecha {
+    width: 5.0625rem;
+    height: 1.5625rem;
 }
 
 .detalle-humedad {
@@ -551,74 +488,54 @@
 }
 
 .titulo-humedad {
-    width: auto;
-    height: auto;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 1.125rem;
-    font-weight: 700;
-    text-align: center;
+    grid-area: icono;
+    width: 11.25rem;
+    height: 1.5625rem;
+    background-color: #D9D9D9;
+    justify-self: center;
 }
 
 .tarjeta-estado {
     width: 24.525rem;
-    max-width: 100%;
+    height: 7.464375rem;
 
-    background: white;
+    background: #D9D9D9;
     box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-    padding: 1.25rem 1rem;
-    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    gap: 0.375rem;
+    gap: 0.9375rem;
 }
 
 .dato-estado {
-    width: auto;
-    height: auto;
-    background: #DCF6E6;
-    color: #1F5C3F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
+    width: 10.125rem;
+    height: 1.5625rem;
+    background: #656A67;
 }
 
 .valor-estado {
-    width: auto;
-    height: auto;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
+    width: 5.625rem;
+    height: 2.3125rem;
+    background: #656A67;
 }
 
 .subtitulo-humedad {
-    width: auto;
-    height: auto;
-    color: #6B7280;
-    font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    text-align: center;
+    width: 7.625rem;
+    height: 1.375rem;
+    background: #656A67;
 }
 
 .grafico-humedad {
     width: 24.5rem;
-    max-width: 100%;
     height: 14.4375rem;
 
-    background: linear-gradient(160deg, #2D9C6F 0%, #1F5C3F 100%);
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-    border-radius: 1rem;
-    padding: 0.75rem;
-    box-sizing: border-box;
+    background: #D9D9D9;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    border-radius: 1rem; 
 
     display: flex;
     align-items: center;
@@ -628,6 +545,7 @@
 .grafico-interior {
     width: 20.4375rem;
     height: 9.8125rem;
+    background: #656A67;
 }
 
 .texto-grafico {
@@ -638,13 +556,10 @@
 
 .tarjeta-informacion {
     width: 24.5rem;
-    max-width: 100%;
+    height: 4.25rem;
 
-    background: white;
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    background: #D9D9D9;
     border-radius: 0.75rem;
-    padding: 1rem 1.25rem;
-    box-sizing: border-box;
 
     display: flex;
     align-items: center;
@@ -653,13 +568,44 @@
 
 .informacion-interior {
     width: 22.5625rem;
-    max-width: 100%;
-    color: #1F5C3F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    line-height: 1.5;
-    text-align: center;
+    height: 2.3125rem;
+    background: #656A67;
+}
+
+.barra-navegacion {
+    display: flex;
+    justify-content: space-around; 
+    align-items: center;
+    width: 100%;
+    height: 3.125rem;
+    background-color: #E0E0E0; 
+    padding: 0 0.625rem;
+    margin-top: 1.25rem;
+}
+
+.icono-navegacion {
+    display: none; 
+}
+
+.opcion-navegacion {
+    height: 1.125rem;
+    background-color: #555555;    
+    border-radius: 0.125rem;
+}
+
+.opcion-izquierda {
+    width: 22%;    
+    background-color: #555555;                
+}
+
+.opcion-derecha {
+    width: 22%;     
+    background-color: #555555;                
+}
+
+.opcion-centro {
+    width: 40%;     
+    background-color: #555555;                
 }
 
 .perfil-temperatura {
@@ -683,14 +629,11 @@
 
 .grafico-temperatura {
     width: 24.5rem;
-    max-width: 100%;
     height: 14.4375rem;
 
-    background: linear-gradient(160deg, #2D9C6F 0%, #1F5C3F 100%);
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    background: #D9D9D9;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-    padding: 0.75rem;
-    box-sizing: border-box;
 
     display: flex;
     align-items: center;
@@ -718,14 +661,11 @@
 
 .grafico-conductividad {
     width: 24.5rem;
-    max-width: 100%;
     height: 14.4375rem;
 
-    background: linear-gradient(160deg, #2D9C6F 0%, #1F5C3F 100%);
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+    background: #D9D9D9;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-    padding: 0.75rem;
-    box-sizing: border-box;
 
     display: flex;
     align-items: center;
@@ -742,56 +682,36 @@
 .logo-acerca {
     width: 2.8125rem;
     height: 2.8125rem;
+    background: #D9D9D9;
     border-radius: 100%;
-    object-fit: cover;
 }
 
 .titulo-acerca {
-    width: auto;
-    height: auto;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 1.375rem;
-    font-weight: 700;
-    text-align: center;
+    width: 15.75rem;
+    height: 2.25rem;
+    background: #D9D9D9;
 }
 
 .perfil-acerca {
     width: 8.25rem;
     height: 7.25rem;
+    background: #D9D9D9;
     border-radius: 100%;
-    background: white;
-    box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.06);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.perfil-acerca img {
-    width: 6.25rem;
-    height: auto;
 }
 
 .subtitulo-acerca {
     width: 18.75rem;
-    max-width: 100%;
-    height: auto;
-    color: #6B7280;
-    font-family: "Inter", sans-serif;
-    font-size: 0.9rem;
-    font-weight: 400;
-    text-align: center;
+    height: 1.5rem;
+    background: #D9D9D9;
 }
 
 .tarjeta-proyecto {
     width: 24.5rem;
-    max-width: 100%;
+    height: 11.4375rem;
 
-    background: white;
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    background: #D9D9D9;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-    padding: 1.25rem 1.5rem;
-    box-sizing: border-box;
 
     display: flex;
     align-items: center;
@@ -800,23 +720,16 @@
 
 .contenido-proyecto {
     width: 15.125rem;
-    max-width: 100%;
-    color: #1F5C3F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.6;
-    text-align: center;
+    height: 8.9375rem;
+    background: #656A67;
 }
 
 .tarjeta-informacion-proyecto {
     width: 24.5rem;
-    max-width: 100%;
+    height: 9.625rem;
 
-    background: #DCF6E6;
+    background: #D9D9D9;
     border-radius: 0.75rem;
-    padding: 1rem 1.25rem;
-    box-sizing: border-box;
 
     display: flex;
     align-items: center;
@@ -825,13 +738,8 @@
 
 .informacion-proyecto {
     width: 20.125rem;
-    max-width: 100%;
-    color: #1F5C3F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    line-height: 1.5;
-    text-align: center;
+    height: 7.3125rem;
+    background: #656A67;
 }
 
 .mi-perfil {
@@ -844,81 +752,49 @@
 .foto-perfil {
     width: 7.186875rem;
     height: 7.150625rem;
+    background: #D9D9D9;
     border-radius: 100%;
-    object-fit: cover;
-    box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.1);
 }
 
 .nombre-perfil {
-    width: auto;
-    height: auto;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
+    width: 6.375rem;
+    height: 1.4375rem;
+    background: #D9D9D9;
 }
 
 .descripcion-perfil {
-    width: auto;
-    height: auto;
-    color: #6B7280;
-    font-family: "Inter", sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
+    width: 9.9375rem;
+    height: 1rem;
+    background: #D9D9D9;
 }
 
 .tarjeta-datos-perfil {
     width: 27.4375rem;
-    max-width: 100%;
+    height: 16.125rem;
 
-    background: white;
-    box-shadow: 0rem 0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    background: #D9D9D9;
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-    padding: 1.5rem 1.25rem;
-    box-sizing: border-box;
 
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
 
-    gap: 0.9rem;
-}
-
-.campo-perfil {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    width: 100%;
-}
-
-.campo-perfil label {
-    color: #000;
-    font-family: "Inter", sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 600;
+    gap: 1.25rem;
 }
 
 .dato-perfil {
-    width: 100%;
-    height: 2.75rem;
-    background: #FFF;
-    border: 1px solid #56DA9F;
-    border-radius: 0.5rem;
-    color: #1F5C3F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0 0.875rem;
-    box-sizing: border-box;
+    width: 14.25rem;
+    height: 2rem;
+    background: #656A67;
 }
 
 .tarjeta-extra-perfil {
     width: 27.400625rem;
-    max-width: 100%;
-    height: auto;
+    height: 4.469375rem;
 
-    background: none;
+    background: #D9D9D9;
     border-radius: 0.75rem;
 
     display: flex;
@@ -927,44 +803,7 @@
 }
 
 .contenido-extra-perfil {
-    width: 21.5625rem;
-    max-width: 100%;
-    height: 3.125rem;
-    border-radius: 1.25rem;
-    background: linear-gradient(90deg, #56DA9F 0%, #2D9C6F 100%);
-    color: white;
-    font-family: "Inter", sans-serif;
-    font-size: 15px;
-    font-weight: 800;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Los botones de navegación ahora son <a>, que por defecto vienen
-   subrayados y azules — esto los deja iguales a como se veían con <button> */
-.Configuracion,
-.Iniciar-sesion,
-.Registrarse,
-.Registrarme {
-    text-decoration: none;
-    cursor: pointer;
-    border: none;
-}
-
-.Registrarse {
-    color: #2D6A4F;
-}
-
-.texto-registro a,
-.texto-login a {
-    color: inherit;
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-@media (max-width: 48rem) {
-    body {
-        background-color: #EFFEF2; 
-    }
+    width: 11rem;
+    height: 2rem;
+    background: #656A67;
 }
