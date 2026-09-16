@@ -2,6 +2,7 @@ import { SerialPort } from 'serialport';
 import { ReadlineParser } from '@serialport/parser-readline';
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
@@ -17,6 +18,9 @@ app.use(express.json());
 
 app.use('/api', usuariosRutas);
 
+// Solución para __dirname en ES Modules / Node 22
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const filePath: string = path.join(__dirname, 'sensores.json');
 
 interface RegistroLectura {
@@ -105,7 +109,7 @@ app.listen(PORT_HTTP, () => {
 });
 
 const port = new SerialPort({
-  path: 'COM3', // Configurado para tu computadora
+  path: 'COM3',
   baudRate: 9600,
 });
 
