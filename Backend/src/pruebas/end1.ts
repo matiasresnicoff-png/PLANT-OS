@@ -6,8 +6,8 @@ import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
 
-import usuariosRutas from '../../rutas/rutasUsuarios.js';
-import { verificarToken } from '../../middlewares/verificarToken.js';
+import usuariosRutas from '../rutas/rutasUsuarios.ts';
+import { verificarToken } from '../middlewares/verificarToken.ts';
 
 const app = express();
 const PORT_HTTP: number = 3000;
@@ -15,7 +15,6 @@ const PORT_HTTP: number = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Enganchamos el enrutador de usuarios (aquí residen los POST, PUT, etc.)
 app.use('/api', usuariosRutas);
 
 const filePath: string = path.join(__dirname, 'sensores.json');
@@ -47,7 +46,6 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
   fs.writeFileSync(filePath, textoJson, 'utf-8');
 }
 
-// Endpoints de sensores
 app.get('/api/sensores', verificarToken, (req: Request, res: Response) => {
   let existeArchivo: boolean = fs.existsSync(filePath);
 
@@ -94,35 +92,20 @@ app.get('/api/sensores/ultimo', verificarToken, (req: Request, res: Response) =>
   }
 });
 
-// Función para imprimir en consola todas las rutas (incluye router principal y sub-rutas de usuarios)
-function mostrarRutas() {
-  console.log('=== LISTA DE RUTAS REGISTRADAS EN EL BACKEND ===');
-  app._router.stack.forEach((middleware: any) => {
-    if (middleware.route) {
-      // Rutas directas en app (como /api/sensores)
-      let metodo = Object.keys(middleware.route.methods)[0].toUpperCase();
-      console.log(`[HTTP] ${metodo} -> ${middleware.route.path}`);
-    } else if (middleware.name === 'router') {
-      // Rutas importadas desde usuariosRutas (/api/...)
-      middleware.handle.stack.forEach((handler: any) => {
-        if (handler.route) {
-          let metodo = Object.keys(handler.route.methods)[0].toUpperCase();
-          console.log(`[HTTP] ${metodo} -> /api${handler.route.path}`);
-        }
-      });
-    }
-  });
-  console.log('================================================');
-}
-
 app.listen(PORT_HTTP, () => {
   console.log(`[HTTP] Servidor Express corriendo en http://localhost:${PORT_HTTP}`);
-  mostrarRutas();
+  console.log('=== RUTAS DISPONIBLES EN TU BACKEND ===');
+  console.log('[HTTP] POST -> /api/usuarios (Registrar)');
+  console.log('[HTTP] POST -> /api/login (Login)');
+  console.log('[HTTP] GET  -> /api/usuarios/perfil (Ver Perfil)');
+  console.log('[HTTP] PUT  -> /api/usuarios/perfil (Editar Perfil)');
+  console.log('[HTTP] GET  -> /api/sensores (Ver Historial Sensores)');
+  console.log('[HTTP] GET  -> /api/sensores/ultimo (Ver Último Sensor)');
+  console.log('=======================================');
 });
 
-// Lectura de Puerto Serie
 const port = new SerialPort({
-  path: 'COM5', // ¡Ajustar al COM del colegio!
+  path: 'COM5', // ¡Cambiá este número si en la compu del colegio es COM3 o COM4!
   baudRate: 9600,
 });
 
