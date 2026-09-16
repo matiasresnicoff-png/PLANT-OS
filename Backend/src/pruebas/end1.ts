@@ -105,7 +105,7 @@ app.listen(PORT_HTTP, () => {
 });
 
 const port = new SerialPort({
-  path: 'COM5', // ¡Cambiá este número si en la compu del colegio es COM3 o COM4!
+  path: 'COM3', // Configurado para tu computadora
   baudRate: 9600,
 });
 
