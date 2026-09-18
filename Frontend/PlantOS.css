@@ -1,12 +1,10 @@
+@media (min-width: 768px) {
 .wireframe {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #C5FFDD;
+    width: 85.375rem;
+    height: 48rem;
+    background-image: url('./src/img/Fondo.png');
 }
 
-/* Adaptación a pantallas más chicas — no cambia ninguna medida original,
-   solo les pone un techo para que se achiquen en vez de desbordar */
 .title{
     white-space: nowrap;
     width: auto;
@@ -899,4 +897,5 @@
     width: 11rem;
     height: 2rem;
     background: #656A67;
+}
 }
