@@ -13,7 +13,7 @@
                 <button id="flecha" onclick="location.href='2. index.html'" style="background: none; border: none; padding: 0; cursor: pointer;">
                     <img style="width: 1.875rem; height: 1.875rem;" src="./src/img/flecha.png" alt="Flecha"/>
                 </button>
-            </section>            
+            </section>
             <section class="logo-registrarse">
                 <img style="width: 10.25rem; height: 9.75rem" src="./src/img/PLANTA.png" />
             </section>
@@ -21,41 +21,34 @@
                 <section class="etiqueta-registro">
                     <p>Nombre</p>
                 </section>
-                <section class="input-registro">
-                    <p>Ej: Matías</p>
-                </section>
+                <input class="input-registro" id="input-nombre-registro" type="text" placeholder="Ej: Matías">
             </section>
             <section class="campo-registro">
                 <section class="etiqueta-registro">
                     <p>Fecha de nacimiento</p>
                 </section>
-                <section class="input-registro">
-                    <p>DD/MM/AAAA</p>
-                </section>
+                <input class="input-registro" id="input-fecha-registro" type="date">
             </section>
             <section class="campo-registro">
                 <section class="etiqueta-registro">
                     <p>Correo electrónico</p>
                 </section>
-                <section class="input-registro">
-                    <p>ejemplo@gmail.com</p>
-                </section>
+                <input class="input-registro" id="input-mail-registro" type="email" placeholder="ejemplo@gmail.com">
             </section>
             <section class="campo-registro">
                 <section class="etiqueta-registro">
                     <p>Contraseña</p>
                 </section>
-                <section class="input-registro">
-                    <p>••••••••</p>
-                </section>
+                <input class="input-registro" id="input-contrasena-registro" type="password" placeholder="••••••••">
             </section>
             <section class="boton-registro">
-                <button class="Registrarme">Registrarme</button>
+                <button class="Registrarme" onclick="registrarUsuario()">Registrarme</button>
             </section>
             <section class="texto-registro">
                 <p class="texto-registro">¿Ya tenés cuenta? <a href="4. iniciar-sesion.html">Iniciá sesión</a></p>
             </section>
         </section>
     </main>
+    <script src="src/registro.js" defer></script>
 </body>
 </html>
