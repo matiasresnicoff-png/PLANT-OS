@@ -128,8 +128,6 @@ function processarBloque(lineas: string[]) {
       conductividad = valor;
     }
   }
-
-  // Si pudimos capturar al menos los datos principales, armamos el registro
   if (temperatura !== null && humedad !== null && conductividad !== null) {
     const registro = {
       timestamp: new Date().toISOString(),
