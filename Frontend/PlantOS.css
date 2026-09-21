@@ -1,29 +1,82 @@
 @media (min-width: 768px) {
-.wireframe {
-    width: 100%;
-    height: 100%;
-    background-image: url('./src/img/Fondo.png');
-    background-size: 100% 100%;
-}
-
-
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
 }
-.title5{
-    white-space: nowrap;
-    width: auto;
-    height: auto;
+
+.wireframe {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('./src/img/Fondo.png');
+    background-size: 100% 100%;
+}
+
+.wireframe * {
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.inicio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    flex: 1; 
+    margin-top: 0;
+}
+
+.header-arriba {
+    display: flex;
+    justify-content: center;
+    align-items: center;            
+    width: 100%;
+    padding: 0.9375rem 1.25rem;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.icono-registro {
+    grid-area: icono;
+    width: 1.625rem;
+    height: 1.1875rem;
+    align-self: flex-start;
+}
+
+.centro-titulos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    justify-content: center;
+    text-align: center;      
+    width: 100%;
+    margin-top: 1rem;          
+    margin-bottom: 1.5rem;    
+}
+
+.logo-inicio {
+    width: auto; 
+    height: 2.625rem;
+    display: flex;
+    justify-content: center;
+}
+
+.titulo-inicio {
+    width: 100%; 
+    height: 1.3125rem;
     color: #2D6A4F;
     font-family: "Inter", sans-serif;
-    color: #0D6B41;
-    font-size: 32px;
-    font-weight: 600;
-    word-wrap: break-word
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center;
 }
-.title{
+
+.title {
     white-space: nowrap;
     width: auto;
     height: 1.4375rem;
@@ -33,8 +86,8 @@ html, body {
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-   
 }
+
 .title3 {
     width: auto;
     color: #2D6A4F;
@@ -46,6 +99,7 @@ html, body {
     text-align: center;
     white-space: nowrap;
 }
+
 .title4 {
     width: 9.0625rem;
     height: 1.6875rem;
@@ -63,12 +117,149 @@ html, body {
     margin-left: auto;
     margin-right: auto;
 }
-.wireframe * {
-    max-width: 100%;
-    min-width: 0;
-    box-sizing: border-box;
+
+.title5 {
+    white-space: nowrap;
+    width: auto;
+    height: auto;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    color: #0D6B41;
+    font-size: 32px;
+    font-weight: 600;
+    word-wrap: break-word;
 }
 
+.circulo-inicio {
+    width: 12.625rem;
+    height: 12.75rem;
+    border-radius: 100%;
+    margin: 0.9375rem auto;
+}
+
+.tarjetas-inicio {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1.375rem;
+    margin-top: 2rem;
+}
+
+.tarjeta-inicio {
+    width: 9.161875rem;
+    height: 9.3125rem;
+    background: white;
+    border-radius: 0.75rem;
+    text-decoration: none;
+}
+
+.simbolo {
+    width: 2.375rem;
+    height: 2rem;
+    aspect-ratio: 19 / 16;
+    display: block;
+    margin: 0 auto;
+}
+
+.titulo {
+    width: 9.125rem;
+    height: 1rem;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.medida {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.conclucion {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    width: 100%;            
+    height: auto;          
+    margin: 0;              
+    color: #56DA9F;
+    font-family: "Inter", sans-serif;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.barra-navegacion {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 3.125rem;
+    background-color: white;
+    padding: 0 0.625rem;
+    margin-top: auto; 
+    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+}
+
+.opcion-navegacion {
+    white-space: nowrap;
+    width: auto;
+    height: 0.8125rem;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 0.625rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    text-decoration: none;
+}
+
+.emojis {
+    width: 1.3265rem;
+    height: 1.3265rem;
+    aspect-ratio: 1/1;
+}
+
+.icono-navegacion {
+    display: none;
+}
+
+.opcion-izquierda {
+    width: 22%;    
+    background-color: #555555;                
+}
+
+.opcion-derecha {
+    width: 22%;    
+    background-color: #555555;                
+}
+
+.opcion-centro {
+    width: 40%;    
+    background-color: #555555;                
+}
 
 .bienvenido {
     display: flex;
@@ -76,7 +267,6 @@ html, body {
     align-items: center;
     gap: 1.25rem;
 }
-
 
 .logo-bienvenido {
     width: 176px;
@@ -88,7 +278,6 @@ html, body {
     margin: 0 auto;
 }
 
-
 .titulo-bienvenido {
     color: #2D6A4F;
     font-size: 0.9375rem;
@@ -99,24 +288,18 @@ html, body {
     margin-bottom: 25px;
 }
 
-
 .tarjeta-bienvenido {
     width: 28.625rem;
     height: 26.375rem;
     background: white;
     border-radius: 1.5625rem;
-
-
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
-
-
     padding-top: 1.1875rem;
     box-sizing: border-box;
 }
-
 
 .logo-tarjeta {
     width: 100%;
@@ -126,7 +309,6 @@ html, body {
     display: flex;
     align-items: center;
 }
-
 
 .bloque-imagen {
     color: #2D6A4F;
@@ -138,8 +320,9 @@ html, body {
     display: flex;
     align-items: center;
 }
+
 .bloque-texto {
-   width: 100%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,6 +334,7 @@ html, body {
     line-height: 30.99px;
     margin: 0 auto;
 }
+
 .Configuracion {
     width: 21.5625rem;
     height: 3.125rem;
@@ -166,7 +350,6 @@ html, body {
     text-decoration: none;
 }
 
-
 .pantalla-inicial {
     display: flex;
     flex-direction: column;
@@ -174,13 +357,11 @@ html, body {
     gap: 1.25rem;
 }
 
-
 .logo-inicial {
     width: 10.25rem;
     height: 9.75rem;
     border-radius: 100%;
 }
-
 
 .titulo-inicial {
     width: 21.25rem;
@@ -189,9 +370,8 @@ html, body {
     font-size: 20px;
     font-family: "Inter", sans-serif;
     font-weight: 400;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
-
 
 .circulo-inicial {
     width: 13.125rem;
@@ -199,22 +379,16 @@ html, body {
     border-radius: 100%;
 }
 
-
 .contenedor-botones {
     width: 31.25rem;
     height: 21.625rem;
     background: white;
-
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
     gap: 3.125rem;
 }
-
 
 .Iniciar-sesion {
     width: 21.5625rem;
@@ -230,7 +404,8 @@ html, body {
     align-items: center;
     text-decoration: none;
 }
-.Registrarse{
+
+.Registrarse {
     width: 21.5625rem;
     height: 3.125rem;
     border-radius: 1.25rem;
@@ -244,7 +419,6 @@ html, body {
     text-decoration: none;
 }
 
-
 .registrarse {
     display: flex;
     flex-direction: column;
@@ -252,36 +426,28 @@ html, body {
     gap: 1.125rem;
 }
 
-
 .logo-registrarse {
     width: 10.25rem;
     height: 9.75rem;
     border-radius: 100%;
 }
 
-
 .titulo-registrarse {
-    width: 21.25rem;
-    height: 1.6875rem;
     width: 21.25rem;
     height: 1.6875rem;
     color: #2D6A4F;
     font-size: 20px;
     font-family: "Inter", sans-serif;
     font-weight: 400;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
-
 
 .campo-registro {
     width: 27.546875rem;
-
-
     display: flex;
     flex-direction: column;
     gap: 0.3125rem;
 }
-
 
 .etiqueta-registro {
     width: 4.29538rem;
@@ -293,7 +459,6 @@ html, body {
     font-weight: 600;
     line-height: normal;
 }
-
 
 .input-registro {
     width: 25.99825rem;
@@ -309,7 +474,6 @@ html, body {
     line-height: normal;
 }
 
-
 .Registrarme {
     width: 21.5625rem;
     height: 3.125rem;
@@ -324,16 +488,10 @@ html, body {
     align-items: center;
 }
 
-
 .texto-registro {
     width: 14.5625rem;
     height: 1.0625rem;
     color: #6A8E5D;
-    font-family: "Inter", sans-serif;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     font-style: normal;
@@ -347,22 +505,12 @@ html, body {
     text-underline-position: from-font;
 }
 
-
-.icono-registro {
-    grid-area: icono;
-    width: 1.625rem;
-    height: 1.1875rem;
-    align-self: flex-start;
-}
-
-
 .header-superior {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 
 .blanco {
     width: 1.625rem;
@@ -371,14 +519,12 @@ html, body {
     align-self: flex-start;
 }
 
-
 .LOGO {
     width: 2.8125rem;
     height: 2.8125rem;
     border-radius: 100%;
     align-self: flex-end;
 }
-
 
 .iniciar-sesion {
     width: 100%;
@@ -389,13 +535,11 @@ html, body {
     gap: 1.125rem;
 }
 
-
 .logo-login {
     width: 10.25rem;
     height: 9.75rem;
     border-radius: 100%;
 }
-
 
 .titulo-login {
     width: 21.25rem;
@@ -404,9 +548,8 @@ html, body {
     font-size: 20px;
     font-family: "Inter", sans-serif;
     font-weight: 400;
-    word-wrap: break-word
+    word-wrap: break-word;
 }
-
 
 .imagen-login {
     width: 10.1875rem;
@@ -414,16 +557,12 @@ html, body {
     border-radius: 100%;
 }
 
-
 .campo-login {
     width: 27.546875rem;
-
-
     display: flex;
     flex-direction: column;
     gap: 0.3125rem;
 }
-
 
 .etiqueta-login {
     width: 4.29538rem;
@@ -433,9 +572,8 @@ html, body {
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
-    line-height: normal;;
+    line-height: normal;
 }
-
 
 .input-login {
     width: 21.5625rem;
@@ -443,7 +581,7 @@ html, body {
     border-radius: 1.25rem;
     background: white;
     color: black;
-    border:1px solid #56DA9F;
+    border: 1px solid #56DA9F;
     font-size: 15px;
     font-family: "Inter", sans-serif;
     font-weight: 800;
@@ -451,7 +589,6 @@ html, body {
     display: flex;
     align-items: center;
 }
-
 
 .texto-login {
     width: 11.25rem;
@@ -467,195 +604,20 @@ html, body {
     align-items: center;
 }
 
-
-.inicio {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin-top: 3rem;  
-}
-
-
-
-
-.logo-inicio {
-    width: 7.8125rem;
-    height: 2.625rem;
-}
-
-
-.titulo-inicio {
-    width: 13.375rem;
-    height: 1.3125rem;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-align: center;
-    width: 100%;
-}
-
-
-.header-arriba {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;            
-    width: 100%;
-    padding: 0.9375rem 1.25rem;
-    box-sizing: border-box;
-}
-
-
 .logo-circulo {
-    width:  3.8125rem;
+    width: 3.8125rem;
     height: 3.875rem;
     border-radius: 100%;
     flex-shrink: 0;
 }
-
 
 .perfil-circulo {
-    width:  3.8125rem;
+    width: 3.8125rem;
     height: 3.875rem;
     background: #D9D9D9;
     border-radius: 100%;
     flex-shrink: 0;
 }
-
-
-.circulo-inicio {
-    width: 12.625rem;
-    height: 12.75rem;
-    border-radius: 100%;
-    margin: 0.9375rem auto;
-}
-
-
-.centro-titulos {
-    display: flex;
-    flex-direction: column;
-    align-items: center;  
-    justify-content: center;
-    text-align: center;      
-    width: 100%;
-    margin-top: 2rem;          
-    margin-bottom: 1.5rem;    
-}
-
-
-.tarjetas-inicio {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1.375rem;
-    margin-top: 2rem;
-}
-
-
-.tarjeta-inicio {
-    width: 9.161875rem;
-    height: 9.3125rem;
-    background: white;
-    border-radius: 0.75rem;
-    text-decoration: none;
-}
-
-
-.barra-navegacion {
-    width: 31.85rem;
-    height: 2.679375rem;
-    background: #D9D9D9;
-
-
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-}
-.simbolo{
-    width: 2.375rem;
-    height: 2rem;
-    aspect-ratio: 19 / 16;
-    display: block;
-    margin: 0 auto;
-}
-.titulo{
-    width: 9.125rem;
-    height: 1rem;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.medida {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    margin: 0;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 1.875rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1.2;
-}
-.conclucion {
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    width: 100%;            
-    height: auto;          
-    margin: 0;              
-    color: #56DA9F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.2;
-}
-.icono-navegacion {
-    width: 1.119375rem;
-    height: 1.119375rem;
-}
-
-
-
-
-
-
-.opcion-centro {
-    width: 9.4375rem;
-    height: 1.375rem;
-}
-
-
-.opcion-izquierda {
-    width: 4.9375rem;
-    height: 1.625rem;
-}
-
-
-.opcion-derecha {
-    width: 5.0625rem;
-    height: 1.5625rem;
-}
-
 
 .detalle-humedad {
     display: flex;
@@ -664,14 +626,12 @@ html, body {
     gap: 1.25rem;
 }
 
-
 .perfil-humedad {
     width: 2.8125rem;
     height: 2.8125rem;
     background: #D9D9D9;
     border-radius: 100%;
 }
-
 
 .titulo-humedad {
     grid-area: icono;
@@ -681,227 +641,122 @@ html, body {
     justify-self: center;
 }
 
-
 .tarjeta-estado {
-    width: 24.525rem;
-    height: 7.464375rem;
-    background: white;
+   width: 37.5rem;
+   height: 7.5rem;
+   border-radius: 1.5625rem;
+   opacity: 0.8;
+   background: #D7D7D7;
+   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem; 
 }
 
-
 .dato-estado {
-    width: 8.6875rem;
-    height: 0.9375rem;
+    width: auto;
+    height: auto;
     color: #2D6A4F;
     font-family: "Inter", sans-serif;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-   
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-
 .valor-estado {
-    width: 4.8125rem;
-    height: 2.625rem;
+    width: auto;
+    height: auto;
     color: #2D6A4F;
-    font-family:"Inter", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 2.5rem;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
+.titulo-humedad {
+    width: 12.75rem;
+    height: 1.1875rem;
+    color: #2D6A4F;
+    font-family: "Inter", sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .subtitulo-humedad {
-    width: 7.625rem;
-    height: 1.375rem;
-    background: #656A67;
+    width: 2.875rem;
+    height: 0.9375rem;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-size: 0.9375rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 5.1875rem;
+    height: 1.125rem;
+    border-radius: 0.625rem;
+    background: rgba(130, 244, 193, 0.53);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-
 
 .grafico-humedad {
     width: 24.5rem;
     height: 14.4375rem;
-
-
     background: #D9D9D9;
     box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .grafico-interior {
     width: 20.4375rem;
     height: 9.8125rem;
-    background: #656A67;
+    background: white;
 }
-
 
 .texto-grafico {
     width: 11.75rem;
     height: 1.3125rem;
-    background: #656A67;
+    background: white;
 }
-
 
 .tarjeta-informacion {
-    width: 24.5rem;
-    height: 4.25rem;
-
-
-    background: #D9D9D9;
-    border-radius: 0.75rem;
-
-
     display: flex;
-    align-items: center;
+    flex-direction: column; 
     justify-content: center;
+    align-items: center;     
+    width: 100%;
 }
-
 
 .informacion-interior {
-    width: 22.5625rem;
-    height: 2.3125rem;
-    background: #656A67;
-}
-
-
-.barra-navegacion {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 3.125rem;
-    background-color:white;
-    padding: 0 0.625rem;
-    margin-top: 1.25rem;
-    text-decoration: none;
-}
-.opcion-navegacion{
-    white-space: nowrap;
-    width: auto;
-    height: 0.8125rem;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.625rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    display: flex;
-    justify-content: center;
-    align-items: center;    
-    text-decoration: none;
-}
-.emojis{
-    width: 1.3265rem;
-    height: 1.3265rem;
-    aspect-ratio: 1/1;
-}
-
-
-.icono-navegacion {
-    display: none;
-}
-
-
-.opcion-izquierda {
-    width: 22%;    
-    background-color: #555555;                
-}
-
-
-.opcion-derecha {
-    width: 22%;    
-    background-color: #555555;                
-}
-
-
-.opcion-centro {
-    width: 40%;    
-    background-color: #555555;                
-}
-
-
-.perfil-temperatura {
-    width: 2.8125rem;
-    height: 2.8125rem;
-    background: #D9D9D9;
-    border-radius: 100%;
-}
-
-
-.titulo-temperatura {
-    width: 15.75rem;
-    height: 2.25rem;
-    background: #D9D9D9;
-}
-
-
-.subtitulo-temperatura {
-    width: 7.625rem;
-    height: 1.375rem;
-    background: #656A67;
-}
-
-
-.grafico-temperatura {
-    width: 24.5rem;
-    height: 14.4375rem;
-
-
-    background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
-
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.perfil-conductividad {
-    width: 2.8125rem;
-    height: 2.8125rem;
-    background: #D9D9D9;
-    border-radius: 100%;
-}
-
-
-.titulo-conductividad {
-    width: 15.75rem;
-    height: 2.25rem;
-    background: #D9D9D9;
-}
-
-
-.subtitulo-conductividad {
-    width: 7.625rem;
-    height: 1.375rem;
-    background: #656A67;
-}
-
-
-.grafico-conductividad {
-    width: 24.5rem;
-    height: 14.4375rem;
-
-
-    background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
-
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   width: 19.625rem;
+   height: auto;
+   color: #2D6A4F;
+   font-family: "Poppins", sans-serif;
+   font-size: 0.875rem;
+   font-style: normal;
+   font-weight: 500;
+   line-height: normal;
+   text-align: center;
+   border-radius: 0.9375rem;
+   background: #D7D7D7;
 }
 
 
@@ -912,7 +767,6 @@ html, body {
     gap: 1.25rem;
 }
 
-
 .logo-acerca {
     width: 2.8125rem;
     height: 2.8125rem;
@@ -920,13 +774,11 @@ html, body {
     border-radius: 100%;
 }
 
-
 .titulo-acerca {
     width: 15.75rem;
     height: 2.25rem;
     background: #D9D9D9;
 }
-
 
 .perfil-acerca {
     width: 8.25rem;
@@ -935,29 +787,22 @@ html, body {
     border-radius: 100%;
 }
 
-
 .subtitulo-acerca {
     width: 18.75rem;
     height: 1.5rem;
     background: #D9D9D9;
 }
 
-
 .tarjeta-proyecto {
     width: 24.5rem;
     height: 11.4375rem;
-
-
     background: #D9D9D9;
     box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .contenido-proyecto {
     width: 15.125rem;
@@ -965,28 +810,21 @@ html, body {
     background: #656A67;
 }
 
-
 .tarjeta-informacion-proyecto {
     width: 24.5rem;
     height: 9.625rem;
-
-
     background: #D9D9D9;
     border-radius: 0.75rem;
-
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .informacion-proyecto {
     width: 20.125rem;
     height: 7.3125rem;
     background: #656A67;
 }
-
 
 .mi-perfil {
     display: flex;
@@ -995,7 +833,6 @@ html, body {
     gap: 1.25rem;
 }
 
-
 .foto-perfil {
     width: 7.186875rem;
     height: 7.150625rem;
@@ -1003,13 +840,11 @@ html, body {
     border-radius: 100%;
 }
 
-
 .nombre-perfil {
     width: 6.375rem;
     height: 1.4375rem;
     background: #D9D9D9;
 }
-
 
 .descripcion-perfil {
     width: 9.9375rem;
@@ -1017,26 +852,18 @@ html, body {
     background: #D9D9D9;
 }
 
-
 .tarjeta-datos-perfil {
     width: 27.4375rem;
     height: 16.125rem;
-
-
     background: #D9D9D9;
     box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
-
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-
     gap: 1.25rem;
 }
-
 
 .dato-perfil {
     width: 14.25rem;
@@ -1044,25 +871,20 @@ html, body {
     background: #656A67;
 }
 
-
 .tarjeta-extra-perfil {
     width: 27.400625rem;
     height: 4.469375rem;
-
-
     background: #D9D9D9;
     border-radius: 0.75rem;
-
-
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 
 .contenido-extra-perfil {
     width: 11rem;
     height: 2rem;
     background: #656A67;
 }
+
 }
