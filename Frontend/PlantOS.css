@@ -621,6 +621,18 @@ html, body {
     border-radius: 100%;
     flex-shrink: 0;
 }
+.detalle-temperatura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+.detalle-conductividad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
 
 .detalle-humedad {
     display: flex;
