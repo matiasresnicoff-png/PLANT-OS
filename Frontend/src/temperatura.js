@@ -29,7 +29,7 @@ async function cargarTemperatura() {
   document.getElementById('recomendacion-temperatura').textContent = '';
 
   try {
-    const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo', {
+    const resUltimo = await fetch('http://10.10.32.52:3000/api/sensores/ultimo', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const ultimo = await resUltimo.json();
@@ -63,7 +63,7 @@ async function cargarTemperatura() {
     document.getElementById('estado-temperatura').textContent = estado;
     document.getElementById('recomendacion-temperatura').textContent = recomendacionTemperatura(estado);
 
-    const resHistorial = await fetch('http://localhost:3000/api/sensores', {
+    const resHistorial = await fetch('http://10.10.32.52:3000/api/sensores', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const historial = await resHistorial.json();

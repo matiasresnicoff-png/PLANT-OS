@@ -11,7 +11,7 @@ async function cargarPerfil() {
   }
 
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios/perfil', {
+    const res = await fetch('http://10.10.32.52:3000/api/usuarios/perfil', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const datos = await res.json();
@@ -38,7 +38,7 @@ async function guardarPerfil() {
   const mail = document.getElementById('input-mail-perfil').value;
 
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios/perfil', {
+    const res = await fetch('http://10.10.32.52:3000/api/usuarios/perfil', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
