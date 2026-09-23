@@ -49,6 +49,14 @@ async function cargarTemperatura() {
     }
 
     const valor = ultimo.temperaturaBME280;
+
+    if (valor === null) {
+      document.getElementById('valor-temperatura').textContent = 'Sin datos';
+      document.getElementById('estado-temperatura').textContent = 'Sin datos';
+      document.getElementById('recomendacion-temperatura').textContent = 'El sensor de temperatura todavía no está conectado.';
+      return;
+    }
+
     document.getElementById('valor-temperatura').textContent = valor + '°C';
 
     const estado = calcularEstadoTemperatura(valor);

@@ -49,6 +49,14 @@ async function cargarConductividad() {
     }
 
     const valor = ultimo.conductividad;
+
+    if (valor === null) {
+      document.getElementById('valor-conductividad').textContent = 'Sin datos';
+      document.getElementById('estado-conductividad').textContent = 'Sin datos';
+      document.getElementById('recomendacion-conductividad').textContent = 'El sensor de conductividad todavía no está conectado.';
+      return;
+    }
+
     document.getElementById('valor-conductividad').textContent = valor + ' µS/cm';
 
     const estado = calcularEstadoConductividad(valor);
