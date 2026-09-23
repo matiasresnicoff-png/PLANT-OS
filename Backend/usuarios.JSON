@@ -12,5 +12,19 @@
     "fechaNacimiento": "01/02/2011",
     "mail": "test@gmail.com",
     "contraseña": "$2b$10$pWuMtgjZk0rk05V8uOg3e.cL5mnrnY27ALwKs7BYmyGoms7JrECSS"
+  },
+  {
+    "idUsuario": "3",
+    "nombre": "Arandano",
+    "fechaNacimiento": "2026-09-21",
+    "mail": "arandano@gmail.com",
+    "contraseña": "$2b$10$WDJjEOFvXWVp9PgpMwxsH.HK3IjqK07FPcmIcQUnF7HlfmpR9uQbK"
+  },
+  {
+    "idUsuario": "4",
+    "nombre": "Martin",
+    "fechaNacimiento": "1971-07-01",
+    "mail": "mresnicoff@gmail.com",
+    "contraseña": "$2b$10$.RwCclKtWFuH9w5HQg6tJOwhNwgYMl0esp3Z.JPMz62eqdhabUd/W"
   }
 ]

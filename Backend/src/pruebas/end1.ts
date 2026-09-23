@@ -50,7 +50,8 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
   fs.writeFileSync(filePath, textoJson, 'utf-8');
 }
 
-app.get('/api/sensores', verificarToken, (req: Request, res: Response) => {
+app.get('/api/sensores', verificarToken, (req: Request, res: Response) => {      //se fija si llego una peticón get a la ruta  /api/sensores y si es asi devuelve lo valores del hitrial2w
+
   let existeArchivo: boolean = fs.existsSync(filePath);
 
   if (existeArchivo === false) {
