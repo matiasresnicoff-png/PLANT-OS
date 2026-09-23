@@ -26,5 +26,12 @@
     "fechaNacimiento": "1971-07-01",
     "mail": "mresnicoff@gmail.com",
     "contraseña": "$2b$10$.RwCclKtWFuH9w5HQg6tJOwhNwgYMl0esp3Z.JPMz62eqdhabUd/W"
+  },
+  {
+    "idUsuario": "5",
+    "nombre": "Matias",
+    "fechaNacimiento": "2011-01-24",
+    "mail": "matias.resnicoff@gmail.com",
+    "contraseña": "$2b$10$j4HG5k1xa/N8eOLBiHrxsuWohRgHvOFMejomLNF/VJ.FEwvf.Uilu"
   }
 ]

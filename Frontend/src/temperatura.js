@@ -13,13 +13,33 @@ function recomendacionTemperatura(estado) {
   return 'La temperatura está en un rango óptimo para la planta.';
 }
 
+function obtenerToken() {
+  return localStorage.getItem('token');
+}
+
 async function cargarTemperatura() {
+  const token = obtenerToken();
+  if (!token) {
+    alert('Tenés que iniciar sesión primero');
+    window.location.href = '4. iniciar-sesion.html';
+    return;
+  }
+
   document.getElementById('valor-temperatura').textContent = 'Cargando...';
   document.getElementById('recomendacion-temperatura').textContent = '';
 
   try {
-    const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo');
+    const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const ultimo = await resUltimo.json();
+
+    if (!resUltimo.ok) {
+      document.getElementById('valor-temperatura').textContent = '--';
+      document.getElementById('estado-temperatura').textContent = 'Error';
+      document.getElementById('recomendacion-temperatura').textContent = ultimo.error || 'No se pudo obtener los datos.';
+      return;
+    }
 
     if (ultimo.mensaje) {
       document.getElementById('valor-temperatura').textContent = '--';
@@ -35,7 +55,9 @@ async function cargarTemperatura() {
     document.getElementById('estado-temperatura').textContent = estado;
     document.getElementById('recomendacion-temperatura').textContent = recomendacionTemperatura(estado);
 
-    const resHistorial = await fetch('http://localhost:3000/api/sensores');
+    const resHistorial = await fetch('http://localhost:3000/api/sensores', {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     const historial = await resHistorial.json();
     dibujarGrafico(historial);
   } catch (error) {
