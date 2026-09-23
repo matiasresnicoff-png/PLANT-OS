@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "simulador": "node --experimental-strip-types src/pruebas/simuladorArduino.ts",
-    "principal": "node --experimental-strip-types --env-file=.env src/pruebas/end1.ts"
+    "principal": "node --experimental-strip-types --env-file=.env src/pruebas/end1.ts",
+    "lint": "tsc --noEmit"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

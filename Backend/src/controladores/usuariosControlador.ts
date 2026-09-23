@@ -2,8 +2,16 @@ import type { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import { leerUsuarios, guardarUsuarios } from '../usuariosData.ts';
+import type {
+  Usuario,
+  RegistroBody,
+  LoginBody,
+  EditarPerfilBody,
+  RequestConUsuario,
+} from '../tipos.ts';
+
 export async function registrarUsuario(req: Request, res: Response) {
-  const { nombre, fechaNacimiento, mail, contraseña } = req.body;
+  const { nombre, fechaNacimiento, mail, contraseña } = req.body as RegistroBody;
   if (!nombre || !fechaNacimiento || !mail || !contraseña) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
   }
@@ -13,7 +21,7 @@ export async function registrarUsuario(req: Request, res: Response) {
     return res.status(409).json({ error: 'Ya existe un usuario con ese mail' });
   }
   const contraseñaHasheada = await bcrypt.hash(contraseña, 10);
-  const nuevoUsuario = {
+  const nuevoUsuario: Usuario = {
     idUsuario: String(usuarios.length + 1),
     nombre,
     fechaNacimiento,
@@ -25,8 +33,9 @@ export async function registrarUsuario(req: Request, res: Response) {
   const { contraseña: _, ...usuarioSinContraseña } = nuevoUsuario;
   res.status(201).json(usuarioSinContraseña);
 }
+
 export async function loginUsuario(req: Request, res: Response) {
-  const { mail, contraseña } = req.body;
+  const { mail, contraseña } = req.body as LoginBody;
 
   if (!mail || !contraseña) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
@@ -59,8 +68,9 @@ export async function loginUsuario(req: Request, res: Response) {
     },
   });
 }
+
 export function verPerfil(req: Request, res: Response) {
-  const { idUsuario } = (req as any).usuario;
+  const { idUsuario } = (req as RequestConUsuario).usuario;
   const usuarios = leerUsuarios();
   const usuario = usuarios.find((u) => u.idUsuario === idUsuario);
 
@@ -73,8 +83,8 @@ export function verPerfil(req: Request, res: Response) {
 }
 
 export function editarPerfil(req: Request, res: Response) {
-  const { idUsuario } = (req as any).usuario;
-  const { nombre, fechaNacimiento, mail } = req.body;
+  const { idUsuario } = (req as RequestConUsuario).usuario;
+  const { nombre, fechaNacimiento, mail } = req.body as EditarPerfilBody;
 
   const usuarios = leerUsuarios();
   const index = usuarios.findIndex((u) => u.idUsuario === idUsuario);
@@ -83,12 +93,21 @@ export function editarPerfil(req: Request, res: Response) {
     return res.status(404).json({ error: 'Usuario no encontrado' });
   }
 
-  if (nombre) usuarios[index].nombre = nombre;
-  if (fechaNacimiento) usuarios[index].fechaNacimiento = fechaNacimiento;
-  if (mail) usuarios[index].mail = mail;
+  // Con noUncheckedIndexedAccess activado, usuarios[index] puede ser
+  // "undefined" para TypeScript aunque nosotros sepamos que existe (ya
+  // encontramos el índice arriba). Por eso lo guardamos en una variable y
+  // chequeamos, en vez de usar usuarios[index] directamente varias veces.
+  const usuarioExistente = usuarios[index];
+  if (usuarioExistente === undefined) {
+    return res.status(404).json({ error: 'Usuario no encontrado' });
+  }
+
+  if (nombre) usuarioExistente.nombre = nombre;
+  if (fechaNacimiento) usuarioExistente.fechaNacimiento = fechaNacimiento;
+  if (mail) usuarioExistente.mail = mail;
 
   guardarUsuarios(usuarios);
 
-  const { contraseña: _, ...usuarioActualizado } = usuarios[index];
+  const { contraseña: _, ...usuarioActualizado } = usuarioExistente;
   res.status(200).json(usuarioActualizado);
 }
