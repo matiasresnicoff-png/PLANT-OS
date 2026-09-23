@@ -19,17 +19,19 @@ function obtenerToken() {
 
 async function cargarHumedad() {
   const token = obtenerToken();
+  /* TEMPORAL: comentado para que Tomás pueda ver el diseño de la pantalla sin loguearse. Descomentar cuando termine de ver.
   if (!token) {
     alert('Tenés que iniciar sesión primero');
     window.location.href = '4. iniciar-sesion.html';
     return;
   }
+  */
 
   document.getElementById('valor-humedad').textContent = 'Cargando...';
   document.getElementById('recomendacion-humedad').textContent = '';
 
   try {
-    const resUltimo = await fetch('http://10.10.32.52:3000/api/sensores/ultimo', {
+    const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const ultimo = await resUltimo.json();
@@ -55,7 +57,7 @@ async function cargarHumedad() {
     document.getElementById('estado-humedad').textContent = estado;
     document.getElementById('recomendacion-humedad').textContent = recomendacionHumedad(estado);
 
-    const resHistorial = await fetch('http://10.10.32.52:3000/api/sensores', {
+    const resHistorial = await fetch('http://localhost:3000/api/sensores', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const historial = await resHistorial.json();

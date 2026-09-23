@@ -19,17 +19,19 @@ function obtenerToken() {
 
 async function cargarTemperatura() {
   const token = obtenerToken();
+  /* TEMPORAL: comentado para que Tomás pueda ver el diseño de la pantalla sin loguearse. Descomentar cuando termine de ver.
   if (!token) {
     alert('Tenés que iniciar sesión primero');
     window.location.href = '4. iniciar-sesion.html';
     return;
   }
+  */
 
   document.getElementById('valor-temperatura').textContent = 'Cargando...';
   document.getElementById('recomendacion-temperatura').textContent = '';
 
   try {
-    const resUltimo = await fetch('http://10.10.32.52:3000/api/sensores/ultimo', {
+    const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const ultimo = await resUltimo.json();
@@ -63,7 +65,7 @@ async function cargarTemperatura() {
     document.getElementById('estado-temperatura').textContent = estado;
     document.getElementById('recomendacion-temperatura').textContent = recomendacionTemperatura(estado);
 
-    const resHistorial = await fetch('http://10.10.32.52:3000/api/sensores', {
+    const resHistorial = await fetch('http://localhost:3000/api/sensores', {
       headers: { Authorization: `Bearer ${token}` },
     });
     const historial = await resHistorial.json();

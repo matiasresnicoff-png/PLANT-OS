@@ -10,7 +10,7 @@ async function registrarUsuario() {
   }
 
   try {
-    const res = await fetch('http://10.10.32.52:3000/api/usuarios', {
+    const res = await fetch('http://localhost:3000/api/usuarios', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, fechaNacimiento, mail, contraseña: contrasena }),
