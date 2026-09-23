@@ -270,13 +270,9 @@ html, body {
 }
 
 .logo-bienvenido {
-    width: 176px;
-    height: 120px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    overflow: hidden;
-    margin: 0 auto;
+    width: 15.3125rem;
+    height: 13.5625rem;
+    aspect-ratio: 35/31;
 }
 
 .titulo-bienvenido {
