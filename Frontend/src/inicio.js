@@ -1,20 +1,7 @@
-function obtenerToken() {
-  return localStorage.getItem('token');
-}
-
 async function cargarNombreUsuario() {
-  const token = obtenerToken();
-
-  if (!token) {
-    mostrarToast('Tenés que iniciar sesión primero', true);
-    setTimeout(() => { window.location.href = '4. iniciar-sesion.html'; }, 1200);
-    return;
-  }
-
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios/perfil', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await fetchProtegido('http://localhost:3000/api/usuarios/perfil');
+    if (!res) return;
     const datos = await res.json();
 
     if (!res.ok) {

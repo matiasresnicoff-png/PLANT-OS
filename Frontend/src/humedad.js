@@ -13,25 +13,13 @@ function recomendacionHumedad(estado) {
   return 'La humedad del suelo está en un rango óptimo. No hace falta regar todavía.';
 }
 
-function obtenerToken() {
-  return localStorage.getItem('token');
-}
-
 async function cargarHumedad() {
-  const token = obtenerToken();
-  if (!token) {
-    mostrarToast('Tenés que iniciar sesión primero', true);
-    setTimeout(() => { window.location.href = '4. iniciar-sesion.html'; }, 1200);
-    return;
-  }
-
   document.getElementById('valor-humedad').textContent = 'Cargando...';
   document.getElementById('recomendacion-humedad').textContent = '';
 
   try {
-    const resUltimo = await fetch('http://localhost:3000/api/sensores/ultimo', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
+    if (!resUltimo) return;
     const ultimo = await resUltimo.json();
 
     if (!resUltimo.ok) {
@@ -55,9 +43,8 @@ async function cargarHumedad() {
     document.getElementById('estado-humedad').textContent = estado;
     document.getElementById('recomendacion-humedad').textContent = recomendacionHumedad(estado);
 
-    const resHistorial = await fetch('http://localhost:3000/api/sensores', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
+    if (!resHistorial) return;
     const historial = await resHistorial.json();
     dibujarGrafico(historial);
   } catch (error) {

@@ -1,19 +1,7 @@
-function obtenerToken() {
-  return localStorage.getItem('token');
-}
-
 async function cargarPerfil() {
-  const token = obtenerToken();
-  if (!token) {
-    mostrarToast('Tenés que iniciar sesión primero', true);
-    setTimeout(() => { window.location.href = '4.%20iniciar-sesion.html'; }, 1200);
-    return;
-  }
-
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios/perfil', {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const res = await fetchProtegido('http://localhost:3000/api/usuarios/perfil');
+    if (!res) return;
     const datos = await res.json();
 
     if (!res.ok) {
@@ -33,20 +21,17 @@ async function cargarPerfil() {
 }
 
 async function guardarPerfil() {
-  const token = obtenerToken();
   const nombre = document.getElementById('input-nombre-perfil').value;
   const fechaNacimiento = document.getElementById('input-fecha-perfil').value;
   const mail = document.getElementById('input-mail-perfil').value;
 
   try {
-    const res = await fetch('http://localhost:3000/api/usuarios/perfil', {
+    const res = await fetchProtegido('http://localhost:3000/api/usuarios/perfil', {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre, fechaNacimiento, mail }),
     });
+    if (!res) return;
     const datos = await res.json();
 
     if (!res.ok) {
