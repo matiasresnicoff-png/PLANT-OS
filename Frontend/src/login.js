@@ -3,7 +3,7 @@ async function iniciarSesion() {
   const contrasena = document.getElementById('input-contrasena-login').value;
 
   if (!mail || !contrasena) {
-    alert('Completá mail y contraseña');
+    mostrarToast('Completá mail y contraseña', true);
     return;
   }
 
@@ -17,7 +17,7 @@ async function iniciarSesion() {
     const datos = await res.json();
 
     if (!res.ok) {
-      alert(datos.error || 'No se pudo iniciar sesión');
+      mostrarToast(datos.error || 'No se pudo iniciar sesión', true);
       return;
     }
 
@@ -27,7 +27,7 @@ async function iniciarSesion() {
     window.location.href = '5.%20inicio.html';
   } catch (error) {
     console.error('Error al iniciar sesión:', error);
-    alert('Error de conexión con el servidor');
+    mostrarToast('Error de conexión con el servidor', true);
   }
 }
 

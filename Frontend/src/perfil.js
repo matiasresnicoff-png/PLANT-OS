@@ -5,8 +5,8 @@ function obtenerToken() {
 async function cargarPerfil() {
   const token = obtenerToken();
   if (!token) {
-    alert('Tenés que iniciar sesión primero');
-    window.location.href = '4.%20iniciar-sesion.html';
+    mostrarToast('Tenés que iniciar sesión primero', true);
+    setTimeout(() => { window.location.href = '4.%20iniciar-sesion.html'; }, 1200);
     return;
   }
 
@@ -17,7 +17,7 @@ async function cargarPerfil() {
     const datos = await res.json();
 
     if (!res.ok) {
-      alert(datos.error || 'No se pudo cargar el perfil');
+      mostrarToast(datos.error || 'No se pudo cargar el perfil', true);
       return;
     }
 
@@ -28,7 +28,7 @@ async function cargarPerfil() {
     document.getElementById('input-mail-perfil').value = datos.mail;
   } catch (error) {
     console.error('Error cargando perfil:', error);
-    alert('Error de conexión con el servidor');
+    mostrarToast('Error de conexión con el servidor', true);
   }
 }
 
@@ -50,16 +50,16 @@ async function guardarPerfil() {
     const datos = await res.json();
 
     if (!res.ok) {
-      alert(datos.error || 'No se pudo guardar');
+      mostrarToast(datos.error || 'No se pudo guardar', true);
       return;
     }
 
     document.getElementById('nombre-perfil-valor').textContent = datos.nombre;
     document.getElementById('avatar-perfil-letra').textContent = datos.nombre ? datos.nombre.charAt(0).toUpperCase() : '?';
-    alert('Perfil actualizado');
+    mostrarToast('Perfil actualizado');
   } catch (error) {
     console.error('Error guardando perfil:', error);
-    alert('Error de conexión con el servidor');
+    mostrarToast('Error de conexión con el servidor', true);
   }
 }
 

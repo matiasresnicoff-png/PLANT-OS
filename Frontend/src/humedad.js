@@ -20,8 +20,8 @@ function obtenerToken() {
 async function cargarHumedad() {
   const token = obtenerToken();
   if (!token) {
-    alert('Tenés que iniciar sesión primero');
-    window.location.href = '4. iniciar-sesion.html';
+    mostrarToast('Tenés que iniciar sesión primero', true);
+    setTimeout(() => { window.location.href = '4. iniciar-sesion.html'; }, 1200);
     return;
   }
 

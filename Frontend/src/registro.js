@@ -5,7 +5,7 @@ async function registrarUsuario() {
   const contrasena = document.getElementById('input-contrasena-registro').value;
 
   if (!nombre || !fechaNacimiento || !mail || !contrasena) {
-    alert('Completá todos los campos');
+    mostrarToast('Completá todos los campos', true);
     return;
   }
 
@@ -19,15 +19,15 @@ async function registrarUsuario() {
     const datos = await res.json();
 
     if (!res.ok) {
-      alert(datos.error || 'No se pudo completar el registro');
+      mostrarToast(datos.error || 'No se pudo completar el registro', true);
       return;
     }
 
-    alert('¡Cuenta creada! Ahora iniciá sesión.');
-    window.location.href = '4. iniciar-sesion.html';
+    mostrarToast('¡Cuenta creada! Ahora iniciá sesión.');
+    setTimeout(() => { window.location.href = '4. iniciar-sesion.html'; }, 1200);
   } catch (error) {
     console.error('Error al registrarse:', error);
-    alert('Error de conexión con el servidor');
+    mostrarToast('Error de conexión con el servidor', true);
   }
 }
 
