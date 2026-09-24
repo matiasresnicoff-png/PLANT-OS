@@ -4,13 +4,11 @@ function obtenerToken() {
 
 async function cargarPerfil() {
   const token = obtenerToken();
-  /* TEMPORAL: comentado para que Tomás pueda ver el diseño de la pantalla sin loguearse. Descomentar cuando termine de ver.
   if (!token) {
     alert('Tenés que iniciar sesión primero');
     window.location.href = '4.%20iniciar-sesion.html';
     return;
   }
-  */
 
   try {
     const res = await fetch('http://localhost:3000/api/usuarios/perfil', {
@@ -24,6 +22,7 @@ async function cargarPerfil() {
     }
 
     document.getElementById('nombre-perfil-valor').textContent = datos.nombre;
+    document.getElementById('avatar-perfil-letra').textContent = datos.nombre ? datos.nombre.charAt(0).toUpperCase() : '?';
     document.getElementById('input-nombre-perfil').value = datos.nombre;
     document.getElementById('input-fecha-perfil').value = datos.fechaNacimiento;
     document.getElementById('input-mail-perfil').value = datos.mail;
@@ -56,6 +55,7 @@ async function guardarPerfil() {
     }
 
     document.getElementById('nombre-perfil-valor').textContent = datos.nombre;
+    document.getElementById('avatar-perfil-letra').textContent = datos.nombre ? datos.nombre.charAt(0).toUpperCase() : '?';
     alert('Perfil actualizado');
   } catch (error) {
     console.error('Error guardando perfil:', error);

@@ -19,13 +19,11 @@ function obtenerToken() {
 
 async function cargarHumedad() {
   const token = obtenerToken();
-  /* TEMPORAL: comentado para que Tomás pueda ver el diseño de la pantalla sin loguearse. Descomentar cuando termine de ver.
   if (!token) {
     alert('Tenés que iniciar sesión primero');
     window.location.href = '4. iniciar-sesion.html';
     return;
   }
-  */
 
   document.getElementById('valor-humedad').textContent = 'Cargando...';
   document.getElementById('recomendacion-humedad').textContent = '';

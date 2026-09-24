@@ -1,0 +1,22 @@
+[
+{"idMedición":1
+,"idSensor":"1 (húmedad)"
+,"Valor":"Número"
+,"unidad":"%"
+,"timestamp":"fecha/hora"},
+
+
+{"idMedición":2
+,"idSensor":"2 (temperatura)",
+"Valor":"Número",
+"unidad":"°C",
+"timestamp":"fecha/hora"},
+
+
+{"idMedición":3
+,"idSensor":"3 (conductividad del suelo)"
+,"Valor":"Número"
+,"unidad":"dS/m"
+,"timestamp":"fecha/hora"}
+
+]
