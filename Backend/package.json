@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "simulador": "node --experimental-strip-types src/pruebas/simuladorArduino.ts",
+    "simulador-sensores": "node --experimental-strip-types src/pruebas/simuladorSensores.ts",
     "principal": "node --experimental-strip-types --env-file=.env src/pruebas/end1.ts",
     "lint": "tsc --noEmit"
   },
