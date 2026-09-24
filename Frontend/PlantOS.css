@@ -29,30 +29,29 @@ html, body {
     flex: 1;
     margin-top: 0;
 }
-
 .header-arriba {
-    display: flex;
-    justify-content: center;
-    align-items: center;            
-    width: 100%;
-    padding: 0.9375rem 1.25rem;
-    box-sizing: border-box;
     position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 0;
+    grid-template-columns: 1fr auto 1fr;
 }
 
 .icono-registro {
-    grid-area: icono;
     width: 1.625rem;
     height: 1.1875rem;
-    align-self: flex-start;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .centro-titulos {
     display: flex;
     flex-direction: column;
-    align-items: center;  
+    align-items: center;   
     justify-content: center;
-    text-align: center;      
     width: 100%;
     margin-top: 0.5rem;          
     margin-bottom: 1rem;
@@ -64,38 +63,34 @@ html, body {
     display: flex;
     justify-content: center;
 }
-
-.titulo-inicio {
-    width: auto;
-    height: 1.3125rem;
-    
+ .titulo-inicio {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
 }
 
 .title {
-    white-space: nowrap;
-    width: auto;
-    height: 1.4375rem;
+    width: 100%;            
     color: #2D6A4F;
     font-family: "Inter", sans-serif;
     font-size: 2rem;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    text-align: center;      
+    margin: 0;
+    box-sizing: border-box;  
     text-align: center;
-    justify-content: center;
 }
-.title2{
-    width: auto;
-    height: 1.5rem;
+
+.title2 {
+    width: 100%;             
     color: #2D6A4F;
     font-family: "Inter", sans-serif;
     font-size: 1.25rem;
-    font-style: normal;
     font-weight: 400;
-    line-height: normal;
+    text-align: center;      
+    margin: 0;
+    box-sizing: border-box;
     text-align: center;
-    justify-content: center;
-    margin-top: 0.25rem;
 }
 
 .title3 {
@@ -145,28 +140,35 @@ html, body {
 .circulo-inicio {
     width: 12.625rem;
     height: 12.75rem;
-    border-radius: 100%;
-    margin: 0.9375rem auto;
+    margin: 0.9375rem auto; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center;
 }
 
 .tarjetas-inicio {
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap; 
-    align-items: center;
-    justify-content: center;
+    align-items: center;     
+    justify-content: center; 
     gap: 1.5rem; 
     margin-top: 2rem;
     margin-bottom: 2rem;
-    padding: 0 1rem;
+    width: 100%;
 }
 
 .tarjeta-inicio {
-    width: 9.161875rem;
-    height: 9.3125rem;
+    width: 11rem; 
+    height: 11rem; 
     background: white;
     border-radius: 0.75rem;
     text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
 }
 
 .simbolo {
