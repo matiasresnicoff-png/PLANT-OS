@@ -27,4 +27,9 @@ async function cargarNombreUsuario() {
   }
 }
 
+function cerrarSesion() {
+  localStorage.removeItem('token');
+  window.location.href = '4. iniciar-sesion.html';
+}
+
 cargarNombreUsuario();

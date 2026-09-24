@@ -1606,5 +1606,521 @@
     "humedadSuelo": 73.1,
     "temperaturaBME280": 24.5,
     "conductividad": 865.6
+  },
+  {
+    "timestamp": "2026-09-24T22:15:49.980Z",
+    "humedadSuelo": 27.8,
+    "temperaturaBME280": 28.5,
+    "conductividad": 609.1
+  },
+  {
+    "timestamp": "2026-09-24T22:15:59.983Z",
+    "humedadSuelo": 63.1,
+    "temperaturaBME280": 16.1,
+    "conductividad": 589.7
+  },
+  {
+    "timestamp": "2026-09-24T22:16:09.994Z",
+    "humedadSuelo": 43.3,
+    "temperaturaBME280": 27.1,
+    "conductividad": 1897
+  },
+  {
+    "timestamp": "2026-09-24T22:16:20.002Z",
+    "humedadSuelo": 67.6,
+    "temperaturaBME280": 24.8,
+    "conductividad": 1543.4
+  },
+  {
+    "timestamp": "2026-09-24T22:16:30.006Z",
+    "humedadSuelo": 40.8,
+    "temperaturaBME280": 25.2,
+    "conductividad": 2066.4
+  },
+  {
+    "timestamp": "2026-09-24T22:16:40.018Z",
+    "humedadSuelo": 59.5,
+    "temperaturaBME280": 29,
+    "conductividad": 1687.5
+  },
+  {
+    "timestamp": "2026-09-24T22:16:50.027Z",
+    "humedadSuelo": 31.7,
+    "temperaturaBME280": 16.7,
+    "conductividad": 524.4
+  },
+  {
+    "timestamp": "2026-09-24T22:17:00.040Z",
+    "humedadSuelo": 55,
+    "temperaturaBME280": 19.5,
+    "conductividad": 1689.9
+  },
+  {
+    "timestamp": "2026-09-24T22:17:10.043Z",
+    "humedadSuelo": 58.4,
+    "temperaturaBME280": 24.7,
+    "conductividad": 1873
+  },
+  {
+    "timestamp": "2026-09-24T22:17:20.051Z",
+    "humedadSuelo": 71.7,
+    "temperaturaBME280": 22.5,
+    "conductividad": 2036.5
+  },
+  {
+    "timestamp": "2026-09-24T22:17:30.063Z",
+    "humedadSuelo": 50,
+    "temperaturaBME280": 19.2,
+    "conductividad": 782.7
+  },
+  {
+    "timestamp": "2026-09-24T22:17:40.077Z",
+    "humedadSuelo": 65.3,
+    "temperaturaBME280": 23.6,
+    "conductividad": 1127.6
+  },
+  {
+    "timestamp": "2026-09-24T22:17:50.086Z",
+    "humedadSuelo": 38.4,
+    "temperaturaBME280": 28.4,
+    "conductividad": 1363.1
+  },
+  {
+    "timestamp": "2026-09-24T22:18:00.092Z",
+    "humedadSuelo": 45.4,
+    "temperaturaBME280": 22.1,
+    "conductividad": 2168
+  },
+  {
+    "timestamp": "2026-09-24T22:18:10.106Z",
+    "humedadSuelo": 26.5,
+    "temperaturaBME280": 24.1,
+    "conductividad": 1686.6
+  },
+  {
+    "timestamp": "2026-09-24T22:18:20.107Z",
+    "humedadSuelo": 47.4,
+    "temperaturaBME280": 29.4,
+    "conductividad": 677.6
+  },
+  {
+    "timestamp": "2026-09-24T22:18:30.114Z",
+    "humedadSuelo": 60.4,
+    "temperaturaBME280": 19.8,
+    "conductividad": 1417
+  },
+  {
+    "timestamp": "2026-09-24T22:18:40.116Z",
+    "humedadSuelo": 61.3,
+    "temperaturaBME280": 18.3,
+    "conductividad": 1403.5
+  },
+  {
+    "timestamp": "2026-09-24T22:18:50.119Z",
+    "humedadSuelo": 53.6,
+    "temperaturaBME280": 18.7,
+    "conductividad": 2185.2
+  },
+  {
+    "timestamp": "2026-09-24T22:19:00.123Z",
+    "humedadSuelo": 29.2,
+    "temperaturaBME280": 28.2,
+    "conductividad": 395.1
+  },
+  {
+    "timestamp": "2026-09-24T22:19:10.126Z",
+    "humedadSuelo": 65.3,
+    "temperaturaBME280": 28,
+    "conductividad": 1344.4
+  },
+  {
+    "timestamp": "2026-09-24T22:19:20.127Z",
+    "humedadSuelo": 74,
+    "temperaturaBME280": 26.4,
+    "conductividad": 1849.8
+  },
+  {
+    "timestamp": "2026-09-24T22:19:30.134Z",
+    "humedadSuelo": 45.3,
+    "temperaturaBME280": 28.1,
+    "conductividad": 1858.8
+  },
+  {
+    "timestamp": "2026-09-24T22:19:40.140Z",
+    "humedadSuelo": 31.2,
+    "temperaturaBME280": 19.6,
+    "conductividad": 1806.7
+  },
+  {
+    "timestamp": "2026-09-24T22:19:50.150Z",
+    "humedadSuelo": 67.3,
+    "temperaturaBME280": 27.6,
+    "conductividad": 2179.9
+  },
+  {
+    "timestamp": "2026-09-24T22:20:00.162Z",
+    "humedadSuelo": 34.8,
+    "temperaturaBME280": 17.8,
+    "conductividad": 956.5
+  },
+  {
+    "timestamp": "2026-09-24T22:20:10.166Z",
+    "humedadSuelo": 51.6,
+    "temperaturaBME280": 29.3,
+    "conductividad": 1377.4
+  },
+  {
+    "timestamp": "2026-09-24T22:20:20.177Z",
+    "humedadSuelo": 31,
+    "temperaturaBME280": 17.7,
+    "conductividad": 944.6
+  },
+  {
+    "timestamp": "2026-09-24T22:20:30.184Z",
+    "humedadSuelo": 71.9,
+    "temperaturaBME280": 24.4,
+    "conductividad": 582.5
+  },
+  {
+    "timestamp": "2026-09-24T22:20:40.191Z",
+    "humedadSuelo": 66.5,
+    "temperaturaBME280": 27.6,
+    "conductividad": 1753.6
+  },
+  {
+    "timestamp": "2026-09-24T22:20:50.200Z",
+    "humedadSuelo": 32.8,
+    "temperaturaBME280": 27.6,
+    "conductividad": 1366.6
+  },
+  {
+    "timestamp": "2026-09-24T22:21:00.202Z",
+    "humedadSuelo": 57,
+    "temperaturaBME280": 27.6,
+    "conductividad": 801.4
+  },
+  {
+    "timestamp": "2026-09-24T22:21:10.214Z",
+    "humedadSuelo": 63.1,
+    "temperaturaBME280": 22,
+    "conductividad": 466.4
+  },
+  {
+    "timestamp": "2026-09-24T22:21:20.225Z",
+    "humedadSuelo": 31.7,
+    "temperaturaBME280": 17,
+    "conductividad": 1944
+  },
+  {
+    "timestamp": "2026-09-24T22:21:30.227Z",
+    "humedadSuelo": 40.1,
+    "temperaturaBME280": 17.3,
+    "conductividad": 649.6
+  },
+  {
+    "timestamp": "2026-09-24T22:21:40.241Z",
+    "humedadSuelo": 46.8,
+    "temperaturaBME280": 22.3,
+    "conductividad": 1897.1
+  },
+  {
+    "timestamp": "2026-09-24T22:21:50.242Z",
+    "humedadSuelo": 63.8,
+    "temperaturaBME280": 20.7,
+    "conductividad": 1633.3
+  },
+  {
+    "timestamp": "2026-09-24T22:22:00.249Z",
+    "humedadSuelo": 55.9,
+    "temperaturaBME280": 24.2,
+    "conductividad": 2148.3
+  },
+  {
+    "timestamp": "2026-09-24T22:22:10.256Z",
+    "humedadSuelo": 25.6,
+    "temperaturaBME280": 28.8,
+    "conductividad": 1865.1
+  },
+  {
+    "timestamp": "2026-09-24T22:22:20.259Z",
+    "humedadSuelo": 68.3,
+    "temperaturaBME280": 22.9,
+    "conductividad": 582.4
+  },
+  {
+    "timestamp": "2026-09-24T22:22:30.259Z",
+    "humedadSuelo": 36.8,
+    "temperaturaBME280": 21.8,
+    "conductividad": 1792.1
+  },
+  {
+    "timestamp": "2026-09-24T22:22:40.261Z",
+    "humedadSuelo": 47.8,
+    "temperaturaBME280": 26.2,
+    "conductividad": 780.5
+  },
+  {
+    "timestamp": "2026-09-24T22:22:50.274Z",
+    "humedadSuelo": 39.9,
+    "temperaturaBME280": 27.1,
+    "conductividad": 1952
+  },
+  {
+    "timestamp": "2026-09-24T22:23:00.281Z",
+    "humedadSuelo": 72,
+    "temperaturaBME280": 26.1,
+    "conductividad": 480.9
+  },
+  {
+    "timestamp": "2026-09-24T22:23:10.290Z",
+    "humedadSuelo": 48.9,
+    "temperaturaBME280": 17,
+    "conductividad": 1937.4
+  },
+  {
+    "timestamp": "2026-09-24T22:23:20.291Z",
+    "humedadSuelo": 44.3,
+    "temperaturaBME280": 24.1,
+    "conductividad": 2064.8
+  },
+  {
+    "timestamp": "2026-09-24T22:23:30.307Z",
+    "humedadSuelo": 66.6,
+    "temperaturaBME280": 21.1,
+    "conductividad": 582.1
+  },
+  {
+    "timestamp": "2026-09-24T22:23:40.317Z",
+    "humedadSuelo": 66,
+    "temperaturaBME280": 16.9,
+    "conductividad": 1873.3
+  },
+  {
+    "timestamp": "2026-09-24T22:23:50.323Z",
+    "humedadSuelo": 62.6,
+    "temperaturaBME280": 19.7,
+    "conductividad": 2034.6
+  },
+  {
+    "timestamp": "2026-09-24T22:24:00.326Z",
+    "humedadSuelo": 34.7,
+    "temperaturaBME280": 20.6,
+    "conductividad": 1969.9
+  },
+  {
+    "timestamp": "2026-09-24T22:24:10.338Z",
+    "humedadSuelo": 71,
+    "temperaturaBME280": 29.4,
+    "conductividad": 1940.7
+  },
+  {
+    "timestamp": "2026-09-24T22:24:20.353Z",
+    "humedadSuelo": 28.1,
+    "temperaturaBME280": 19.6,
+    "conductividad": 372.4
+  },
+  {
+    "timestamp": "2026-09-24T22:24:30.367Z",
+    "humedadSuelo": 55,
+    "temperaturaBME280": 29.3,
+    "conductividad": 708.6
+  },
+  {
+    "timestamp": "2026-09-24T22:24:40.370Z",
+    "humedadSuelo": 71.5,
+    "temperaturaBME280": 21.6,
+    "conductividad": 1924.2
+  },
+  {
+    "timestamp": "2026-09-24T22:24:50.379Z",
+    "humedadSuelo": 33.9,
+    "temperaturaBME280": 29,
+    "conductividad": 1847.1
+  },
+  {
+    "timestamp": "2026-09-24T22:25:00.386Z",
+    "humedadSuelo": 65.2,
+    "temperaturaBME280": 24.9,
+    "conductividad": 984.2
+  },
+  {
+    "timestamp": "2026-09-24T22:25:10.391Z",
+    "humedadSuelo": 74.9,
+    "temperaturaBME280": 20.7,
+    "conductividad": 1995.9
+  },
+  {
+    "timestamp": "2026-09-24T22:25:20.398Z",
+    "humedadSuelo": 43.7,
+    "temperaturaBME280": 16,
+    "conductividad": 1941.4
+  },
+  {
+    "timestamp": "2026-09-24T22:25:30.403Z",
+    "humedadSuelo": 74.7,
+    "temperaturaBME280": 27,
+    "conductividad": 744.8
+  },
+  {
+    "timestamp": "2026-09-24T22:25:40.411Z",
+    "humedadSuelo": 35.4,
+    "temperaturaBME280": 16.4,
+    "conductividad": 1662.9
+  },
+  {
+    "timestamp": "2026-09-24T22:25:50.426Z",
+    "humedadSuelo": 64.9,
+    "temperaturaBME280": 22.2,
+    "conductividad": 1121.4
+  },
+  {
+    "timestamp": "2026-09-24T22:26:00.426Z",
+    "humedadSuelo": 48.1,
+    "temperaturaBME280": 19.4,
+    "conductividad": 774.9
+  },
+  {
+    "timestamp": "2026-09-24T22:26:10.430Z",
+    "humedadSuelo": 68.8,
+    "temperaturaBME280": 19.9,
+    "conductividad": 1600.7
+  },
+  {
+    "timestamp": "2026-09-24T22:26:20.439Z",
+    "humedadSuelo": 66.9,
+    "temperaturaBME280": 17.2,
+    "conductividad": 708
+  },
+  {
+    "timestamp": "2026-09-24T22:26:30.454Z",
+    "humedadSuelo": 38.2,
+    "temperaturaBME280": 20.8,
+    "conductividad": 933.4
+  },
+  {
+    "timestamp": "2026-09-24T22:26:40.468Z",
+    "humedadSuelo": 55.6,
+    "temperaturaBME280": 29.3,
+    "conductividad": 543.5
+  },
+  {
+    "timestamp": "2026-09-24T22:26:50.472Z",
+    "humedadSuelo": 50.2,
+    "temperaturaBME280": 20.6,
+    "conductividad": 1491.2
+  },
+  {
+    "timestamp": "2026-09-24T22:27:00.480Z",
+    "humedadSuelo": 68.1,
+    "temperaturaBME280": 21.4,
+    "conductividad": 2037.2
+  },
+  {
+    "timestamp": "2026-09-24T22:27:10.493Z",
+    "humedadSuelo": 25.3,
+    "temperaturaBME280": 16.1,
+    "conductividad": 1373
+  },
+  {
+    "timestamp": "2026-09-24T22:27:20.498Z",
+    "humedadSuelo": 48,
+    "temperaturaBME280": 17.1,
+    "conductividad": 1123.6
+  },
+  {
+    "timestamp": "2026-09-24T22:27:30.504Z",
+    "humedadSuelo": 31.4,
+    "temperaturaBME280": 17.6,
+    "conductividad": 1144
+  },
+  {
+    "timestamp": "2026-09-24T22:27:40.507Z",
+    "humedadSuelo": 27.6,
+    "temperaturaBME280": 29,
+    "conductividad": 864
+  },
+  {
+    "timestamp": "2026-09-24T22:27:50.508Z",
+    "humedadSuelo": 26.5,
+    "temperaturaBME280": 25.7,
+    "conductividad": 782.2
+  },
+  {
+    "timestamp": "2026-09-24T22:28:00.517Z",
+    "humedadSuelo": 34.5,
+    "temperaturaBME280": 21.1,
+    "conductividad": 1446.5
+  },
+  {
+    "timestamp": "2026-09-24T22:28:10.532Z",
+    "humedadSuelo": 59.6,
+    "temperaturaBME280": 17.9,
+    "conductividad": 1926.3
+  },
+  {
+    "timestamp": "2026-09-24T22:28:20.546Z",
+    "humedadSuelo": 29,
+    "temperaturaBME280": 29.4,
+    "conductividad": 440.3
+  },
+  {
+    "timestamp": "2026-09-24T22:28:30.548Z",
+    "humedadSuelo": 26.1,
+    "temperaturaBME280": 28.7,
+    "conductividad": 669.9
+  },
+  {
+    "timestamp": "2026-09-24T22:28:40.561Z",
+    "humedadSuelo": 30.3,
+    "temperaturaBME280": 29.2,
+    "conductividad": 399.7
+  },
+  {
+    "timestamp": "2026-09-24T22:28:50.573Z",
+    "humedadSuelo": 42.4,
+    "temperaturaBME280": 27.7,
+    "conductividad": 1664.3
+  },
+  {
+    "timestamp": "2026-09-24T22:29:00.579Z",
+    "humedadSuelo": 69.1,
+    "temperaturaBME280": 17.1,
+    "conductividad": 564.3
+  },
+  {
+    "timestamp": "2026-09-24T22:29:10.579Z",
+    "humedadSuelo": 39.2,
+    "temperaturaBME280": 21.1,
+    "conductividad": 1076.3
+  },
+  {
+    "timestamp": "2026-09-24T22:29:20.586Z",
+    "humedadSuelo": 53.5,
+    "temperaturaBME280": 24.1,
+    "conductividad": 1063.3
+  },
+  {
+    "timestamp": "2026-09-24T22:29:30.595Z",
+    "humedadSuelo": 48.4,
+    "temperaturaBME280": 25,
+    "conductividad": 1252.3
+  },
+  {
+    "timestamp": "2026-09-24T22:29:40.606Z",
+    "humedadSuelo": 60.6,
+    "temperaturaBME280": 23.7,
+    "conductividad": 771.1
+  },
+  {
+    "timestamp": "2026-09-24T22:29:50.619Z",
+    "humedadSuelo": 31.3,
+    "temperaturaBME280": 22.9,
+    "conductividad": 1477.9
+  },
+  {
+    "timestamp": "2026-09-24T22:30:00.631Z",
+    "humedadSuelo": 54.4,
+    "temperaturaBME280": 18.8,
+    "conductividad": 1975.2
   }
 ]
