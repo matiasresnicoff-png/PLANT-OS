@@ -13,6 +13,7 @@ html, body {
     background-image: url('./src/img/Fondo.png');
     opacity: 100%;
     background-size: 100% 100%;
+    object-fit: contain;
 }
 
 .wireframe * {
@@ -847,20 +848,35 @@ html, body {
 }
 
 .tarjeta-proyecto {
-    width: 24.5rem;
-    height: 11.4375rem;
-    background: #D9D9D9;
-    box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
-    border-radius: 1rem;
+    background: white;
     display: flex;
-    align-items: center;
+    width: 33.75rem;
+    height: 11.25rem;
+    padding: 0.9375rem;
     justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.875rem;
 }
 
 .contenido-proyecto {
-    width: 15.125rem;
+    width: 31.8125rem;
     height: 8.9375rem;
-    background: #656A67;
+    color: #2D6A4F;
+    font-family: "Poppins"  sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.contenido-proyecto2 {
+    width: 31.8125rem;
+    color: #2D6A4F;
+    font-family: "Poppins"  sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
 
 .tarjeta-informacion-proyecto {
