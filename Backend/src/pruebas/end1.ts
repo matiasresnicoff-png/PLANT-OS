@@ -7,7 +7,7 @@ import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
 
-import usuariosRutas from '../rutas/rutasUsuarios.ts';
+import { registrarUsuario, loginUsuario, verPerfil, editarPerfil } from '../controladores/usuariosControlador.ts';
 import { verificarToken } from '../middlewares/verificarToken.ts';
 
 const app = express();
@@ -16,7 +16,10 @@ const PORT_HTTP: number = 3000;
 app.use(cors());
 app.use(express.json());
 
-app.use('/api', usuariosRutas);
+app.post('/api/usuarios', registrarUsuario);
+app.post('/api/login', loginUsuario);
+app.get('/api/usuarios/perfil', verificarToken, verPerfil);
+app.put('/api/usuarios/perfil', verificarToken, editarPerfil);
 
 // Solución para __dirname en ES Modules / Node 22
 const __filename = fileURLToPath(import.meta.url);
