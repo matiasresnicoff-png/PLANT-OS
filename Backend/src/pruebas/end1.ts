@@ -17,6 +17,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', usuariosRutas);
+
+// Solución para __dirname en ES Modules / Node 22
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const filePath: string = path.join(__dirname, 'sensores.json');
@@ -48,7 +50,7 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
   fs.writeFileSync(filePath, textoJson, 'utf-8');
 }
 
-app.get('/api/sensores', verificarToken, (req: Request, res: Response) => {      //se fija si llego una peticón get a la ruta  /api/sensores y si es asi devuelve lo valores del hitrial2w
+app.get('/api/sensores', verificarToken, function (req: Request, res: Response) {      //se fija si llego una peticón get a la ruta  /api/sensores y si es asi devuelve lo valores del hitrial2w
 
   let existeArchivo: boolean = fs.existsSync(filePath);
 
@@ -65,7 +67,7 @@ app.get('/api/sensores', verificarToken, (req: Request, res: Response) => {     
   }
 });
 
-app.get('/api/sensores/ultimo', verificarToken, (req: Request, res: Response) => {
+app.get('/api/sensores/ultimo', verificarToken, function (req: Request, res: Response) {
   let existeArchivo: boolean = fs.existsSync(filePath);
 
   if (existeArchivo === false) {
@@ -95,7 +97,7 @@ app.get('/api/sensores/ultimo', verificarToken, (req: Request, res: Response) =>
   }
 });
 
-app.listen(PORT_HTTP, () => {
+app.listen(PORT_HTTP, function () {
   console.log(`[HTTP] Servidor Express corriendo en http://localhost:${PORT_HTTP}`);
   console.log('=== RUTAS DISPONIBLES EN TU BACKEND ===');
   console.log('[HTTP] POST -> /api/usuarios (Registrar)');
@@ -114,13 +116,13 @@ const port = new SerialPort({
 
 const parser = port.pipe(new ReadlineParser({ delimiter: '\r\n' }));
 
-port.on('open', () => {
+port.on('open', function () {
   console.log('[UART] Puerto serial abierto correctamente.');
 });
 
 let lineasBloque: string[] = [];
 
-parser.on('data', (lineaCruda: string) => {
+parser.on('data', function (lineaCruda: string) {
   let lineaLimpia: string = lineaCruda.trim();
 
   let empiezaConGuiones: boolean = lineaLimpia.startsWith('---');
@@ -136,8 +138,6 @@ parser.on('data', (lineaCruda: string) => {
 });
 
 function procesarBloqueLimpio(lineas: string[]): void {
-  // Todavía no hay un sensor de humedad de suelo "de verdad" conectado,
-  // por eso ese valor queda siempre en null por ahora.
   let temperatura: number | null = null;
   let conductividad: number | null = null;
 
@@ -178,9 +178,12 @@ function procesarBloqueLimpio(lineas: string[]): void {
   if (llegoAlgunDato === true) {
     let fechaActual: string = new Date().toISOString();
 
+    // Por ahora "humedad del suelo" y "conductividad" van unificadas: las
+    // dos muestran el mismo valor del sensor de humedad de 2 patitas,
+    // hasta que llegue el sensor de conductividad real y las separemos.
     let registro: RegistroLectura = {
       timestamp: fechaActual,
-      humedadSuelo: null,
+      humedadSuelo: conductividad,
       conductividad: conductividad,
       temperaturaBME280: temperatura,
     };
@@ -190,6 +193,6 @@ function procesarBloqueLimpio(lineas: string[]): void {
   }
 }
 
-port.on('error', (err: Error) => {
+port.on('error', function (err: Error) {
   console.error('[UART Error]:', err.message);
 });

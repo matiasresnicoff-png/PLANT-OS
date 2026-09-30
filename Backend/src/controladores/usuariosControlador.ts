@@ -16,7 +16,9 @@ export async function registrarUsuario(req: Request, res: Response) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
   }
   const usuarios = leerUsuarios();
-  const yaExiste = usuarios.some((u) => u.mail === mail);
+  const yaExiste = usuarios.some(function (u) {
+    return u.mail === mail;
+  });
   if (yaExiste) {
     return res.status(409).json({ error: 'Ya existe un usuario con ese mail' });
   }
@@ -42,7 +44,9 @@ export async function loginUsuario(req: Request, res: Response) {
   }
 
   const usuarios = leerUsuarios();
-  const usuario = usuarios.find((u) => u.mail === mail);
+  const usuario = usuarios.find(function (u) {
+    return u.mail === mail;
+  });
 
   if (!usuario) {
     return res.status(401).json({ error: 'Mail o contraseña incorrectos' });
@@ -72,7 +76,9 @@ export async function loginUsuario(req: Request, res: Response) {
 export function verPerfil(req: Request, res: Response) {
   const { idUsuario } = (req as RequestConUsuario).usuario;
   const usuarios = leerUsuarios();
-  const usuario = usuarios.find((u) => u.idUsuario === idUsuario);
+  const usuario = usuarios.find(function (u) {
+    return u.idUsuario === idUsuario;
+  });
 
   if (!usuario) {
     return res.status(404).json({ error: 'Usuario no encontrado' });
@@ -87,7 +93,9 @@ export function editarPerfil(req: Request, res: Response) {
   const { nombre, fechaNacimiento, mail } = req.body as EditarPerfilBody;
 
   const usuarios = leerUsuarios();
-  const index = usuarios.findIndex((u) => u.idUsuario === idUsuario);
+  const index = usuarios.findIndex(function (u) {
+    return u.idUsuario === idUsuario;
+  });
 
   if (index === -1) {
     return res.status(404).json({ error: 'Usuario no encontrado' });
