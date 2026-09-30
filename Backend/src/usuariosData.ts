@@ -8,11 +8,13 @@ const __dirname = path.dirname(__filename);
 const rutaArchivo = path.join(__dirname, '..', 'usuarios.JSON');
 
 export function leerUsuarios(): Usuario[] {
-  if (!fs.existsSync(rutaArchivo)) {
+  try {
+    const contenido = fs.readFileSync(rutaArchivo, 'utf-8');
+    return JSON.parse(contenido) as Usuario[];
+  } catch (error) {
+    // Si el archivo todavía no existe (primera vez que se usa la app), arrancamos sin usuarios.
     return [];
   }
-  const contenido = fs.readFileSync(rutaArchivo, 'utf-8');
-  return JSON.parse(contenido) as Usuario[];
 }
 
 export function guardarUsuarios(usuarios: Usuario[]): void {

@@ -33,15 +33,12 @@ interface RegistroLectura {
 function guardarEnJson(datosNuevos: RegistroLectura): void {
   let historial: RegistroLectura[] = [];
 
-  let existeArchivo: boolean = fs.existsSync(filePath);
-
-  if (existeArchivo === true) {
-    try {
-      let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
-      historial = JSON.parse(contenidoTexto);
-    } catch (error) {
-      console.error('Error al leer el archivo JSON previo:', error);
-    }
+  try {
+    let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
+    historial = JSON.parse(contenidoTexto);
+  } catch (error) {
+    // Si el archivo todavía no existe (o está corrupto), arrancamos con el historial vacío.
+    historial = [];
   }
 
   historial.push(datosNuevos);
@@ -51,29 +48,17 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
 }
 
 app.get('/api/sensores', verificarToken, function (req: Request, res: Response) {      //se fija si llego una peticón get a la ruta  /api/sensores y si es asi devuelve lo valores del hitrial2w
-
-  let existeArchivo: boolean = fs.existsSync(filePath);
-
-  if (existeArchivo === false) {
-    return res.json([]);
-  }
-
   try {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     let datosCargados: RegistroLectura[] = JSON.parse(contenidoTexto);
     res.json(datosCargados);
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener los datos de sensores' });
+    // Si el archivo todavía no existe (o hay algún problema al leerlo), no hay datos para mostrar.
+    res.json([]);
   }
 });
 
 app.get('/api/sensores/ultimo', verificarToken, function (req: Request, res: Response) {
-  let existeArchivo: boolean = fs.existsSync(filePath);
-
-  if (existeArchivo === false) {
-    return res.json({ mensaje: 'No hay datos registrados aún' });
-  }
-
   try {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     let historial: RegistroLectura[] = JSON.parse(contenidoTexto);
@@ -93,7 +78,8 @@ app.get('/api/sensores/ultimo', verificarToken, function (req: Request, res: Res
       res.json({ mensaje: 'No se encontró el último registro' });
     }
   } catch (error) {
-    res.status(500).json({ error: 'Error al obtener la última lectura' });
+    // Si el archivo todavía no existe (o hay algún problema al leerlo), avisamos que no hay datos.
+    res.json({ mensaje: 'No hay datos registrados aún' });
   }
 });
 

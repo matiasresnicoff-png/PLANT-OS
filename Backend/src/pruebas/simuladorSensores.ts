@@ -34,15 +34,12 @@ function numeroAlAzar(minimo: number, maximo: number): number {
 function guardarEnJson(datosNuevos: RegistroLectura): void {
   let historial: RegistroLectura[] = [];
 
-  const existeArchivo: boolean = fs.existsSync(filePath);
-
-  if (existeArchivo === true) {
-    try {
-      const contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
-      historial = JSON.parse(contenidoTexto);
-    } catch (error) {
-      console.error('Error al leer el archivo JSON previo:', error);
-    }
+  try {
+    const contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
+    historial = JSON.parse(contenidoTexto);
+  } catch (error) {
+    // Si el archivo todavía no existe (o está corrupto), arrancamos con el historial vacío.
+    historial = [];
   }
 
   historial.push(datosNuevos);
