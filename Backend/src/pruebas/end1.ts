@@ -138,7 +138,8 @@ parser.on('data', (lineaCruda: string) => {
 });
 
 function procesarBloqueLimpio(lineas: string[]): void {
-  let humedad: number | null = null;
+  let temperatura: number | null = null;
+  let conductividad: number | null = null;
 
   let totalLineas: number = lineas.length;
 
@@ -147,28 +148,44 @@ function procesarBloqueLimpio(lineas: string[]): void {
 
     if (lineaActual !== undefined) {
       let lineaEnMinusculas: string = lineaActual.toLowerCase();
-      let tienePalabraHumedad: boolean = lineaEnMinusculas.includes('humedad');
 
-      if (tienePalabraHumedad === true) {
-        let paso1: string = lineaActual.replace('Humedad:', '');
-        let paso2: string = paso1.replace('%', '');
-        let textoSinEspacios: string = paso2.trim();
+      let tienePalabraTemperatura: boolean = lineaEnMinusculas.includes('temperatura');
 
-        if (textoSinEspacios !== '') {
-          let numeroConvertido: number = Number(textoSinEspacios);
-          humedad = numeroConvertido;
+      if (tienePalabraTemperatura === true) {
+        let textoSinEtiqueta: string = lineaActual.replace('Temperatura:', '').trim();
+
+        if (textoSinEtiqueta !== '') {
+          let numeroConvertido: number = Number(textoSinEtiqueta);
+          temperatura = numeroConvertido;
+        }
+      }
+
+      let tienePalabraConductividad: boolean = lineaEnMinusculas.includes('conductividad');
+
+      if (tienePalabraConductividad === true) {
+        let textoSinEtiqueta: string = lineaActual.replace('Conductividad:', '').trim();
+
+        if (textoSinEtiqueta !== '') {
+          let numeroConvertido: number = Number(textoSinEtiqueta);
+          conductividad = numeroConvertido;
         }
       }
     }
   }
-  if (humedad !== null) {
+
+  let llegoAlgunDato: boolean = temperatura !== null || conductividad !== null;
+
+  if (llegoAlgunDato === true) {
     let fechaActual: string = new Date().toISOString();
 
+    // Por ahora "humedad del suelo" y "conductividad" van unificadas: las
+    // dos muestran el mismo valor del sensor de humedad de 2 patitas,
+    // hasta que llegue el sensor de conductividad real y las separemos.
     let registro: RegistroLectura = {
       timestamp: fechaActual,
-      humedadSuelo: humedad,
-      conductividad: null,
-      temperaturaBME280: null,
+      humedadSuelo: conductividad,
+      conductividad: conductividad,
+      temperaturaBME280: temperatura,
     };
 
     guardarEnJson(registro);
