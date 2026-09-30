@@ -11,42 +11,70 @@ import type {
 } from '../tipos.ts';
 
 export async function registrarUsuario(req: Request, res: Response) {
-  const { nombre, fechaNacimiento, mail, contraseña } = req.body as RegistroBody;
+  const body = req.body as RegistroBody;
+  const nombre = body.nombre;
+  const fechaNacimiento = body.fechaNacimiento;
+  const mail = body.mail;
+  const contraseña = body.contraseña;
+
   if (!nombre || !fechaNacimiento || !mail || !contraseña) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
   }
+
   const usuarios = leerUsuarios();
-  const yaExiste = usuarios.some(function (u) {
-    return u.mail === mail;
-  });
+
+  let yaExiste = false;
+  for (let i = 0; i < usuarios.length; i = i + 1) {
+    const usuarioActual = usuarios[i];
+    if (usuarioActual !== undefined && usuarioActual.mail === mail) {
+      yaExiste = true;
+    }
+  }
+
   if (yaExiste) {
     return res.status(409).json({ error: 'Ya existe un usuario con ese mail' });
   }
+
   const contraseñaHasheada = await bcrypt.hash(contraseña, 10);
   const nuevoUsuario: Usuario = {
     idUsuario: String(usuarios.length + 1),
-    nombre,
-    fechaNacimiento,
-    mail,
+    nombre: nombre,
+    fechaNacimiento: fechaNacimiento,
+    mail: mail,
     contraseña: contraseñaHasheada,
   };
+
   usuarios.push(nuevoUsuario);
   guardarUsuarios(usuarios);
-  const { contraseña: _, ...usuarioSinContraseña } = nuevoUsuario;
+
+  const usuarioSinContraseña = {
+    idUsuario: nuevoUsuario.idUsuario,
+    nombre: nuevoUsuario.nombre,
+    fechaNacimiento: nuevoUsuario.fechaNacimiento,
+    mail: nuevoUsuario.mail,
+  };
+
   res.status(201).json(usuarioSinContraseña);
 }
 
 export async function loginUsuario(req: Request, res: Response) {
-  const { mail, contraseña } = req.body as LoginBody;
+  const body = req.body as LoginBody;
+  const mail = body.mail;
+  const contraseña = body.contraseña;
 
   if (!mail || !contraseña) {
     return res.status(400).json({ error: 'Faltan datos obligatorios' });
   }
 
   const usuarios = leerUsuarios();
-  const usuario = usuarios.find(function (u) {
-    return u.mail === mail;
-  });
+
+  let usuario: Usuario | undefined = undefined;
+  for (let i = 0; i < usuarios.length; i = i + 1) {
+    const usuarioActual = usuarios[i];
+    if (usuarioActual !== undefined && usuarioActual.mail === mail) {
+      usuario = usuarioActual;
+    }
+  }
 
   if (!usuario) {
     return res.status(401).json({ error: 'Mail o contraseña incorrectos' });
@@ -74,28 +102,51 @@ export async function loginUsuario(req: Request, res: Response) {
 }
 
 export function verPerfil(req: Request, res: Response) {
-  const { idUsuario } = (req as RequestConUsuario).usuario;
+  const usuarioDelToken = (req as RequestConUsuario).usuario;
+  const idUsuario = usuarioDelToken.idUsuario;
+
   const usuarios = leerUsuarios();
-  const usuario = usuarios.find(function (u) {
-    return u.idUsuario === idUsuario;
-  });
+
+  let usuario: Usuario | undefined = undefined;
+  for (let i = 0; i < usuarios.length; i = i + 1) {
+    const usuarioActual = usuarios[i];
+    if (usuarioActual !== undefined && usuarioActual.idUsuario === idUsuario) {
+      usuario = usuarioActual;
+    }
+  }
 
   if (!usuario) {
     return res.status(404).json({ error: 'Usuario no encontrado' });
   }
 
-  const { contraseña: _, ...usuarioSinContraseña } = usuario;
+  const usuarioSinContraseña = {
+    idUsuario: usuario.idUsuario,
+    nombre: usuario.nombre,
+    fechaNacimiento: usuario.fechaNacimiento,
+    mail: usuario.mail,
+  };
+
   res.status(200).json(usuarioSinContraseña);
 }
 
 export function editarPerfil(req: Request, res: Response) {
-  const { idUsuario } = (req as RequestConUsuario).usuario;
-  const { nombre, fechaNacimiento, mail } = req.body as EditarPerfilBody;
+  const usuarioDelToken = (req as RequestConUsuario).usuario;
+  const idUsuario = usuarioDelToken.idUsuario;
+
+  const body = req.body as EditarPerfilBody;
+  const nombre = body.nombre;
+  const fechaNacimiento = body.fechaNacimiento;
+  const mail = body.mail;
 
   const usuarios = leerUsuarios();
-  const index = usuarios.findIndex(function (u) {
-    return u.idUsuario === idUsuario;
-  });
+
+  let index = -1;
+  for (let i = 0; i < usuarios.length; i = i + 1) {
+    const usuarioActual = usuarios[i];
+    if (usuarioActual !== undefined && usuarioActual.idUsuario === idUsuario) {
+      index = i;
+    }
+  }
 
   if (index === -1) {
     return res.status(404).json({ error: 'Usuario no encontrado' });
@@ -116,6 +167,12 @@ export function editarPerfil(req: Request, res: Response) {
 
   guardarUsuarios(usuarios);
 
-  const { contraseña: _, ...usuarioActualizado } = usuarioExistente;
+  const usuarioActualizado = {
+    idUsuario: usuarioExistente.idUsuario,
+    nombre: usuarioExistente.nombre,
+    fechaNacimiento: usuarioExistente.fechaNacimiento,
+    mail: usuarioExistente.mail,
+  };
+
   res.status(200).json(usuarioActualizado);
 }

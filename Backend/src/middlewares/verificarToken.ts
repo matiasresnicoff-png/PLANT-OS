@@ -4,7 +4,12 @@ import type { UsuarioPayload, RequestConUsuario } from '../tipos.ts';
 
 export function verificarToken(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
-  const token = authHeader?.split(' ')[1];
+
+  let token: string | undefined = undefined;
+  if (authHeader) {
+    const partesDelHeader = authHeader.split(' ');
+    token = partesDelHeader[1];
+  }
 
   if (!token) {
     return res.status(401).json({ error: 'No autorizado' });
