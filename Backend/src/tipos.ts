@@ -1,5 +1,9 @@
 import type { Request } from 'express';
 
+// Este archivo no tiene lógica: son solo los "moldes" (tipos) que usa el
+// resto del backend, para que TypeScript sepa qué forma tiene cada cosa
+// (un usuario, el body de cada ruta, etc.).
+
 // Cómo se guarda un usuario en usuarios.JSON
 export interface Usuario {
   idUsuario: string;

@@ -10,7 +10,14 @@ import type {
   RequestConUsuario,
 } from '../tipos.ts';
 
+// Acá están las funciones que se ejecutan cuando llega una petición a cada
+// ruta de usuarios (una función por ruta: registro, login, ver perfil,
+// editar perfil).
+
+// Ruta: POST /api/usuarios — crea un usuario nuevo.
 export async function registrarUsuario(req: Request, res: Response) {
+  // req.body no viene tipado, por eso lo "casteamos" a RegistroBody para
+  // que TypeScript sepa qué campos esperamos ahí adentro.
   const body = req.body as RegistroBody;
   const nombre = body.nombre;
   const fechaNacimiento = body.fechaNacimiento;
@@ -23,6 +30,8 @@ export async function registrarUsuario(req: Request, res: Response) {
 
   const usuarios = leerUsuarios();
 
+  // Recorremos todos los usuarios guardados para ver si ya hay uno con
+  // ese mismo mail (no puede haber dos usuarios con el mismo mail).
   let yaExiste = false;
   for (let i = 0; i < usuarios.length; i = i + 1) {
     const usuarioActual = usuarios[i];
@@ -57,6 +66,8 @@ export async function registrarUsuario(req: Request, res: Response) {
   res.status(201).json(usuarioSinContraseña);
 }
 
+// Ruta: POST /api/login — valida mail y contraseña, y si están bien
+// devuelve un token (JWT) para usar en las rutas protegidas.
 export async function loginUsuario(req: Request, res: Response) {
   const body = req.body as LoginBody;
   const mail = body.mail;
@@ -68,6 +79,8 @@ export async function loginUsuario(req: Request, res: Response) {
 
   const usuarios = leerUsuarios();
 
+  // Recorremos la lista de usuarios buscando el que tenga ese mail.
+  // Si no lo encontramos, "usuario" se queda en undefined.
   let usuario: Usuario | undefined = undefined;
   for (let i = 0; i < usuarios.length; i = i + 1) {
     const usuarioActual = usuarios[i];
@@ -101,12 +114,18 @@ export async function loginUsuario(req: Request, res: Response) {
   });
 }
 
+// Ruta: GET /api/usuarios/perfil — devuelve los datos del usuario logueado.
+// Pasa primero por el middleware verificarToken, así que acá ya sabemos
+// que el token es válido.
 export function verPerfil(req: Request, res: Response) {
+  // El middleware verificarToken ya validó el token y nos dejó los datos
+  // del usuario colgando de req.usuario (por eso el "cast" a RequestConUsuario).
   const usuarioDelToken = (req as RequestConUsuario).usuario;
   const idUsuario = usuarioDelToken.idUsuario;
 
   const usuarios = leerUsuarios();
 
+  // Buscamos, entre todos los usuarios, el que tiene ese idUsuario.
   let usuario: Usuario | undefined = undefined;
   for (let i = 0; i < usuarios.length; i = i + 1) {
     const usuarioActual = usuarios[i];
@@ -129,6 +148,9 @@ export function verPerfil(req: Request, res: Response) {
   res.status(200).json(usuarioSinContraseña);
 }
 
+// Ruta: PUT /api/usuarios/perfil — actualiza los datos del usuario
+// logueado. Solo pisa los campos que vienen en el body (si no mandan
+// "mail", por ejemplo, el mail actual queda igual).
 export function editarPerfil(req: Request, res: Response) {
   const usuarioDelToken = (req as RequestConUsuario).usuario;
   const idUsuario = usuarioDelToken.idUsuario;
@@ -140,6 +162,8 @@ export function editarPerfil(req: Request, res: Response) {
 
   const usuarios = leerUsuarios();
 
+  // En vez del idUsuario que encontramos, acá necesitamos la POSICIÓN
+  // (el índice) en el array, porque después vamos a modificar ese usuario.
   let index = -1;
   for (let i = 0; i < usuarios.length; i = i + 1) {
     const usuarioActual = usuarios[i];

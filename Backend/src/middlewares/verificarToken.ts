@@ -2,6 +2,11 @@ import type { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import type { UsuarioPayload, RequestConUsuario } from '../tipos.ts';
 
+// Este es el "middleware" de autenticación: se ejecuta ANTES que la ruta
+// protegida (por eso va como segundo argumento en app.get/put, antes de la
+// función de la ruta). Si el token es válido, deja pasar la petición con
+// next(); si no, corta acá mismo con un 401 y la ruta protegida ni se llega
+// a ejecutar.
 export function verificarToken(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
 

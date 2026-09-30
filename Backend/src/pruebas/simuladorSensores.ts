@@ -37,7 +37,7 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
   try {
     const contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     historial = JSON.parse(contenidoTexto);
-  } catch (error) {
+  } catch {
     // Si el archivo todavía no existe (o está corrupto), arrancamos con el historial vacío.
     historial = [];
   }

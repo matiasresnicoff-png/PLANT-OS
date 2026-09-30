@@ -7,6 +7,10 @@ import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
 
+// Este es el servidor principal: levanta la API con Express (rutas de
+// usuarios y de sensores) y además escucha el puerto serie para recibir
+// las lecturas que manda el Arduino.
+
 import { registrarUsuario, loginUsuario, verPerfil, editarPerfil } from '../controladores/usuariosControlador.ts';
 import { verificarToken } from '../middlewares/verificarToken.ts';
 
@@ -16,6 +20,8 @@ const PORT_HTTP: number = 3000;
 app.use(cors());
 app.use(express.json());
 
+// Rutas de usuarios. verificarToken es el middleware que chequea el JWT
+// antes de dejar pasar la petición a verPerfil/editarPerfil.
 app.post('/api/usuarios', registrarUsuario);
 app.post('/api/login', loginUsuario);
 app.get('/api/usuarios/perfil', verificarToken, verPerfil);
@@ -33,13 +39,15 @@ interface RegistroLectura {
   temperaturaBME280: number | null;
 }
 
+// Guarda una lectura nueva en sensores.json: lee el historial que ya
+// había, le agrega la lectura nueva al final, y vuelve a guardar todo.
 function guardarEnJson(datosNuevos: RegistroLectura): void {
   let historial: RegistroLectura[] = [];
 
   try {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     historial = JSON.parse(contenidoTexto);
-  } catch (error) {
+  } catch {
     // Si el archivo todavía no existe (o está corrupto), arrancamos con el historial vacío.
     historial = [];
   }
@@ -50,17 +58,19 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
   fs.writeFileSync(filePath, textoJson, 'utf-8');
 }
 
-app.get('/api/sensores', verificarToken, function (req: Request, res: Response) {      //se fija si llego una peticón get a la ruta  /api/sensores y si es asi devuelve lo valores del hitrial2w
+// Ruta: GET /api/sensores — devuelve todo el historial de lecturas guardadas.
+app.get('/api/sensores', verificarToken, function (req: Request, res: Response) {
   try {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     let datosCargados: RegistroLectura[] = JSON.parse(contenidoTexto);
     res.json(datosCargados);
-  } catch (error) {
+  } catch {
     // Si el archivo todavía no existe (o hay algún problema al leerlo), no hay datos para mostrar.
     res.json([]);
   }
 });
 
+// Ruta: GET /api/sensores/ultimo — devuelve solamente la lectura más reciente.
 app.get('/api/sensores/ultimo', verificarToken, function (req: Request, res: Response) {
   try {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
@@ -80,12 +90,13 @@ app.get('/api/sensores/ultimo', verificarToken, function (req: Request, res: Res
     } else {
       res.json({ mensaje: 'No se encontró el último registro' });
     }
-  } catch (error) {
+  } catch {
     // Si el archivo todavía no existe (o hay algún problema al leerlo), avisamos que no hay datos.
     res.json({ mensaje: 'No hay datos registrados aún' });
   }
 });
 
+// Levanta el servidor HTTP y muestra en consola qué rutas hay disponibles.
 app.listen(PORT_HTTP, function () {
   console.log(`[HTTP] Servidor Express corriendo en http://localhost:${PORT_HTTP}`);
   console.log('=== RUTAS DISPONIBLES EN TU BACKEND ===');
@@ -98,6 +109,8 @@ app.listen(PORT_HTTP, function () {
   console.log('=======================================');
 });
 
+// Acá abrimos la conexión con el Arduino por el puerto serie (COM3).
+// "parser" separa lo que llega en líneas de texto (una lectura por línea).
 const port = new SerialPort({
   path: 'COM3',
   baudRate: 9600,
@@ -109,6 +122,9 @@ port.on('open', function () {
   console.log('[UART] Puerto serial abierto correctamente.');
 });
 
+// El Arduino manda las lecturas de a "bloques": varias líneas seguidas
+// (una por sensor) y al final una línea que arranca con "---" avisando que
+// el bloque terminó. Mientras tanto vamos juntando las líneas acá.
 let lineasBloque: string[] = [];
 
 parser.on('data', function (lineaCruda: string) {
@@ -117,6 +133,8 @@ parser.on('data', function (lineaCruda: string) {
   let empiezaConGuiones: boolean = lineaLimpia.startsWith('---');
 
   if (empiezaConGuiones === true) {
+    // Llegó el separador: ya tenemos el bloque completo, lo procesamos
+    // y vaciamos la lista para empezar a juntar el próximo.
     procesarBloqueLimpio(lineasBloque);
     lineasBloque = [];
   } else {
@@ -126,6 +144,9 @@ parser.on('data', function (lineaCruda: string) {
   }
 });
 
+// Recibe todas las líneas de un bloque (ya sin la línea "---" del final) y
+// busca ahí adentro la temperatura y la conductividad, línea por línea. Al
+// final, si encontró algún dato, arma el registro y lo guarda.
 function procesarBloqueLimpio(lineas: string[]): void {
   let temperatura: number | null = null;
   let conductividad: number | null = null;
