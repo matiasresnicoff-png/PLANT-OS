@@ -17,8 +17,6 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api', usuariosRutas);
-
-// Solución para __dirname en ES Modules / Node 22
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const filePath: string = path.join(__dirname, 'sensores.json');
@@ -138,6 +136,8 @@ parser.on('data', (lineaCruda: string) => {
 });
 
 function procesarBloqueLimpio(lineas: string[]): void {
+  // Todavía no hay un sensor de humedad de suelo "de verdad" conectado,
+  // por eso ese valor queda siempre en null por ahora.
   let temperatura: number | null = null;
   let conductividad: number | null = null;
 
@@ -178,12 +178,9 @@ function procesarBloqueLimpio(lineas: string[]): void {
   if (llegoAlgunDato === true) {
     let fechaActual: string = new Date().toISOString();
 
-    // Por ahora "humedad del suelo" y "conductividad" van unificadas: las
-    // dos muestran el mismo valor del sensor de humedad de 2 patitas,
-    // hasta que llegue el sensor de conductividad real y las separemos.
     let registro: RegistroLectura = {
       timestamp: fechaActual,
-      humedadSuelo: conductividad,
+      humedadSuelo: null,
       conductividad: conductividad,
       temperaturaBME280: temperatura,
     };
