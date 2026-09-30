@@ -95,19 +95,27 @@ html, body {
 }
 
 .title3 {
-    width: auto;
-    color: #2D6A4F;
-    font-family: "Inter", sans-serif;
-    font-size: 0.9375rem;
+    color: #184D36;
+    font-family: "Playfair Display";
+    font-size: 2rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     line-height: normal;
     white-space: nowrap;
-    text-align: center;
-    margin-left: auto;
+    margin-left: 2rem;
     margin-right: auto;
 }
-
+.info {
+    color: rgba(0, 0, 0, 0.75);      
+    font-family: "Poppins", sans-serif; 
+    font-size: 0.8125rem;             
+    font-style: normal;
+    font-weight: 400;                
+    line-height: normal;
+    text-align: left;                  
+    width: 12.8125rem;                
+    margin: 2rem;
+}
 .title4 {
     width: 9.0625rem;
     height: 1.6875rem;
@@ -139,15 +147,19 @@ html, body {
 }
 
 .circulo-inicio {
-    width: 12.625rem;
-    height: 12.75rem;
+    width: 14rem;
+    height: 1.75rem;
     margin: 0.9375rem auto; 
+    margin-top: -4rem;
     display: flex;
     flex-direction: column;
     align-items: center;    
     justify-content: center;
-}
 
+}
+.planta{
+margin-top: 0;
+}
 .tarjetas-inicio {
     display: flex;
     flex-direction: row;
@@ -423,6 +435,13 @@ html, body {
     display: flex;
     align-items: center;
     text-decoration: none;
+}
+.rectangulo{
+    width: 45.3125rem;
+    height: 16.25rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
 }
 
 .cerrar-sesion {

@@ -33,5 +33,19 @@
     "fechaNacimiento": "2011-01-24",
     "mail": "matias.resnicoff@gmail.com",
     "contraseña": "$2b$10$j4HG5k1xa/N8eOLBiHrxsuWohRgHvOFMejomLNF/VJ.FEwvf.Uilu"
+  },
+  {
+    "idUsuario": "6",
+    "nombre": "Tomas",
+    "fechaNacimiento": "2026-07-25",
+    "mail": "t@gmail.com",
+    "contraseña": "$2b$10$M8vqXcsdulgvelJ0JYHb3uSEFQLMo3isDgVapqhpCTzRHEWBev3Ke"
+  },
+  {
+    "idUsuario": "7",
+    "nombre": "Martin",
+    "fechaNacimiento": "1987-02-22",
+    "mail": "tute@gmail.com",
+    "contraseña": "$2b$10$lZHnVKHs7rQVlKduLlJcTO0Vg1LYkXUxL2NkWGweUBonjk9/lBdRK"
   }
 ]
