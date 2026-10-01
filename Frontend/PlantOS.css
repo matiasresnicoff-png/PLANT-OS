@@ -73,15 +73,25 @@ html, body {
 .title {
     width: 100%;            
     color: #2D6A4F;
-    font-family: "Inter", sans-serif;
+    font-family: "Playfair Display";
     font-size: 2rem;
     font-weight: 400;
-    text-align: center;      
     margin: 0;
     box-sizing: border-box;  
     text-align: center;
 }
+.header-rectangulo {
+    display: flex;
+    justify-content: space-between; 
+    align-items: flex-start;
+}
 
+.circulo-verde {
+    margin: 0;
+    width: 1rem;
+    height: auto;
+    pointer-events: none;
+}
 .title2 {
     width: 100%;             
     color: #2D6A4F;
@@ -442,6 +452,9 @@ margin-top: 0;
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.85);
     box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 }
 
 .cerrar-sesion {

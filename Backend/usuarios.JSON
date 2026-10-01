@@ -47,5 +47,19 @@
     "fechaNacimiento": "1987-02-22",
     "mail": "tute@gmail.com",
     "contraseña": "$2b$10$lZHnVKHs7rQVlKduLlJcTO0Vg1LYkXUxL2NkWGweUBonjk9/lBdRK"
+  },
+  {
+    "idUsuario": "8",
+    "nombre": "matias",
+    "fechaNacimiento": "2010-02-02",
+    "mail": "mati.residtiktok@gmail.com",
+    "contraseña": "$2b$10$Srf6qEBuTQcCPFJBoygmT.K79rNBl/wALfG77jTNJuTc7/O4fMQji"
+  },
+  {
+    "idUsuario": "9",
+    "nombre": "Tomi",
+    "fechaNacimiento": "2020-02-20",
+    "mail": "to@gmail.com",
+    "contraseña": "$2b$10$gdYhNM3.DWej1AkCoR7Csu04n6Lk/.AgK4oGj9o29L2NXMsApXHBq"
   }
 ]
