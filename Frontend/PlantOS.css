@@ -87,10 +87,16 @@ html, body {
 }
 
 .circulo-verde {
+    display: flex;
+    width: 2.0625rem;
+    height: 2.0625rem;
+    padding: 0.625rem 0.5rem 0.5625rem 0.6875rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: 1.03125rem;
+    background: rgba(86, 218, 159, 0.45);
     margin: 0;
-    width: 1rem;
-    height: auto;
-    pointer-events: none;
 }
 .title2 {
     width: 100%;             
