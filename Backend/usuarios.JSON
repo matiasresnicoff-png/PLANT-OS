@@ -68,5 +68,12 @@
     "fechaNacimiento": "2010-02-01",
     "mail": "hola@gmail.com",
     "contraseña": "$2b$10$XrD.I.3A6Kb0MwbpuUeQsOdBYC/0N5F0rixycvUuiIhrhbKnxyexO"
+  },
+  {
+    "idUsuario": "11",
+    "nombre": "hola",
+    "fechaNacimiento": "2020-02-22",
+    "mail": "1234@gmail.com",
+    "contraseña": "$2b$10$sarAFXhVjU6C2ujIGjikBux8qmPM0Pxu.mF47qfCicaytfgln/iVO"
   }
 ]

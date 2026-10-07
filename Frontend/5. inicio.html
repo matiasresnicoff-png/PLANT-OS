@@ -18,50 +18,65 @@
         <section class="inicio">
             <header class="header-arriba">
                 <section class="icono-registro">
-                    <button id="flecha" onclick="history.back()" style="background: none; border: none; padding: 0; cursor: pointer;">
-                        <img style="width: 1.875rem; height: 1.875rem;" src="./src/img/flecha.png" alt="Flecha"/>
-                    </button>
+                <button id="flecha" onclick="history.back()" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img style="width: 1.875rem; height: 1.875rem;" src="./src/img/flecha.png" alt="Flecha"/>
+                </button>
                 </section>
             </header>
 
-                <section class="centro-titulos">
-                    <h1 class="title">Inicio</h1>
-                    <h2 class="title2">¡Bienvenido, <span id="nombre-usuario-inicio">Usuario</span>!</h2>
+            <section class="centro-titulos">
+                <h1 class="title">Inicio</h1>
+                <h2 class="title2">¡Bienvenido, <span id="nombre-usuario-inicio">Usuario</span>!</h2>
                 </section>
-                <section class="rectangulo">
-                    <section class="rectangulo">
-                        <div class="columna-izquierda">
-                            <h1 class="title">Salud General</h1>
-                            <p class="info">Tu planta se encuentra en un rango saludable.</p>
-                            <p class="info">Todos los parametros estan estables.</p>
-                        </div>
-                        <img class="Logo1" src="./src/img/planta5.png" alt="Planta" />
-                        <div class="columna-derecha">
-                            <div class="header-rectangulo">
-                                <img class="simbolo2" src="./src/img/arbol.png" alt="Crecimiento" />
-                                <div class="bloque-texto">
-                                    <p class="titulo">Crecimiento</p>
-                                    <p class="conclucion">Estable</p>
-                                </div>
-                            </div>
-                    
-                            <div class="header-rectangulo">
-                                <img class="simbolo2" src="./src/img/vector.png" alt="Condiciones" />
-                                <div class="bloque-texto">
-                                    <p class="titulo">Condiciones</p>
-                                    <p class="conclucion">Ideales</p>
-                                </div>
-                            </div>
-                    
-                            <div class="header-rectangulo">
-                                <img class="simbolo2" src="./src/img/conductividad.png" alt="Última medición" />
-                                <div class="bloque-texto">
-                                    <p class="titulo">Última medición</p>
-                                    <p class="medida">Hoy, 14:32</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+               <section class="rectangulo">
+                
+            <div class="contenido-izquierdo">
+            <p class="title3">Salud general</p>
+            <p class="info">
+            Tu planta se encuentra en un rango saludable.
+            Todos los parámetros están estables.
+        </p>
+    </div>
+
+    <div class="contenido-centro">
+        <img src="./src/img/planta5.png" alt="Estado de la planta">
+    </div>
+
+    <div class="contenido-derecho">
+        <div class="estado">
+            <div class="icono-estado">
+                <img src="./src/img/vector.png" alt="Estado de la planta">
+            </div>
+
+            <div class="texto-estado">
+                <p class="titulo-estado">Crecimiento</p>
+                <p class="subtitulo-estado">Estable</p>
+            </div>
+        </div>
+
+        <div class="estado">
+            <div class="icono-estado">
+                <img src="./src/img/vector2.png" alt="Estado de la planta">
+            </div>
+
+            <div class="texto-estado">
+                <p class="titulo-estado">Condiciones</p>
+                <p class="subtitulo-estado">Ideales</p>
+            </div>
+        </div>
+
+        <div class="estado">
+            <div class="icono-estado">
+                <img src="./src/img/vector3.png" alt="Estado de la planta">
+            </div>
+
+            <div class="texto-estado">
+                <p class="titulo-estado">Última medición</p>
+                <p class="subtitulo-estado">Hoy, 14:32</p>
+            </div>
+        </div>
+    </div>
+            </section>
             <section class="tarjetas-inicio">
                 <a class="tarjeta-inicio" href="8. conductividad.html">
                     <img class="simbolo" src="./src/img/conductividad.png" />
@@ -82,8 +97,6 @@
                     <p class="conclucion">¡Ideal!</p>
                 </a>
             </section>
-
-            <button class="cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
 
             <section class="barra-navegacion">
                 <a class="opcion-navegacion" href="5. inicio.html">
