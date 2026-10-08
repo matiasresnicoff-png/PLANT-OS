@@ -1,49 +1,41 @@
-// Sketch de PlantOS.
-//
-// Lee dos sensores y manda los datos por el puerto serie, en bloques que
-// terminan con una línea "---" (así los reconoce el backend en end1.ts).
-//
-//   - Temperatura: sensor DS18B20, conectado en el pin digital 3 (D3).
-//   - "Conductividad": sensor de humedad de 2 patitas, conectado a la
-//     entrada analógica A1. OJO: esto no es un sensor de conductividad de
-//     verdad, es el sensor de humedad que tenemos usado como reemplazo
-//     mientras llega el sensor de conductividad real, tal cual lo hablamos.
-//     Por eso el valor no es preciso, es solo un número de referencia.
-//
-// Librerías que hay que instalar antes de subir este código (en el Arduino
-// IDE: Herramientas -> Administrar bibliotecas...):
-//   - "OneWire" (de Paul Stoffregen)
-//   - "DallasTemperature" (de Miles Burton)
-
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
-const int PIN_TEMPERATURA = 3;   // DS18B20 - cable de datos (amarillo, normalmente)
-const int PIN_CONDUCTIVIDAD = A1; // sensor de humedad de 2 patitas - salida analógica
+// CONEXIONES ACTUALES DEL VIDEO
+const int PIN_TEMPERATURA = 3;      // DATA del DS18B20 → D3
+const int PIN_CONDUCTIVIDAD = A1;   // AO del sensor → A1
 
-OneWire cableTemperatura(PIN_TEMPERATURA);
-DallasTemperature sensorTemperatura(&cableTemperatura);
+OneWire oneWire(PIN_TEMPERATURA);
+DallasTemperature sensorTemperatura(&oneWire);
 
 void setup() {
   Serial.begin(9600);
+
   sensorTemperatura.begin();
+
+  pinMode(PIN_CONDUCTIVIDAD, INPUT);
 }
 
 void loop() {
-  // Pedimos la temperatura y esperamos a que el sensor conteste.
+
+  // ----- TEMPERATURA -----
   sensorTemperatura.requestTemperatures();
   float temperatura = sensorTemperatura.getTempCByIndex(0);
 
-  // Leemos el valor analógico crudo (va de 0 a 1023).
-  int lecturaConductividad = analogRead(PIN_CONDUCTIVIDAD);
+  // ----- "CONDUCTIVIDAD" -----
+  // Por ahora se usa el sensor de humedad de 2 puntas
+  // como reemplazo del sensor de conductividad real.
+  int conductividad = analogRead(PIN_CONDUCTIVIDAD);
 
+  // ----- ENVIAR DATOS -----
   Serial.print("Temperatura: ");
   Serial.println(temperatura);
 
   Serial.print("Conductividad: ");
-  Serial.println(lecturaConductividad);
+  Serial.println(conductividad);
 
+  // El backend reconoce el final de cada bloque con ---
   Serial.println("---");
 
-  delay(5000); // manda una lectura nueva cada 5 segundos
+  delay(5000);
 }
