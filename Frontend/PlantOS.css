@@ -163,14 +163,17 @@
     }
 
     .title5 {
+        width: 19.4375rem;
+        height: 2.6875rem;
         white-space: nowrap;
-        width: auto;
-        height: auto;
         color: #0D6B41;
-        font-family: "Inter", sans-serif;
+        font-family:"Playfair Display";
         font-size: 32px;
         font-weight: 600;
         word-wrap: break-word;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
     }
 
     .circulo-inicio {
@@ -409,10 +412,10 @@
     }
 
     .Configuracion {
-        width: 29.75rem;
+        width: 34.375rem;
         height: 3.125rem;
         border-radius: 1.25rem;
-        background: #698E5C;
+        background: #447B3A;
         color: white;
         font-size: 15px;
         font-family: "Inter", sans-serif;
@@ -457,10 +460,9 @@
     }
 
     .contenedor-botones {
-        width: 35.25rem;
+        width: 40.625rem;
         height: 15.625rem;
         border-radius: 1.5625rem;
-        opacity: 0.7;
         background: #D7D7D7;
         display: flex;
         flex-direction: column;
@@ -470,11 +472,11 @@
     }
 
     .Iniciar-sesion {
-        width: 29.75rem;
+        width: 34.375rem;
         height: 3.125rem;
         border-radius: 1.25rem;
-        background: #698E5C;
-        color: white;
+        background: #447B3A;
+        color: #FFFFFF;
         font-size: 15px;
         font-family: "Inter", sans-serif;
         font-weight: 800;
@@ -514,11 +516,11 @@
     }
 
     .Registrarse {
-        width: 29.75rem;
+        width: 34.375rem;
         height: 3.125rem;
         border-radius: 1.25rem;
-        border: 1.5px solid #698E5C;
-        color: #698E5C;
+        border: 1.5px solid #447B3A;
+        color: #447B3A;
         font-family: "Inter", sans-serif;
         font-weight: 800;
         justify-content: center;
@@ -536,9 +538,11 @@
     }
 
     .logo-registrarse {
-        width: 10.25rem;
-        height: 9.75rem;
-        border-radius: 100%;
+        display: flex;
+        padding: 0.625rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.625rem;
     }
 
     .titulo-registrarse {
@@ -552,15 +556,14 @@
     }
 
     .campo-registro {
-        width: 27.546875rem;
         display: flex;
         flex-direction: column;
         gap: 0.3125rem;
     }
 
     .etiqueta-registro {
-        width: 4.29538rem;
-        height: 2.47625rem;
+        width: 3.375rem;
+        height: 2.125rem;
         color: #000;
         font-family: "Inter", sans-serif;
         font-size: 0.875rem;
@@ -571,10 +574,10 @@
     }
 
     .input-registro {
-        width: 25.99825rem;
+        width: 35.0625rem;
         height: 3.30163rem;
         border-radius: 0.5rem;
-        border: 1px solid #6A8E5D;
+        border: 1px solid #447B3A;
         background: #FFF;
         color: #9E9E9E;
         font-family: "Inter", sans-serif;
@@ -585,10 +588,10 @@
     }
 
     .Registrarme {
-        width: 29.75rem;
+        width: 34.375rem;
         height: 3.125rem;
         border-radius: 1.25rem;
-        background: #6A8E5D;
+        background: #447B3A;
         color: white;
         font-size: 15px;
         font-family: "Inter", sans-serif;
@@ -599,9 +602,23 @@
     }
 
     .texto-registro {
-        width: 14.5625rem;
+        width: 13.5625rem;
         height: 1.0625rem;
-        color: #6A8E5D;
+        color: rgba(0, 0, 0, 0.71);
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+    }
+
+    .texto-registro2 {
+        width: 13.5625rem;
+        height: 1.0625rem;
+        color: #447B3A;
         font-family: "Inter", sans-serif;
         font-size: 0.875rem;
         font-style: normal;
@@ -613,6 +630,9 @@
         text-decoration-thickness: auto;
         text-underline-offset: auto;
         text-underline-position: from-font;
+        margin: 0;
+        padding: 0;
+        line-height: 1;    
     }
 
     .header-superior {
@@ -646,9 +666,16 @@
     }
 
     .logo-login {
-        width: 10.25rem;
-        height: 9.75rem;
+        display: flex;
+        width: 13rem;
+        padding: 0.625rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.625rem;
         border-radius: 100%;
+        margin: 0;
+        padding: 0;
+        line-height: 1; 
     }
 
     .titulo-login {
