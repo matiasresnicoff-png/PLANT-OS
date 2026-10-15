@@ -32,7 +32,6 @@
     }
 
     .header-arriba {
-        position: relative;
         width: 100%;
         display: flex;
         justify-content: flex-start;
@@ -58,20 +57,6 @@
         margin-bottom: 1rem;
     }
 
-    .logo-inicio {
-        width: auto;
-        height: 2.625rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .titulo-inicio {
-        width: 100%; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 
     .title {
         width: 100%;          
@@ -84,27 +69,6 @@
         margin: 0;
         box-sizing: border-box;  
         text-align: center;
-    }
-
-    .header-rectangulo {
-        display: flex;
-        justify-content: space-between; 
-        align-items: flex-start;
-        width: 100%;
-    }
-
-    .circulo-verde {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-        width: 2.0625rem;
-        height: 2.0625rem;
-        padding: 0.625rem 0.5rem 0.5625rem 0.6875rem;
-        gap: 0.625rem;
-        border-radius: 1.03125rem;
-        background: rgba(86, 218, 159, 0.45);
-        margin: 0;
     }
 
     .title2 {
@@ -187,10 +151,6 @@
         justify-content: center;
     }
 
-    .planta {
-        margin-top: 0;
-    }
-
     .tarjetas-inicio {
         display: flex;
         flex-direction: row;
@@ -221,17 +181,7 @@
         aspect-ratio: 19 / 16;
         display: block;
         margin: 0 auto;
-    }
-    .simbolo2{
-        display: flex;
-        width: 2.0625rem;
-        height: 2.0625rem;
-        padding: 0.625rem 0.5rem 0.5625rem 0.6875rem;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.625rem;
-        border-radius: 1.03125rem;
-        background: rgba(86, 218, 159, 0.45);
+        object-fit: contain;
     }
     .Logo1{
         width: 14rem;
@@ -292,9 +242,9 @@
         justify-content: space-around;
         align-items: center;
         width: 100%;
+        height: auto;
         height: 3.125rem;
         background-color: white;
-        padding: 0 0.625rem;
         margin-top: auto;
         box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
         text-decoration: none;
@@ -322,26 +272,9 @@
         width: 1.3265rem;
         height: 1.3265rem;
         aspect-ratio: 1/1;
+        object-fit: contain;
     }
 
-    .icono-navegacion {
-        display: none;
-    }
-
-    .opcion-izquierda {
-        width: 22%;    
-        background-color: #555555;                
-    }
-
-    .opcion-derecha {
-        width: 22%;    
-        background-color: #555555;                
-    }
-
-    .opcion-centro {
-        width: 40%;    
-        background-color: #555555;                
-    }
 
     .bienvenido {
         display: flex;
@@ -763,6 +696,9 @@
         flex-direction: column;
         align-items: center;
         gap: 1.25rem;
+        min-height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
     }
 
     .detalle-conductividad {
@@ -770,6 +706,9 @@
         flex-direction: column;
         align-items: center;
         gap: 1.25rem;
+        min-height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
     }
 
     .detalle-humedad {
@@ -777,6 +716,9 @@
         flex-direction: column;
         align-items: center;
         gap: 1.25rem;
+        min-height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
     }
 
     .perfil-humedad {
@@ -858,6 +800,24 @@
         align-items: center;
     }
 
+     .subtitulo-ver{
+        color: #000;
+        font-family: "Inter", sans-serif;
+        font-size: 0.9375rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        width: 5.1875rem;
+        height: 1.125rem;
+        border-radius: 0.625rem;
+        background:#78C2FF;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-decoration: none; 
+        cursor: pointer;
+    }
+
     .grafico-humedad {
         width: 24.5rem;
         height: 14.4375rem;
@@ -908,81 +868,102 @@
         flex-direction: column;
         align-items: center;
         gap: 1.25rem;
-    }
-
-    .logo-acerca {
-        width: 2.8125rem;
-        height: 2.8125rem;
-        background: #D9D9D9;
-        border-radius: 100%;
-    }
-
-    .titulo-acerca {
-        width: 15.75rem;
-        height: 2.25rem;
-        background: #D9D9D9;
-    }
-
-    .perfil-acerca {
-        width: 8.25rem;
-        height: 7.25rem;
-        background: #D9D9D9;
-        border-radius: 100%;
-    }
-
-    .subtitulo-acerca {
-        width: 18.75rem;
-        height: 1.5rem;
-        background: #D9D9D9;
+        min-height: 100vh;
+        margin: 0;
+        box-sizing: border-box;
     }
 
 .tarjeta-proyecto {
-        background: white;
-        display: flex;
-        width: 33.75rem;
-        height: 11.25rem;
-        padding: 0.9375rem;
-        justify-content: center;
-        align-items: center;
-        gap: 0.625rem;
-        border-radius: 0.875rem;
-    }
+    display: flex;
+    width: 35.25rem;
+    height: 9.1875rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.9375rem;
+    background: white;
+    flex-direction: column;
+}
 
 .contenido-proyecto {
-        width: 31.8125rem;
-        height: 8.9375rem;
-        color: #2D6A4F;
-        font-family: "Poppins", sans-serif;
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
-
-.contenido-proyecto2 {
-        width: 31.8125rem;
+        width: 25.125rem;
+        height: auto;
         color: #2D6A4F;
         font-family: "Poppins", sans-serif;
         font-size: 0.875rem;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        margin: 0;
+        gap: 0px;
+    }
+
+.contenido-proyecto2 {
+        width: 25.125rem;
+        color: #000;
+        text-align: center;
+        font-family: "Inter", sans-serif;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        gap: 0px;
+        margin: 0;
     }
 
 .tarjeta-informacion-proyecto {
-        width: 24.5rem;
-        height: 9.625rem;
-        background: #D9D9D9;
-        border-radius: 0.75rem;
         display: flex;
-        align-items: center;
+        width: 33.75rem;
+        height: 6.25rem;
+        padding: 0.625rem;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        gap: 0.625rem;
+        border-radius: 0.9375rem;
+        background: #FFF;
     }
 
 .informacion-proyecto {
-        width: 20.125rem;
-        height: 7.3125rem;
-        background: #656A67;
+        width: 32.5rem;
+        height: auto;
+        color: #2D6A4F;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        gap: 0px;
+    }
+.informacion-proyecto2 {
+        width: 32.5rem;
+        height: auto;
+        color: #000;
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        gap: 0px;
     }
 
 .mi-perfil {
