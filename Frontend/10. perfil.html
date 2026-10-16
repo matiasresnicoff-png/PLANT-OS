@@ -7,38 +7,39 @@
     <link rel="stylesheet" href="PlantOS.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:wght@100..900&display=swap" rel="stylesheet">
 </head>
 <body>
     <main class="wireframe">
         <section class="mi-perfil">
              <header class="header-superior">
-             <section class="icono-registro">
-                <button onclick="location.href='5. inicio.html'" style="background: none; border: none; padding: 0; cursor: pointer;">
-                    <img src="./src/img/flecha.png" alt="Volver" style="width: 1.875rem; height: 1.875rem;"/>
-                </button>
-             </section>
+                 <section class="icono-registro">
+                    <button onclick="location.href='5. inicio.html'" style="background: none; border: none; padding: 0; cursor: pointer;">
+                        <img src="./src/img/flecha.png" alt="Volver" style="width: 1.875rem; height: 1.875rem;"/>
+                    </button>
+                 </section>
             </header>
-            <div class="foto-perfil avatar-inicial" id="avatar-perfil-letra">P</div>
-            <section class="nombre-perfil" id="nombre-perfil-valor">Pablo</section>
-            <section class="descripcion-perfil">Cuenta de PlantOS</section>
+
+            <div class="foto-perfil avatar-inicial" id="avatar-perfil-letra"></div>
+            <section class="nombre-perfil" id="nombre-perfil-valor"></section>
+            <section class="descripcion-perfil" id="mail-perfil-valor"></section>
+            
             <section class="tarjeta-datos-perfil">
                 <section class="campo-perfil">
-                    <label for="input-nombre-perfil">Nombre</label>
-                    <input class="dato-perfil" id="input-nombre-perfil" type="text">
+                    <label class="input" for="input-nombre-registro">Nombre</label>
+                    <input class="dato-perfil" id="input-nombre-registro" type="text">
                 </section>
                 <section class="campo-perfil">
-                    <label for="input-fecha-perfil">Fecha de nacimiento</label>
-                    <input class="dato-perfil" id="input-fecha-perfil" type="date">
+                    <label class="input" for="input-fecha-registro">Fecha de nacimiento</label>
+                    <input class="dato-perfil" id="input-fecha-registro" type="date">
                 </section>
                 <section class="campo-perfil">
-                    <label for="input-mail-perfil">Correo electrónico</label>
-                    <input class="dato-perfil" id="input-mail-perfil" type="email">
+                    <label class="input" for="input-mail-registro">Correo electrónico</label>
+                    <input class="dato-perfil" id="input-mail-registro" type="email">
                 </section>
             </section>
+            <button id="boton-guardar-perfil" class="btn-guardar" style="margin-top: 1rem; cursor: pointer;">Editar datos personales</button>
             <section class="barra-navegacion">
                 <a class="opcion-navegacion" href="5. inicio.html">
                     <p class="opcion-navegacion">Inicio</p>

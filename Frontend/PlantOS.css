@@ -967,11 +967,31 @@
     }
 
 .mi-perfil {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    min-height: 100vh;
+    margin: 0;
+    box-sizing: border-box;
     }
+.btn-guardar{
+    display: flex;
+    width: 34.375rem;
+    height: 3.125rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.9375rem;
+    border: 1px solid #000;
+    background: #FFF;
+    color: #000;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
 
 .foto-perfil {
         width: 7.186875rem;
@@ -993,35 +1013,37 @@
     }
 
  .nombre-perfil {
-        width: 6.375rem;
-        height: 1.4375rem;
-        color: #2D6A4F;
-        font-family: "Inter", sans-serif;
-        font-size: 1.25rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+    display: flex;
+    width: 20.6875rem;
+    height: 2.6875rem;
+    padding: 0.625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 6.25rem;
+    border: 1px solid #000;
+    color: #000;
+    font-family: "Inter", sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }
 
 .descripcion-perfil {
-        width: 9.9375rem;
-        height: 1rem;
-        color: #2D6A4F;
-        font-family: "Inter", sans-serif;
-        font-size: 1.25rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        white-space: nowrap;
-    }
+    width: 9rem;
+    height: 1.25rem;
+    color: #000;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.8125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
 .tarjeta-datos-perfil {
         width: 27.4375rem;
@@ -1038,9 +1060,18 @@
 .dato-perfil {
         width: 14.25rem;
         height: 2rem;
-        background: #656A67;
+        background: white;
+        border-radius: 6.25rem;
+        border: 1px solid #000;
     }
-
+.input{
+    color: #1D2A24;
+    font-family: "Inter", sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
 .tarjeta-extra-perfil {
         width: 27.400625rem;
         height: 4.469375rem;
@@ -1049,12 +1080,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-.contenido-extra-perfil {
-        width: 11rem;
-        height: 2rem;
-        background: #656A67;
     }
 
 .rectangulo {

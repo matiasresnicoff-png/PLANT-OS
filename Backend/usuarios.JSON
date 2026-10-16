@@ -75,5 +75,12 @@
     "fechaNacimiento": "2020-02-22",
     "mail": "1234@gmail.com",
     "contraseña": "$2b$10$sarAFXhVjU6C2ujIGjikBux8qmPM0Pxu.mF47qfCicaytfgln/iVO"
+  },
+  {
+    "idUsuario": "12",
+    "nombre": "Tomas",
+    "fechaNacimiento": "2010-03-20",
+    "mail": "tomi91972@gmail.com",
+    "contraseña": "$2b$10$NIKnwWm16H3uzM5GlvhK6uPHrXOhNuXrTAlssTYK5An7eiHpSnXba"
   }
 ]
