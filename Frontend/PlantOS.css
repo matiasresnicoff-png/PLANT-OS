@@ -1,5 +1,4 @@
-@media (min-width: 768px) {
-    html, body {
+html, body {
         margin: 0;
         padding: 0;
         height: 100%;
@@ -60,7 +59,7 @@
 
     .title {
         width: 100%;          
-        color: #184D36;
+        color: #2D6A4F;
         font-family: "Playfair Display";
         font-size: 2rem;
         font-style: normal;
@@ -205,6 +204,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        margin: 0;
+        gap: 0px;
     }
 
     .medida {
@@ -220,6 +221,8 @@
         font-style: normal;
         font-weight: 700;
         line-height: 1.2;
+        margin-top: 0.5rem;
+        gap: 0px;
     }
 
     .conclucion {
@@ -235,6 +238,8 @@
         font-style: normal;
         font-weight: 500;
         line-height: 1.2;
+        margin-top: 0.5rem;
+        gap: 0px;
     }
 
     .barra-navegacion {
@@ -733,7 +738,7 @@
         height: 7.5rem;
         border-radius: 1.5625rem;
         opacity: 0.8;
-        background: #D7D7D7;
+        background: white;
         box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
         display: flex;
         flex-direction: column;
@@ -816,12 +821,14 @@
         align-items: center;
         text-decoration: none; 
         cursor: pointer;
+        margin-top: 0.5rem;
+        gap: 0px;
     }
 
     .grafico-humedad {
         width: 24.5rem;
         height: 14.4375rem;
-        background: #D9D9D9;
+        background: white;
         box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
         border-radius: 1rem;
         display: flex;
@@ -860,7 +867,7 @@
         line-height: normal;
         text-align: center;
         border-radius: 0.9375rem;
-        background: #D7D7D7;
+        background: white;
     }
 
     .acerca-proyecto {
@@ -1035,14 +1042,15 @@
     height: 1.25rem;
     color: #000;
     font-family: 'Poppins', sans-serif;
-    font-size: 0.8125rem;
+    font-size: 0.875rem;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 700;
     line-height: normal;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
 }
 
 .tarjeta-datos-perfil {
@@ -1062,7 +1070,13 @@
         height: 2rem;
         background: white;
         border-radius: 6.25rem;
-        border: 1px solid #000;
+        border: 1px solid #2D6A4F;
+        color: black;
+        font-family:'Poppins', sans-serif;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
     }
 .input{
     color: #1D2A24;
@@ -1180,5 +1194,4 @@
     margin: 0;
     padding: 0;
     line-height: 1;
-}
 }
