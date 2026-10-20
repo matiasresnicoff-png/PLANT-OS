@@ -82,5 +82,19 @@
     "fechaNacimiento": "2010-03-20",
     "mail": "tomi91972@gmail.com",
     "contraseña": "$2b$10$NIKnwWm16H3uzM5GlvhK6uPHrXOhNuXrTAlssTYK5An7eiHpSnXba"
+  },
+  {
+    "idUsuario": "13",
+    "nombre": "LUKA",
+    "fechaNacimiento": "2000-04-11",
+    "mail": "LAJSAKLSAJ@GMAIL.COM",
+    "contraseña": "$2b$10$CTJaJ3mhVJaU6eGgwhmW4uhdPK3JH5DdxnhaZFJRRXVA0MzLuDP4y"
+  },
+  {
+    "idUsuario": "14",
+    "nombre": "luka",
+    "fechaNacimiento": "2000-04-11",
+    "mail": "holahola@gmail.com",
+    "contraseña": "$2b$10$VgWHF/.DYi7oeEb2vFM79.TChlGi8fQy3xJHRKNnCLYznO5E/mtFC"
   }
 ]
