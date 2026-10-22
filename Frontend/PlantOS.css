@@ -93,7 +93,7 @@ html, body {
         width: 14.3125rem;
         flex-direction: column;
         align-items: flex-start;
-        margin: 0;
+        margin-top: -1rem;
         line-height: 1.4;
     }
 
@@ -185,7 +185,8 @@ html, body {
     .conclucion {
         display: flex;
         justify-content: center;
-        align-items: center;    
+        align-items: center; 
+        flex-direction: column;   
         width: 100%;            
         height: auto;          
         margin: 0;              
@@ -615,23 +616,24 @@ html, body {
     }
 
      .subtitulo-ver{
+        display: flex;
+        width: 6.25rem;
+        height: 1.5625rem;
+        padding: 0.625rem;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 0.625rem;
+        border-radius: 1.9375rem;
+        background: #78C2FF;
         color: #000;
         font-family: "Inter", sans-serif;
         font-size: 0.9375rem;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
-        width: 5.1875rem;
-        height: 1.125rem;
-        border-radius: 0.625rem;
-        background:#78C2FF;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        text-decoration: none; 
-        cursor: pointer;
+        text-decoration: none;
         margin-top: 0.5rem;
-        gap: 0px;
     }
 
     .grafico-humedad {
@@ -940,7 +942,7 @@ html, body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.8rem;
+    gap: 1.5rem;
 }
 
 .estado {
@@ -952,13 +954,13 @@ html, body {
 
 .icono-estado {
     display: flex;
-    width: 2.0625rem;
-    height: 2.0625rem;
+    width: 2.6875rem;
+    height: 2.6875rem;
     padding: 0.625rem 0.5rem 0.5625rem 0.6875rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.625rem;
-    border-radius: 1.03125rem;
+    border-radius: 100%;
     background: rgba(86, 218, 159, 0.45);
 }
 
@@ -970,21 +972,19 @@ html, body {
 .titulo-estado {
     color: #2D6A4F;
     font-family: "Inter", sans-serif;
-    font-size: 0.625rem;
+    font-size: 1rem;
     font-style: normal;
     font-weight: 500;
+    line-height: normal;
     margin: 0;
-    padding: 0;
-    line-height: 1;
 }
 
 .subtitulo-estado {
     color: rgba(0, 0, 0, 0.75);
     font-family: "Inter", sans-serif;
-    font-size: 0.5625rem;
+    font-size: 0.6875rem;
     font-style: normal;
     font-weight: 400;
+    line-height: normal;
     margin: 0;
-    padding: 0;
-    line-height: 1;
 }
