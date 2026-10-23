@@ -572,17 +572,12 @@ html, body {
     }
 
     .dato-estado {
-        width: auto;
-        height: auto;
         color: #2D6A4F;
-        font-family: "Inter", sans-serif;
-        font-size: 0.875rem;
+        font-family:"Inter", sans-serif;
+        font-size: 1.125rem;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 400;
         line-height: normal;
-        display: flex;
-        justify-content: center;
-        align-items: center;
     }
 
     .valor-estado {
@@ -597,6 +592,7 @@ html, body {
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 0.625rem;
     }
 
     .subtitulo-humedad {
@@ -635,10 +631,17 @@ html, body {
         text-decoration: none;
         margin-top: 0.5rem;
     }
-
+.cajita-recomendacion {
+        color: #2D6A4F;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
     .grafico-humedad {
-        width: 24.5rem;
-        height: 14.4375rem;
+        width: 32.25rem;
+        height: 15.3125rem;
         background: white;
         box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
         border-radius: 1rem;
