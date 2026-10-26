@@ -13,6 +13,17 @@ function recomendacionHumedad(estado) {
   return 'La humedad del suelo está en un rango óptimo. No hace falta regar todavía.';
 }
 
+// Función auxiliar para extraer y formatear la hora real (HH:mm)
+function formatearHora(fechaString) {
+  if (!fechaString) return '--:--';
+  const fecha = new Date(fechaString);
+  if (isNaN(fecha.getTime())) return '--:--';
+  
+  const horas = fecha.getHours().toString().padStart(2, '0');
+  const minutos = fecha.getMinutes().toString().padStart(2, '0');
+  return `${horas}:${minutos}`;
+}
+
 async function cargarHumedad() {
   document.getElementById('valor-humedad').textContent = 'Cargando...';
   document.getElementById('recomendacion-humedad').innerHTML = '';
@@ -73,16 +84,19 @@ function dibujarGraficoHumedad(historial) {
   contenedor.style.justifyContent = 'space-between';
   contenedor.style.width = '100%';
   contenedor.style.height = '175px';
-  contenedor.style.padding = '12px 20px 24px 45px'; 
+  contenedor.style.padding = '12px 20px 28px 45px'; 
   contenedor.style.boxSizing = 'border-box';
   contenedor.style.fontFamily = 'Arial, sans-serif';
 
+  const ALTURA_UTIL = 135; 
   [0, 25, 50, 75, 100].forEach((porcentaje) => {
+    const bottomPx = 28 + (porcentaje / 100) * ALTURA_UTIL;
+
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '45px';
     linea.style.right = '20px';
-    linea.style.bottom = `calc(${porcentaje}% + 24px)`;
+    linea.style.bottom = `${bottomPx}px`;
     linea.style.borderTop = porcentaje === 0 ? '1px solid rgba(0,0,0,0.3)' : '1px dashed rgba(0, 0, 0, 0.15)';
     linea.style.zIndex = '1';
     contenedor.appendChild(linea);
@@ -91,7 +105,7 @@ function dibujarGraficoHumedad(historial) {
     etiquetaEje.textContent = porcentaje + '%';
     etiquetaEje.style.position = 'absolute';
     etiquetaEje.style.left = '6px';
-    etiquetaEje.style.bottom = `calc(${porcentaje}% + 17px)`;
+    etiquetaEje.style.bottom = `${bottomPx - 6}px`;
     etiquetaEje.style.fontSize = '9px';
     etiquetaEje.style.color = '#555';
     etiquetaEje.style.fontWeight = '600';
@@ -100,7 +114,6 @@ function dibujarGraficoHumedad(historial) {
   });
 
   const ultimos = historial.slice(-9);
-  const horariosFijos = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', 'AHORA'];
 
   ultimos.forEach((medicion, index) => {
     const valor = medicion.humedadSuelo;
@@ -117,11 +130,16 @@ function dibujarGraficoHumedad(historial) {
     columna.style.position = 'relative';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 8);
-    barra.title = `${valor}% — ${estadoBarra}`;
-    barra.style.height = alturaPorcentaje + '%';
+    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 5);
+    
+    // Obtiene la hora real de la medición (ajustá la propiedad si en tu base de datos se llama distinto)
+    const fechaOrigen = medicion.fecha || medicion.created_at || medicion.timestamp || medicion.createdAt;
+    const horaTexto = formatearHora(fechaOrigen);
+
+    barra.title = `Hora: ${horaTexto} | Humedad: ${valor}% — ${estadoBarra}`;
+    barra.style.height = `calc(${alturaPorcentaje}% - 28px)`;
     barra.style.width = '70%';
-    barra.style.minHeight = '8px';
+    barra.style.minHeight = '6px';
     barra.style.borderRadius = '6px 6px 0 0';
     barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
     barra.style.transition = 'transform 0.15s ease';
@@ -134,14 +152,15 @@ function dibujarGraficoHumedad(historial) {
     barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
 
     const etiquetaHora = document.createElement('div');
+    
     if (index === ultimos.length - 1) {
       etiquetaHora.textContent = 'AHORA';
-    } else if (index < horariosFijos.length) {
-      etiquetaHora.textContent = horariosFijos[index];
+    } else {
+      etiquetaHora.textContent = horaTexto;
     }
 
     etiquetaHora.style.position = 'absolute';
-    etiquetaHora.style.bottom = '-18px';
+    etiquetaHora.style.bottom = '-20px';
     etiquetaHora.style.fontSize = '9px';
     etiquetaHora.style.color = '#555';
     etiquetaHora.style.fontWeight = '700';

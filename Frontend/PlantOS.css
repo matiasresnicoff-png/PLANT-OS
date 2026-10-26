@@ -1,7 +1,8 @@
 html, body {
-        margin: 0;
-        padding: 0;
+        overflow: hidden;
         height: 100%;
+        margin: 0;
+        font-size: 90%;
     }
 
     .wireframe {
@@ -554,9 +555,9 @@ html, body {
         margin: 0;
         box-sizing: border-box;
     }
+.dato-estado2{
 
-    
-
+}
     .tarjeta-estado {
         width: 37.5rem;
         height: 7.5rem;
@@ -578,6 +579,7 @@ html, body {
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        margin-top: -0.3rem;
     }
 
     .valor-estado {
@@ -593,6 +595,7 @@ html, body {
         justify-content: center;
         align-items: center;
         gap: 0.625rem;
+        margin-top: -1rem;
     }
 
     .subtitulo-humedad {
