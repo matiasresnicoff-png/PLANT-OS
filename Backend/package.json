@@ -6,6 +6,7 @@
     "simulador": "node --experimental-strip-types src/pruebas/simuladorArduino.ts",
     "simulador-sensores": "node --experimental-strip-types src/pruebas/simuladorSensores.ts",
     "principal": "node --experimental-strip-types --env-file=.env src/pruebas/end1.ts",
+    "probar-serial": "node --experimental-strip-types src/pruebas/probarSerial.ts",
     "lint": "tsc --noEmit"
   },
   "dependencies": {

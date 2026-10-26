@@ -210,12 +210,14 @@ function procesarBloqueLimpio(lineas: string[]): void {
   if (llegoAlgunDato === true) {
     let fechaActual: string = new Date().toISOString();
 
-    // Por ahora "humedad del suelo" y "conductividad" van unificadas: las
-    // dos muestran el mismo valor del sensor de humedad de 2 patitas,
-    // hasta que llegue el sensor de conductividad real y las separemos.
+    // Por ahora el único sensor analógico que tenemos conectado es el de
+    // humedad de 2 patitas (todavía no llegó el sensor de conductividad de
+    // verdad). "humedadSuelo" usa ese valor ya convertido a porcentaje;
+    // "conductividad" por ahora queda con el mismo valor crudo, como relleno
+    // temporal, hasta que llegue el sensor real y lo reemplacemos.
     let registro: RegistroLectura = {
       timestamp: fechaActual,
-      humedadSuelo: conductividad,
+      humedadSuelo: conductividad !== null ? convertirHumedadAPorcentaje(conductividad) : null,
       conductividad: conductividad,
       temperaturaBME280: temperatura,
     };
