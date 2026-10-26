@@ -1,6 +1,28 @@
 const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const ESCALA_CONDUCTIVIDAD = 3000; // techo del eje, en µS/cm, solo para escalar el gráfico
 
+// El backend guarda el timestamp en UTC (hora universal). Esta función lo
+// convierte a hora de Argentina (UTC-3) para mostrarlo en pantalla.
+function formatearHoraArgentina(timestampUTC) {
+  return new Date(timestampUTC).toLocaleString('es-AR', {
+    timeZone: 'America/Argentina/Buenos_Aires',
+    day: '2-digit',
+    month: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+// Versión corta, solo "HH:MM", para las etiquetas debajo de cada barra del gráfico.
+function formatearHoraCorta(timestampUTC) {
+  return new Date(timestampUTC).toLocaleString('es-AR', {
+    timeZone: 'America/Argentina/Buenos_Aires',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+}
+
 function calcularEstadoConductividad(valor) {
   if (valor < UMBRAL_CONDUCTIVIDAD.bajo) return 'Bajo';
   if (valor > UMBRAL_CONDUCTIVIDAD.alto) return 'Alto';
@@ -49,7 +71,8 @@ async function cargarConductividad() {
 
     const estado = calcularEstadoConductividad(valor);
     document.getElementById('estado-conductividad').textContent = estado;
-    document.getElementById('recomendacion-conductividad').textContent = recomendacionConductividad(estado);
+    document.getElementById('recomendacion-conductividad').textContent =
+      recomendacionConductividad(estado) + ' (Última lectura: ' + formatearHoraArgentina(ultimo.timestamp) + ' hs. Arg.)';
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
     if (!resHistorial) return;
@@ -66,47 +89,58 @@ async function cargarConductividad() {
 function dibujarGrafico(historial) {
   const contenedor = document.getElementById('grafico-conductividad');
   contenedor.innerHTML = '';
-  contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
-  contenedor.style.alignItems = 'flex-end';
-  contenedor.style.gap = '4%';
-  contenedor.style.borderBottom = '2px solid rgba(255,255,255,0.6)';
-  contenedor.style.padding = '28px 6px 0';
+  contenedor.style.flexDirection = 'column';
   contenedor.style.boxSizing = 'border-box';
+  contenedor.style.padding = '10px 10px 6px';
   contenedor.style.fontFamily = 'Arial, sans-serif';
 
-  [
-    { valor: UMBRAL_CONDUCTIVIDAD.bajo, texto: `Bajo ${UMBRAL_CONDUCTIVIDAD.bajo}` },
-    { valor: UMBRAL_CONDUCTIVIDAD.alto, texto: `Alto ${UMBRAL_CONDUCTIVIDAD.alto}` },
-  ].forEach(({ valor, texto }) => {
-    const posicion = (valor / ESCALA_CONDUCTIVIDAD) * 100;
+  // Área de las barras + líneas de referencia del eje Y (como en el Figma).
+  const areaGrafico = document.createElement('div');
+  areaGrafico.style.position = 'relative';
+  areaGrafico.style.flex = '1';
+  areaGrafico.style.display = 'flex';
+  areaGrafico.style.alignItems = 'flex-end';
+  areaGrafico.style.gap = '4%';
+  areaGrafico.style.marginLeft = '28px';
+  areaGrafico.style.borderBottom = '1px solid #e2e2e2';
+  contenedor.appendChild(areaGrafico);
+
+  // Eje Y: 5 líneas horizontales parejas, con su valor a la izquierda.
+  const pasoEjeY = ESCALA_CONDUCTIVIDAD / 5;
+  for (let i = 1; i <= 5; i = i + 1) {
+    const valorLinea = pasoEjeY * i;
+    const posicion = (valorLinea / ESCALA_CONDUCTIVIDAD) * 100;
 
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
     linea.style.bottom = posicion + '%';
-    linea.style.borderTop = '1px dashed rgba(255,255,255,0.7)';
-    contenedor.appendChild(linea);
+    linea.style.borderTop = '1px dashed #e2e2e2';
+    areaGrafico.appendChild(linea);
 
-    const etiquetaLinea = document.createElement('div');
-    etiquetaLinea.textContent = texto;
-    etiquetaLinea.style.position = 'absolute';
-    etiquetaLinea.style.left = '4px';
-    etiquetaLinea.style.bottom = `calc(${posicion}% + 3px)`;
-    etiquetaLinea.style.fontSize = '9px';
-    etiquetaLinea.style.fontWeight = '600';
-    etiquetaLinea.style.color = '#fff';
-    etiquetaLinea.style.background = 'rgba(0,0,0,0.45)';
-    etiquetaLinea.style.padding = '1px 5px';
-    etiquetaLinea.style.borderRadius = '8px';
-    etiquetaLinea.style.zIndex = '5';
-    contenedor.appendChild(etiquetaLinea);
-  });
+    const etiquetaEje = document.createElement('div');
+    etiquetaEje.textContent = Math.round(valorLinea);
+    etiquetaEje.style.position = 'absolute';
+    etiquetaEje.style.left = '-28px';
+    etiquetaEje.style.bottom = `calc(${posicion}% - 5px)`;
+    etiquetaEje.style.fontSize = '8px';
+    etiquetaEje.style.color = '#8a8a8a';
+    areaGrafico.appendChild(etiquetaEje);
+  }
 
-  const ultimos = historial.slice(-8);
+  const ultimos = historial.slice(-7);
 
-  ultimos.forEach((medicion) => {
+  // Fila de horarios debajo de cada barra (la última dice "AHORA").
+  const filaHoras = document.createElement('div');
+  filaHoras.style.display = 'flex';
+  filaHoras.style.gap = '4%';
+  filaHoras.style.marginLeft = '28px';
+  filaHoras.style.marginTop = '4px';
+  contenedor.appendChild(filaHoras);
+
+  ultimos.forEach((medicion, indice) => {
     const valor = medicion.conductividad;
     const estadoBarra = calcularEstadoConductividad(valor);
 
@@ -121,23 +155,21 @@ function dibujarGrafico(historial) {
 
     const etiqueta = document.createElement('div');
     etiqueta.textContent = valor;
-    etiqueta.style.fontSize = '11px';
+    etiqueta.style.fontSize = '10px';
     etiqueta.style.fontWeight = 'bold';
-    etiqueta.style.marginBottom = '4px';
-    etiqueta.style.color = '#fff';
-    etiqueta.style.textShadow = '0 1px 2px rgba(0,0,0,0.5)';
+    etiqueta.style.marginBottom = '3px';
+    etiqueta.style.color = '#2D6A4F';
 
     const barra = document.createElement('div');
     const alturaPorcentaje = (valor / ESCALA_CONDUCTIVIDAD) * 100;
-    barra.title = `${valor} µS/cm — ${estadoBarra}`;
+    barra.title = `${valor} µS/cm — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
     barra.style.height = alturaPorcentaje + '%';
-    barra.style.width = '70%';
-    barra.style.minHeight = '6px';
+    barra.style.width = '65%';
+    barra.style.minHeight = '5px';
     barra.style.borderRadius = '6px 6px 2px 2px';
-    barra.style.boxShadow = '0 2px 4px rgba(0,0,0,0.25)';
     barra.style.transition = 'transform 0.15s ease';
     barra.style.background = estadoBarra === 'Óptimo'
-      ? 'linear-gradient(180deg, #6fd07f, #2f8f45)'
+      ? 'linear-gradient(180deg, #6fd07f, #2D6A4F)'
       : 'linear-gradient(180deg, #ffb15c, #e07a1f)';
 
     barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
@@ -145,7 +177,17 @@ function dibujarGrafico(historial) {
 
     columna.appendChild(etiqueta);
     columna.appendChild(barra);
-    contenedor.appendChild(columna);
+    areaGrafico.appendChild(columna);
+
+    const esUltima = indice === ultimos.length - 1;
+    const etiquetaHora = document.createElement('div');
+    etiquetaHora.textContent = esUltima ? 'AHORA' : formatearHoraCorta(medicion.timestamp);
+    etiquetaHora.style.flex = '1';
+    etiquetaHora.style.textAlign = 'center';
+    etiquetaHora.style.fontSize = '8px';
+    etiquetaHora.style.fontWeight = esUltima ? 'bold' : 'normal';
+    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#8a8a8a';
+    filaHoras.appendChild(etiquetaHora);
   });
 }
 
