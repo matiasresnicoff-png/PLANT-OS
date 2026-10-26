@@ -13,10 +13,17 @@ function recomendacionConductividad(estado) {
   return 'El nivel de nutrientes en la tierra está en un rango óptimo.';
 }
 
-async function cargarConductividad() {
-  document.getElementById('valor-conductividad').textContent = 'Cargando...';
-  document.getElementById('recomendacion-conductividad').innerHTML = '';
+function formatearHora(fechaString) {
+  if (!fechaString) return '--:--';
+  const fecha = new Date(fechaString);
+  if (isNaN(fecha.getTime())) return '--:--';
+  
+  const horas = fecha.getHours().toString().padStart(2, '0');
+  const minutos = fecha.getMinutes().toString().padStart(2, '0');
+  return `${horas}:${minutos}`;
+}
 
+async function cargarConductividad() {
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
     if (!resUltimo) return;
@@ -65,6 +72,8 @@ async function cargarConductividad() {
 
 function dibujarGraficoConductividad(historial) {
   const contenedor = document.getElementById('grafico-conductividad');
+  if (!contenedor) return;
+  
   contenedor.innerHTML = '';
   
   contenedor.style.position = 'relative';
@@ -73,16 +82,20 @@ function dibujarGraficoConductividad(historial) {
   contenedor.style.justifyContent = 'space-between';
   contenedor.style.width = '100%';
   contenedor.style.height = '175px';
-  contenedor.style.padding = '12px 20px 24px 50px'; 
+  contenedor.style.padding = '22px 20px 24px 50px'; 
   contenedor.style.boxSizing = 'border-box';
   contenedor.style.fontFamily = 'Arial, sans-serif';
 
+  const ALTURA_UTIL = 120;
+
   [0, 25, 50, 75, 100].forEach((porcentaje) => {
+    const bottomPx = 24 + (porcentaje / 100) * ALTURA_UTIL;
+
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '50px';
     linea.style.right = '20px';
-    linea.style.bottom = `calc(${porcentaje}% + 24px)`;
+    linea.style.bottom = `${bottomPx}px`;
     linea.style.borderTop = porcentaje === 0 ? '1px solid rgba(0,0,0,0.3)' : '1px dashed rgba(0, 0, 0, 0.15)';
     linea.style.zIndex = '1';
     contenedor.appendChild(linea);
@@ -92,7 +105,7 @@ function dibujarGraficoConductividad(historial) {
     etiquetaEje.textContent = valorEje;
     etiquetaEje.style.position = 'absolute';
     etiquetaEje.style.left = '8px';
-    etiquetaEje.style.bottom = `calc(${porcentaje}% + 17px)`;
+    etiquetaEje.style.bottom = `${bottomPx - 6}px`;
     etiquetaEje.style.fontSize = '9px';
     etiquetaEje.style.color = '#555';
     etiquetaEje.style.fontWeight = '600';
@@ -101,7 +114,6 @@ function dibujarGraficoConductividad(historial) {
   });
 
   const ultimos = historial.slice(-9);
-  const horariosFijos = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', 'AHORA'];
 
   ultimos.forEach((medicion, index) => {
     const valor = medicion.conductividad;
@@ -119,8 +131,12 @@ function dibujarGraficoConductividad(historial) {
 
     const barra = document.createElement('div');
     const alturaPorcentaje = Math.max((valor / ESCALA_CONDUCTIVIDAD) * 100, 8);
-    barra.title = `${valor} µS/cm — ${estadoBarra}`;
-    barra.style.height = alturaPorcentaje + '%';
+    
+    const fechaOrigen = medicion.fecha || medicion.created_at || medicion.timestamp || medicion.createdAt;
+    const horaTexto = formatearHora(fechaOrigen);
+
+    barra.title = `Hora: ${horaTexto} | Conductividad: ${valor} µS/cm — ${estadoBarra}`;
+    barra.style.height = `calc(${alturaPorcentaje}% - 24px)`;
     barra.style.width = '70%';
     barra.style.minHeight = '8px';
     barra.style.borderRadius = '6px 6px 0 0';
@@ -137,8 +153,8 @@ function dibujarGraficoConductividad(historial) {
     const etiquetaHora = document.createElement('div');
     if (index === ultimos.length - 1) {
       etiquetaHora.textContent = 'AHORA';
-    } else if (index < horariosFijos.length) {
-      etiquetaHora.textContent = horariosFijos[index];
+    } else {
+      etiquetaHora.textContent = horaTexto;
     }
 
     etiquetaHora.style.position = 'absolute';
@@ -155,4 +171,9 @@ function dibujarGraficoConductividad(historial) {
 }
 
 cargarConductividad();
-setInterval(cargarConductividad, 15 * 60 * 1000);
+setInterval(cargarConductividad, 30 * 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    cargarConductividad();
+  }
+});

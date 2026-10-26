@@ -13,7 +13,6 @@ function recomendacionHumedad(estado) {
   return 'La humedad del suelo está en un rango óptimo. No hace falta regar todavía.';
 }
 
-// Función auxiliar para extraer y formatear la hora real (HH:mm)
 function formatearHora(fechaString) {
   if (!fechaString) return '--:--';
   const fecha = new Date(fechaString);
@@ -25,9 +24,6 @@ function formatearHora(fechaString) {
 }
 
 async function cargarHumedad() {
-  document.getElementById('valor-humedad').textContent = 'Cargando...';
-  document.getElementById('recomendacion-humedad').innerHTML = '';
-
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
     if (!resUltimo) return;
@@ -76,6 +72,8 @@ async function cargarHumedad() {
 
 function dibujarGraficoHumedad(historial) {
   const contenedor = document.getElementById('grafico-humedad');
+  if (!contenedor) return;
+  
   contenedor.innerHTML = '';
   
   contenedor.style.position = 'relative';
@@ -132,7 +130,6 @@ function dibujarGraficoHumedad(historial) {
     const barra = document.createElement('div');
     const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 5);
     
-    // Obtiene la hora real de la medición (ajustá la propiedad si en tu base de datos se llama distinto)
     const fechaOrigen = medicion.fecha || medicion.created_at || medicion.timestamp || medicion.createdAt;
     const horaTexto = formatearHora(fechaOrigen);
 
@@ -173,4 +170,10 @@ function dibujarGraficoHumedad(historial) {
 }
 
 cargarHumedad();
-setInterval(cargarHumedad, 15 * 60 * 1000);
+setInterval(cargarHumedad, 30 * 1000);
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    cargarHumedad();
+  }
+});

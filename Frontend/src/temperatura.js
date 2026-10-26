@@ -13,10 +13,17 @@ function recomendacionTemperatura(estado) {
   return 'La temperatura está en un rango óptimo para la planta.';
 }
 
-async function cargarTemperatura() {
-  document.getElementById('valor-temperatura').textContent = 'Cargando...';
-  document.getElementById('recomendacion-temperatura').innerHTML = '';
+function formatearHora(fechaString) {
+  if (!fechaString) return '--:--';
+  const fecha = new Date(fechaString);
+  if (isNaN(fecha.getTime())) return '--:--';
+  
+  const horas = fecha.getHours().toString().padStart(2, '0');
+  const minutos = fecha.getMinutes().toString().padStart(2, '0');
+  return `${horas}:${minutos}`;
+}
 
+async function cargarTemperatura() {
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
     if (!resUltimo) return;
@@ -65,6 +72,8 @@ async function cargarTemperatura() {
 
 function dibujarGraficoTemperatura(historial) {
   const contenedor = document.getElementById('grafico-temperatura');
+  if (!contenedor) return;
+  
   contenedor.innerHTML = '';
   
   contenedor.style.position = 'relative';
@@ -73,16 +82,20 @@ function dibujarGraficoTemperatura(historial) {
   contenedor.style.justifyContent = 'space-between';
   contenedor.style.width = '100%';
   contenedor.style.height = '175px';
-  contenedor.style.padding = '12px 20px 24px 45px'; 
+  contenedor.style.padding = '22px 20px 24px 45px'; 
   contenedor.style.boxSizing = 'border-box';
   contenedor.style.fontFamily = 'Arial, sans-serif';
 
+  const ALTURA_UTIL = 120; 
+
   [0, 25, 50, 75, 100].forEach((porcentaje) => {
+    const bottomPx = 24 + (porcentaje / 100) * ALTURA_UTIL;
+
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '45px';
     linea.style.right = '20px';
-    linea.style.bottom = `calc(${porcentaje}% + 24px)`;
+    linea.style.bottom = `${bottomPx}px`;
     linea.style.borderTop = porcentaje === 0 ? '1px solid rgba(0,0,0,0.3)' : '1px dashed rgba(0, 0, 0, 0.15)';
     linea.style.zIndex = '1';
     contenedor.appendChild(linea);
@@ -92,7 +105,7 @@ function dibujarGraficoTemperatura(historial) {
     etiquetaEje.textContent = valorEje + '°';
     etiquetaEje.style.position = 'absolute';
     etiquetaEje.style.left = '6px';
-    etiquetaEje.style.bottom = `calc(${porcentaje}% + 17px)`;
+    etiquetaEje.style.bottom = `${bottomPx - 6}px`;
     etiquetaEje.style.fontSize = '9px';
     etiquetaEje.style.color = '#555';
     etiquetaEje.style.fontWeight = '600';
@@ -101,7 +114,6 @@ function dibujarGraficoTemperatura(historial) {
   });
 
   const ultimos = historial.slice(-9);
-  const horariosFijos = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', 'AHORA'];
 
   ultimos.forEach((medicion, index) => {
     const valor = medicion.temperaturaBME280;
@@ -119,8 +131,12 @@ function dibujarGraficoTemperatura(historial) {
 
     const barra = document.createElement('div');
     const alturaPorcentaje = Math.max((valor / ESCALA_TEMPERATURA) * 100, 8);
-    barra.title = `${valor}°C — ${estadoBarra}`;
-    barra.style.height = alturaPorcentaje + '%';
+    
+    const fechaOrigen = medicion.fecha || medicion.created_at || medicion.timestamp || medicion.createdAt;
+    const horaTexto = formatearHora(fechaOrigen);
+
+    barra.title = `Hora: ${horaTexto} | Temperatura: ${valor}°C — ${estadoBarra}`;
+    barra.style.height = `calc(${alturaPorcentaje}% - 24px)`;
     barra.style.width = '70%';
     barra.style.minHeight = '8px';
     barra.style.borderRadius = '6px 6px 0 0';
@@ -137,8 +153,8 @@ function dibujarGraficoTemperatura(historial) {
     const etiquetaHora = document.createElement('div');
     if (index === ultimos.length - 1) {
       etiquetaHora.textContent = 'AHORA';
-    } else if (index < horariosFijos.length) {
-      etiquetaHora.textContent = horariosFijos[index];
+    } else {
+      etiquetaHora.textContent = horaTexto;
     }
 
     etiquetaHora.style.position = 'absolute';
@@ -155,4 +171,11 @@ function dibujarGraficoTemperatura(historial) {
 }
 
 cargarTemperatura();
-setInterval(cargarTemperatura, 15 * 60 * 1000);
+
+setInterval(cargarTemperatura, 30 * 1000);
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    cargarTemperatura();
+  }
+});
