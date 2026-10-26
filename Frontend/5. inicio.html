@@ -18,45 +18,85 @@
         <section class="inicio">
             <header class="header-arriba">
                 <section class="icono-registro">
-                    <button id="flecha" onclick="history.back()" style="background: none; border: none; padding: 0; cursor: pointer;">
-                        <img style="width: 1.875rem; height: 1.875rem;" src="./src/img/flecha.png" alt="Flecha"/>
-                    </button>
+                <button id="flecha" onclick="history.back()" style="background: none; border: none; padding: 0; cursor: pointer;">
+                    <img style="width: 1.875rem; height: 1.875rem;" src="./src/img/flecha.png" alt="Flecha"/>
+                </button>
                 </section>
             </header>
 
-                <section class="centro-titulos">
-                    <h1 class="title">Inicio</h1>
-                    <h2 class="title2">¡Bienvenido, <span id="nombre-usuario-inicio">Usuario</span>!</h2>
+            <section class="centro-titulos">
+                <h1 class="title">Inicio</h1>
+                <h2 class="title2">¡Bienvenido, <span id="nombre-usuario-inicio">Usuario</span>!</h2>
                 </section>
+               <section class="rectangulo">
+                
+            <div class="contenido-izquierdo">
+            <p class="title3">Salud general</p>
+            <p class="info">
+            Tu planta se encuentra en un rango saludable.
+            Todos los parámetros están estables.
+        </p>
+    </div>
 
-            <section class="circulo-inicio">
-                <img src="./src/img/planta5.png" alt="Mi perfil" />
-                <p class="title3">Salud general</p>
-                <p class="title4">Estado óptimo</p>
+    <div class="contenido-centro">
+        <img src="./src/img/planta5.png" alt="Estado de la planta">
+    </div>
+
+    <div class="contenido-derecho">
+        <div class="estado">
+            <div class="icono-estado">
+                <img src="./src/img/vector.png" alt="Estado de la planta">
+            </div>
+
+            <div class="texto-estado">
+                <p class="titulo-estado">Crecimiento</p>
+                <p class="subtitulo-estado">Estable</p>
+            </div>
+        </div>
+
+        <div class="estado">
+            <div class="icono-estado">
+                <img src="./src/img/vector2.png" alt="Estado de la planta">
+            </div>
+
+            <div class="texto-estado">
+                <p class="titulo-estado">Condiciones</p>
+                <p class="subtitulo-estado">Ideales</p>
+            </div>
+        </div>
+
+        <div class="estado">
+            <div class="icono-estado">
+                <img src="./src/img/vector3.png" alt="Estado de la planta">
+            </div>
+
+            <div class="texto-estado">
+                <p class="titulo-estado">Última medición</p>
+                <p class="subtitulo-estado">Hoy, 14:32</p>
+            </div>
+        </div>
+    </div>
             </section>
-
             <section class="tarjetas-inicio">
-                <a class="tarjeta-inicio" href="8. conductividad.html">
-                    <img class="simbolo" src="./src/img/conductividad.png" />
+                <section class="tarjeta-inicio">
                     <p class="titulo">Conductividad del suelo</p>
-                    <p class="medida">1.4 dS/m</p>
+                    <p class="medida" id="valor-conductividad">1.4 dS/m</p>
                     <p class="conclucion">¡Rango Saludable!</p>
-                </a>
-                <a class="tarjeta-inicio" href="7. temperatura.html">
-                    <img class="simbolo" src="./src/img/temperatura.png" />
+                    <a class="subtitulo-ver" href="8. conductividad.html">Ver más</a>
+                </section>
+                <section class="tarjeta-inicio">
                     <p class="titulo">Temperatura</p>
-                    <p class="medida">21.5 °C</p>
+                    <p class="medida"id="valor-temperatura">21.5 °C</p>
                     <p class="conclucion">¡Perfecto!</p>
-                </a>
-                <a class="tarjeta-inicio" href="6. humedad.html">
-                    <img class="simbolo" src="./src/img/humedad.png" />
+                    <a class="subtitulo-ver" href="7. temperatura.html">Ver más</a>
+                </section>
+                <section class="tarjeta-inicio">
                     <p class="titulo">Humedad del suelo</p>
-                    <p class="medida">72%</p>
+                    <p class="medida" id="valor-humedad">72%</p>
                     <p class="conclucion">¡Ideal!</p>
-                </a>
+                    <a class="subtitulo-ver" href="6. humedad.html">Ver más</a>
+                </section>
             </section>
-
-            <button class="cerrar-sesion" onclick="cerrarSesion()">Cerrar sesión</button>
 
             <section class="barra-navegacion">
                 <a class="opcion-navegacion" href="5. inicio.html">

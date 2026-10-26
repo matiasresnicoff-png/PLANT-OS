@@ -37,7 +37,7 @@ function recomendacionConductividad(estado) {
 
 async function cargarConductividad() {
   document.getElementById('valor-conductividad').textContent = 'Cargando...';
-  document.getElementById('recomendacion-conductividad').textContent = '';
+  document.getElementById('recomendacion-conductividad').innerHTML = '';
 
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
@@ -88,6 +88,8 @@ async function cargarConductividad() {
 
 function dibujarGrafico(historial) {
   const contenedor = document.getElementById('grafico-conductividad');
+  if (!contenedor) return;
+
   contenedor.innerHTML = '';
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
@@ -161,7 +163,7 @@ function dibujarGrafico(historial) {
     etiqueta.style.color = '#2D6A4F';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = (valor / ESCALA_CONDUCTIVIDAD) * 100;
+    const alturaPorcentaje = Math.max((valor / ESCALA_CONDUCTIVIDAD) * 100, 8);
     barra.title = `${valor} µS/cm — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
     barra.style.height = alturaPorcentaje + '%';
     barra.style.width = '65%';
@@ -192,4 +194,9 @@ function dibujarGrafico(historial) {
 }
 
 cargarConductividad();
-setInterval(cargarConductividad, 15 * 60 * 1000);
+setInterval(cargarConductividad, 30 * 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    cargarConductividad();
+  }
+});

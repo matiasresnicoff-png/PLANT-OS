@@ -88,6 +88,8 @@ async function cargarTemperatura() {
 
 function dibujarGrafico(historial) {
   const contenedor = document.getElementById('grafico-temperatura');
+  if (!contenedor) return;
+
   contenedor.innerHTML = '';
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
@@ -161,7 +163,7 @@ function dibujarGrafico(historial) {
     etiqueta.style.color = '#2D6A4F';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = (valor / ESCALA_TEMPERATURA) * 100;
+    const alturaPorcentaje = Math.max((valor / ESCALA_TEMPERATURA) * 100, 8);
     barra.title = `${valor}°C — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
     barra.style.height = alturaPorcentaje + '%';
     barra.style.width = '65%';
@@ -192,4 +194,9 @@ function dibujarGrafico(historial) {
 }
 
 cargarTemperatura();
-setInterval(cargarTemperatura, 15 * 60 * 1000);
+setInterval(cargarTemperatura, 30 * 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    cargarTemperatura();
+  }
+});

@@ -33,12 +33,5 @@
     "fechaNacimiento": "2011-01-24",
     "mail": "matias.resnicoff@gmail.com",
     "contraseña": "$2b$10$j4HG5k1xa/N8eOLBiHrxsuWohRgHvOFMejomLNF/VJ.FEwvf.Uilu"
-  },
-  {
-    "idUsuario": "6",
-    "nombre": "beto",
-    "fechaNacimiento": "0034-11-23",
-    "mail": "a@b.com",
-    "contraseña": "$2b$10$vHTo70i4Rxl0DVMZXXMS5eWraHhNxp9AmaZwM0nzEUYC4JIBWzk3."
   }
 ]

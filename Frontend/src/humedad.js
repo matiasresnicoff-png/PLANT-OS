@@ -37,7 +37,7 @@ function recomendacionHumedad(estado) {
 
 async function cargarHumedad() {
   document.getElementById('valor-humedad').textContent = 'Cargando...';
-  document.getElementById('recomendacion-humedad').textContent = '';
+  document.getElementById('recomendacion-humedad').innerHTML = '';
 
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
@@ -80,6 +80,8 @@ async function cargarHumedad() {
 
 function dibujarGrafico(historial) {
   const contenedor = document.getElementById('grafico-humedad');
+  if (!contenedor) return;
+
   contenedor.innerHTML = '';
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
@@ -153,7 +155,7 @@ function dibujarGrafico(historial) {
     etiqueta.style.color = '#2D6A4F';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = (valor / ESCALA_HUMEDAD) * 100;
+    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 8);
     barra.title = `${valor}% — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
     barra.style.height = alturaPorcentaje + '%';
     barra.style.width = '65%';
@@ -184,4 +186,9 @@ function dibujarGrafico(historial) {
 }
 
 cargarHumedad();
-setInterval(cargarHumedad, 15 * 60 * 1000);
+setInterval(cargarHumedad, 30 * 1000);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') {
+    cargarHumedad();
+  }
+});
