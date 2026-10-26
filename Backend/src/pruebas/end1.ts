@@ -39,6 +39,28 @@ interface RegistroLectura {
   temperaturaBME280: number | null;
 }
 
+// El sensor de humedad manda un valor "crudo" (analogRead de Arduino, de 0 a
+// 1023), no un porcentaje. Estos dos números son de calibración: la mayoría
+// de estos sensores resistivos de 2 patitas dan un valor ALTO (cerca de
+// 1023) cuando están secos, y el valor BAJA a medida que se mojan. Son
+// valores típicos, no medidos con este sensor en particular — si en algún
+// momento lo calibran de verdad (ver el valor crudo bien seco y bien
+// mojado en el Monitor Serie), solo hay que cambiar estos dos números.
+const HUMEDAD_SECO: number = 1023;
+const HUMEDAD_MOJADO: number = 400;
+
+// Convierte el valor crudo del sensor de humedad a un porcentaje de 0% a 100%.
+function convertirHumedadAPorcentaje(valorCrudo: number): number {
+  let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;
+
+  // Si el valor crudo se escapa del rango esperado, lo recortamos entre
+  // 0% y 100% para que no se vean números raros (negativos o mayores a 100).
+  if (porcentaje < 0) porcentaje = 0;
+  if (porcentaje > 100) porcentaje = 100;
+
+  return Math.round(porcentaje);
+}
+
 // Guarda una lectura nueva en sensores.json: lee el historial que ya
 // había, le agrega la lectura nueva al final, y vuelve a guardar todo.
 function guardarEnJson(datosNuevos: RegistroLectura): void {
