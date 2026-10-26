@@ -1882,5 +1882,17 @@
     "humedadSuelo": 322,
     "conductividad": 322,
     "temperaturaBME280": 24.12
+  },
+  {
+    "timestamp": "2026-10-26T13:14:29.160Z",
+    "humedadSuelo": 323,
+    "conductividad": 323,
+    "temperaturaBME280": 24.12
+  },
+  {
+    "timestamp": "2026-10-26T13:14:34.665Z",
+    "humedadSuelo": 322,
+    "conductividad": 322,
+    "temperaturaBME280": 24.12
   }
 ]
