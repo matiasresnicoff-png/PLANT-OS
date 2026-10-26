@@ -25,17 +25,6 @@ function recomendacionHumedad(estado) {
   return 'La humedad del suelo está en un rango óptimo. No hace falta regar todavía.';
 }
 
-// Función auxiliar para extraer y formatear la hora real (HH:mm)
-function formatearHora(fechaString) {
-  if (!fechaString) return '--:--';
-  const fecha = new Date(fechaString);
-  if (isNaN(fecha.getTime())) return '--:--';
-  
-  const horas = fecha.getHours().toString().padStart(2, '0');
-  const minutos = fecha.getMinutes().toString().padStart(2, '0');
-  return `${horas}:${minutos}`;
-}
-
 async function cargarHumedad() {
   document.getElementById('valor-humedad').textContent = 'Cargando...';
   document.getElementById('recomendacion-humedad').textContent = '';
@@ -85,7 +74,6 @@ function dibujarGrafico(historial) {
   contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
   contenedor.style.alignItems = 'flex-end';
-<<<<<<< HEAD
   contenedor.style.gap = '4%';
   contenedor.style.borderBottom = '2px solid rgba(255,255,255,0.6)';
   contenedor.style.padding = '28px 6px 0';
@@ -122,41 +110,6 @@ function dibujarGrafico(historial) {
   });
 
   const ultimos = historial.slice(-8);
-=======
-  contenedor.style.justifyContent = 'space-between';
-  contenedor.style.width = '100%';
-  contenedor.style.height = '175px';
-  contenedor.style.padding = '12px 20px 28px 45px'; 
-  contenedor.style.boxSizing = 'border-box';
-  contenedor.style.fontFamily = 'Arial, sans-serif';
-
-  const ALTURA_UTIL = 135; 
-  [0, 25, 50, 75, 100].forEach((porcentaje) => {
-    const bottomPx = 28 + (porcentaje / 100) * ALTURA_UTIL;
-
-    const linea = document.createElement('div');
-    linea.style.position = 'absolute';
-    linea.style.left = '45px';
-    linea.style.right = '20px';
-    linea.style.bottom = `${bottomPx}px`;
-    linea.style.borderTop = porcentaje === 0 ? '1px solid rgba(0,0,0,0.3)' : '1px dashed rgba(0, 0, 0, 0.15)';
-    linea.style.zIndex = '1';
-    contenedor.appendChild(linea);
-
-    const etiquetaEje = document.createElement('div');
-    etiquetaEje.textContent = porcentaje + '%';
-    etiquetaEje.style.position = 'absolute';
-    etiquetaEje.style.left = '6px';
-    etiquetaEje.style.bottom = `${bottomPx - 6}px`;
-    etiquetaEje.style.fontSize = '9px';
-    etiquetaEje.style.color = '#555';
-    etiquetaEje.style.fontWeight = '600';
-    etiquetaEje.style.zIndex = '2';
-    contenedor.appendChild(etiquetaEje);
-  });
-
-  const ultimos = historial.slice(-9);
->>>>>>> 7aa25d27a223ea78e1084240c9d14907963cd529
 
   ultimos.forEach((medicion) => {
     const valor = medicion.humedadSuelo;
@@ -180,7 +133,6 @@ function dibujarGrafico(historial) {
     etiqueta.style.textShadow = '0 1px 2px rgba(0,0,0,0.5)';
 
     const barra = document.createElement('div');
-<<<<<<< HEAD
     const alturaPorcentaje = (valor / ESCALA_HUMEDAD) * 100;
     barra.title = `${valor}% — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
     barra.style.height = alturaPorcentaje + '%';
@@ -188,20 +140,6 @@ function dibujarGrafico(historial) {
     barra.style.minHeight = '6px';
     barra.style.borderRadius = '6px 6px 2px 2px';
     barra.style.boxShadow = '0 2px 4px rgba(0,0,0,0.25)';
-=======
-    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 5);
-    
-    // Obtiene la hora real de la medición (ajustá la propiedad si en tu base de datos se llama distinto)
-    const fechaOrigen = medicion.fecha || medicion.created_at || medicion.timestamp || medicion.createdAt;
-    const horaTexto = formatearHora(fechaOrigen);
-
-    barra.title = `Hora: ${horaTexto} | Humedad: ${valor}% — ${estadoBarra}`;
-    barra.style.height = `calc(${alturaPorcentaje}% - 28px)`;
-    barra.style.width = '70%';
-    barra.style.minHeight = '6px';
-    barra.style.borderRadius = '6px 6px 0 0';
-    barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
->>>>>>> 7aa25d27a223ea78e1084240c9d14907963cd529
     barra.style.transition = 'transform 0.15s ease';
     barra.style.background = estadoBarra === 'Óptimo'
       ? 'linear-gradient(180deg, #6fd07f, #2f8f45)'
@@ -210,25 +148,7 @@ function dibujarGrafico(historial) {
     barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
     barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
 
-<<<<<<< HEAD
     columna.appendChild(etiqueta);
-=======
-    const etiquetaHora = document.createElement('div');
-    
-    if (index === ultimos.length - 1) {
-      etiquetaHora.textContent = 'AHORA';
-    } else {
-      etiquetaHora.textContent = horaTexto;
-    }
-
-    etiquetaHora.style.position = 'absolute';
-    etiquetaHora.style.bottom = '-20px';
-    etiquetaHora.style.fontSize = '9px';
-    etiquetaHora.style.color = '#555';
-    etiquetaHora.style.fontWeight = '700';
-    etiquetaHora.style.whiteSpace = 'nowrap';
-
->>>>>>> 7aa25d27a223ea78e1084240c9d14907963cd529
     columna.appendChild(barra);
     contenedor.appendChild(columna);
   });
