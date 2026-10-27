@@ -1,25 +1,6 @@
 const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const ESCALA_CONDUCTIVIDAD = 3000;
 
-function formatearHoraArgentina(timestampUTC) {
-  return new Date(timestampUTC).toLocaleString('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    day: '2-digit',
-    month: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-function formatearHoraCorta(timestampUTC) {
-  return new Date(timestampUTC).toLocaleString('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-}
-
 function calcularEstadoConductividad(valor) {
   if (valor < UMBRAL_CONDUCTIVIDAD.bajo) return 'Bajo';
   if (valor > UMBRAL_CONDUCTIVIDAD.alto) return 'Alto';
@@ -33,14 +14,8 @@ function recomendacionConductividad(estado) {
 }
 
 async function cargarConductividad() {
-  const elValor = document.getElementById('valor-conductividad');
-  const elEstado = document.getElementById('estado-conductividad');
-  const elRecomendacion = document.getElementById('recomendacion-conductividad');
-  const elUltimaLectura = document.getElementById('ultima-lectura-conductividad');
-
-  if (elValor) elValor.textContent = 'Cargando...';
-  if (elRecomendacion) elRecomendacion.textContent = '';
-  if (elUltimaLectura) elUltimaLectura.textContent = '';
+  document.getElementById('valor-conductividad').textContent = 'Cargando...';
+  document.getElementById('recomendacion-conductividad').innerHTML = '';
 
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
@@ -48,116 +23,89 @@ async function cargarConductividad() {
     const ultimo = await resUltimo.json();
 
     if (!resUltimo.ok) {
-      if (elValor) elValor.textContent = '--';
-      if (elEstado) elEstado.textContent = 'Error';
-      if (elRecomendacion) elRecomendacion.textContent = ultimo.error || 'No se pudo obtener los datos.';
+      document.getElementById('valor-conductividad').textContent = '--';
+      document.getElementById('estado-conductividad').textContent = 'Error';
+      document.getElementById('recomendacion-conductividad').innerHTML = '<strong>Recomendación:</strong> ' + (ultimo.error || 'No se pudo obtener los datos.');
       return;
     }
 
     if (ultimo.mensaje) {
-      if (elValor) elValor.textContent = '--';
-      if (elEstado) elEstado.textContent = 'Sin datos';
-      if (elRecomendacion) elRecomendacion.textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+      document.getElementById('valor-conductividad').textContent = '--';
+      document.getElementById('estado-conductividad').textContent = 'Sin datos';
+      document.getElementById('recomendacion-conductividad').innerHTML = '<strong>Recomendación:</strong> Todavía no hay mediciones. Esperá a que el sensor mande datos.';
       return;
     }
 
     const valor = ultimo.conductividad;
 
     if (valor === null) {
-      if (elValor) elValor.textContent = 'Sin datos';
-      if (elEstado) elEstado.textContent = 'Sin datos';
-      if (elRecomendacion) elRecomendacion.textContent = 'El sensor de conductividad todavía no está conectado.';
+      document.getElementById('valor-conductividad').textContent = 'Sin datos';
+      document.getElementById('estado-conductividad').textContent = 'Sin datos';
+      document.getElementById('recomendacion-conductividad').innerHTML = '<strong>Recomendación:</strong> El sensor de conductividad todavía no está conectado.';
       return;
     }
 
-    if (elValor) elValor.textContent = valor + ' µS/cm';
+    document.getElementById('valor-conductividad').textContent = valor + ' µS/cm';
 
     const estado = calcularEstadoConductividad(valor);
-    if (elEstado) elEstado.textContent = estado;
-    if (elRecomendacion) elRecomendacion.textContent = recomendacionConductividad(estado);
-    if (elUltimaLectura) elUltimaLectura.textContent = 'Última lectura: ' + formatearHoraArgentina(ultimo.timestamp) + ' hs. Arg.';
+    document.getElementById('estado-conductividad').textContent = estado;
+    document.getElementById('recomendacion-conductividad').innerHTML = '<strong>Recomendación:</strong> ' + recomendacionConductividad(estado);
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
     if (!resHistorial) return;
     const historial = await resHistorial.json();
-    dibujarGrafico(historial);
+    dibujarGraficoConductividad(historial);
   } catch (error) {
     console.error('Error cargando datos de conductividad:', error);
-    if (elValor) elValor.textContent = '--';
-    if (elEstado) elEstado.textContent = 'Error';
-    if (elRecomendacion) elRecomendacion.textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
+    document.getElementById('valor-conductividad').textContent = '--';
+    document.getElementById('estado-conductividad').textContent = 'Error';
+    document.getElementById('recomendacion-conductividad').innerHTML = '<strong>Recomendación:</strong> No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
-function dibujarGrafico(historial) {
-  const contenedor = document.getElementById('grafico-humedad');
-  if (!contenedor) return;
 
+function dibujarGraficoConductividad(historial) {
+  const contenedor = document.getElementById('grafico-conductividad');
   contenedor.innerHTML = '';
+  
+  contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
-  contenedor.style.flexDirection = 'column';
+  contenedor.style.alignItems = 'flex-end';
   contenedor.style.justifyContent = 'space-between';
+  contenedor.style.width = '100%';
+  contenedor.style.height = '175px';
+  contenedor.style.padding = '12px 20px 24px 50px'; 
   contenedor.style.boxSizing = 'border-box';
-  contenedor.style.fontFamily = "'Poppins', sans-serif";
+  contenedor.style.fontFamily = 'Arial, sans-serif';
 
-  // Área de barras y líneas del eje Y
-  const areaGrafico = document.createElement('div');
-  areaGrafico.style.position = 'relative';
-  areaGrafico.style.flex = '1';
-  areaGrafico.style.display = 'flex';
-  areaGrafico.style.alignItems = 'flex-end';
-  areaGrafico.style.marginLeft = '38px';
-  areaGrafico.style.borderBottom = '1px solid #e5e5e5';
-  contenedor.appendChild(areaGrafico);
-
-  // Eje Y (0%, 25%, 50%, 75%, 100%)
-  for (let i = 0; i <= 4; i++) {
-    const porcentajePosicion = i * 25;
-    const valorLinea = Math.round((ESCALA_HUMEDAD / 100) * porcentajePosicion);
-
+  [0, 25, 50, 75, 100].forEach((porcentaje) => {
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
-    linea.style.left = '0';
-    linea.style.right = '0';
-    linea.style.bottom = `${porcentajePosicion}%`;
-    linea.style.borderTop = '1px solid #f0f0f0';
-    areaGrafico.appendChild(linea);
+    linea.style.left = '50px';
+    linea.style.right = '20px';
+    linea.style.bottom = `calc(${porcentaje}% + 24px)`;
+    linea.style.borderTop = porcentaje === 0 ? '1px solid rgba(0,0,0,0.3)' : '1px dashed rgba(0, 0, 0, 0.15)';
+    linea.style.zIndex = '1';
+    contenedor.appendChild(linea);
 
     const etiquetaEje = document.createElement('div');
-    etiquetaEje.textContent = `${valorLinea}%`;
+    const valorEje = Math.round((porcentaje / 100) * ESCALA_CONDUCTIVIDAD);
+    etiquetaEje.textContent = valorEje;
     etiquetaEje.style.position = 'absolute';
-    etiquetaEje.style.left = '-38px';
-    etiquetaEje.style.bottom = `calc(${porcentajePosicion}% - 6px)`;
+    etiquetaEje.style.left = '8px';
+    etiquetaEje.style.bottom = `calc(${porcentaje}% + 17px)`;
     etiquetaEje.style.fontSize = '9px';
-    etiquetaEje.style.color = '#8a8a8a';
-    etiquetaEje.style.width = '32px';
-    etiquetaEje.style.textAlign = 'right';
-    areaGrafico.appendChild(etiquetaEje);
-  }
+    etiquetaEje.style.color = '#555';
+    etiquetaEje.style.fontWeight = '600';
+    etiquetaEje.style.zIndex = '2';
+    contenedor.appendChild(etiquetaEje);
+  });
 
-  const ultimos = historial.slice(-8);
+  const ultimos = historial.slice(-9);
+  const horariosFijos = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', 'AHORA'];
 
-  // Contenedor horizontal de columnas de barras
-  const contenedorBarras = document.createElement('div');
-  contenedorBarras.style.position = 'relative';
-  contenedorBarras.style.width = '100%';
-  contenedorBarras.style.height = '100%';
-  contenedorBarras.style.display = 'flex';
-  contenedorBarras.style.alignItems = 'flex-end';
-  contenedorBarras.style.justifyContent = 'space-between';
-  contenedorBarras.style.zIndex = '2';
-  areaGrafico.appendChild(contenedorBarras);
-
-  // Fila de horas
-  const filaHoras = document.createElement('div');
-  filaHoras.style.display = 'flex';
-  filaHoras.style.justifyContent = 'space-between';
-  filaHoras.style.marginLeft = '38px';
-  filaHoras.style.marginTop = '4px';
-  contenedor.appendChild(filaHoras);
-
-  ultimos.forEach((medicion, indice) => {
-    const valor = medicion.humedadSuelo || 0;
-    const esUltima = indice === ultimos.length - 1;
+  ultimos.forEach((medicion, index) => {
+    const valor = medicion.conductividad;
+    const estadoBarra = calcularEstadoConductividad(valor);
 
     const columna = document.createElement('div');
     columna.style.display = 'flex';
@@ -166,33 +114,45 @@ function dibujarGrafico(historial) {
     columna.style.justifyContent = 'flex-end';
     columna.style.height = '100%';
     columna.style.flex = '1';
+    columna.style.zIndex = '3';
+    columna.style.position = 'relative';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.min(Math.max((valor / ESCALA_HUMEDAD) * 100, 2), 100);
-    barra.title = `${valor}% — ${formatearHoraArgentina(medicion.timestamp)}`;
-    barra.style.height = `${alturaPorcentaje}%`;
-    barra.style.width = '16px';
-    barra.style.backgroundColor = '#2D6A4F';
-    barra.style.borderRadius = '8px 8px 0 0';
+    const alturaPorcentaje = Math.max((valor / ESCALA_CONDUCTIVIDAD) * 100, 8);
+    barra.title = `${valor} µS/cm — ${estadoBarra}`;
+    barra.style.height = alturaPorcentaje + '%';
+    barra.style.width = '70%';
+    barra.style.minHeight = '8px';
+    barra.style.borderRadius = '6px 6px 0 0';
+    barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
+    barra.style.transition = 'transform 0.15s ease';
 
-    columna.appendChild(barra);
-    contenedorBarras.appendChild(columna);
+    barra.style.background = estadoBarra === 'Óptimo'
+      ? 'linear-gradient(180deg, #3b7a42, #244b29)'
+      : 'linear-gradient(180deg, #f59e0b, #d97706)';
+
+    barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
+    barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
 
     const etiquetaHora = document.createElement('div');
-    etiquetaHora.textContent = esUltima ? 'AHORA' : formatearHoraCorta(medicion.timestamp);
-    etiquetaHora.style.flex = '1';
-    etiquetaHora.style.textAlign = 'center';
-    etiquetaHora.style.fontSize = '8px';
-    etiquetaHora.style.fontFamily = "'Poppins', sans-serif";
-    etiquetaHora.style.fontWeight = esUltima ? '700' : '400';
-    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#8a8a8a';
-    filaHoras.appendChild(etiquetaHora);
+    if (index === ultimos.length - 1) {
+      etiquetaHora.textContent = 'AHORA';
+    } else if (index < horariosFijos.length) {
+      etiquetaHora.textContent = horariosFijos[index];
+    }
+
+    etiquetaHora.style.position = 'absolute';
+    etiquetaHora.style.bottom = '-18px';
+    etiquetaHora.style.fontSize = '9px';
+    etiquetaHora.style.color = '#555';
+    etiquetaHora.style.fontWeight = '700';
+    etiquetaHora.style.whiteSpace = 'nowrap';
+
+    columna.appendChild(barra);
+    columna.appendChild(etiquetaHora);
+    contenedor.appendChild(columna);
   });
 }
+
 cargarConductividad();
-setInterval(cargarConductividad, 30 * 1000);
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    cargarConductividad();
-  }
-});
+setInterval(cargarConductividad, 15 * 60 * 1000);
