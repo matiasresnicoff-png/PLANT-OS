@@ -1,8 +1,6 @@
 const UMBRAL_HUMEDAD = { bajo: 30, alto: 70 };
 const ESCALA_HUMEDAD = 100;
 
-// El backend guarda el timestamp en UTC (hora universal). Esta función lo
-// convierte a hora de Argentina (UTC-3) para mostrarlo en pantalla.
 function formatearHoraArgentina(timestampUTC) {
   return new Date(timestampUTC).toLocaleString('es-AR', {
     timeZone: 'America/Argentina/Buenos_Aires',
@@ -13,7 +11,6 @@ function formatearHoraArgentina(timestampUTC) {
   });
 }
 
-// Versión corta, solo "HH:MM", para las etiquetas debajo de cada barra del gráfico.
 function formatearHoraCorta(timestampUTC) {
   return new Date(timestampUTC).toLocaleString('es-AR', {
     timeZone: 'America/Argentina/Buenos_Aires',
@@ -36,8 +33,14 @@ function recomendacionHumedad(estado) {
 }
 
 async function cargarHumedad() {
-  document.getElementById('valor-humedad').textContent = 'Cargando...';
-  document.getElementById('recomendacion-humedad').innerHTML = '';
+  const elValor = document.getElementById('valor-humedad');
+  const elEstado = document.getElementById('estado-humedad');
+  const elRecomendacion = document.getElementById('recomendacion-humedad');
+  const elUltimaLectura = document.getElementById('ultima-lectura-humedad');
+
+  if (elValor) elValor.textContent = 'Cargando...';
+  if (elRecomendacion) elRecomendacion.textContent = '';
+  if (elUltimaLectura) elUltimaLectura.textContent = '';
 
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
@@ -45,26 +48,26 @@ async function cargarHumedad() {
     const ultimo = await resUltimo.json();
 
     if (!resUltimo.ok) {
-      document.getElementById('valor-humedad').textContent = '--';
-      document.getElementById('estado-humedad').textContent = 'Error';
-      document.getElementById('recomendacion-humedad').textContent = ultimo.error || 'No se pudo obtener los datos.';
+      if (elValor) elValor.textContent = '--';
+      if (elEstado) elEstado.textContent = 'Error';
+      if (elRecomendacion) elRecomendacion.textContent = ultimo.error || 'No se pudo obtener los datos.';
       return;
     }
 
     if (ultimo.mensaje) {
-      document.getElementById('valor-humedad').textContent = '--';
-      document.getElementById('estado-humedad').textContent = 'Sin datos';
-      document.getElementById('recomendacion-humedad').textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+      if (elValor) elValor.textContent = '--';
+      if (elEstado) elEstado.textContent = 'Sin datos';
+      if (elRecomendacion) elRecomendacion.textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
       return;
     }
 
     const valor = ultimo.humedadSuelo;
-    document.getElementById('valor-humedad').textContent = valor + '%';
+    if (elValor) elValor.textContent = valor + '%';
 
     const estado = calcularEstadoHumedad(valor);
-    document.getElementById('estado-humedad').textContent = estado;
-    document.getElementById('recomendacion-humedad').textContent =
-      recomendacionHumedad(estado) + ' (Última lectura: ' + formatearHoraArgentina(ultimo.timestamp) + ' hs. Arg.)';
+    if (elEstado) elEstado.textContent = estado;
+    if (elRecomendacion) elRecomendacion.textContent = recomendacionHumedad(estado);
+    if (elUltimaLectura) elUltimaLectura.textContent = 'Última lectura: ' + formatearHoraArgentina(ultimo.timestamp) + ' hs. Arg.';
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
     if (!resHistorial) return;
@@ -72,9 +75,9 @@ async function cargarHumedad() {
     dibujarGrafico(historial);
   } catch (error) {
     console.error('Error cargando datos de humedad:', error);
-    document.getElementById('valor-humedad').textContent = '--';
-    document.getElementById('estado-humedad').textContent = 'Error';
-    document.getElementById('recomendacion-humedad').textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
+    if (elValor) elValor.textContent = '--';
+    if (elEstado) elEstado.textContent = 'Error';
+    if (elRecomendacion) elRecomendacion.textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
 
@@ -85,58 +88,67 @@ function dibujarGrafico(historial) {
   contenedor.innerHTML = '';
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
+  contenedor.style.width = '100%';
+  contenedor.style.height = '100%';
   contenedor.style.boxSizing = 'border-box';
-  contenedor.style.padding = '10px 10px 6px';
-  contenedor.style.fontFamily = 'Arial, sans-serif';
+  contenedor.style.padding = '12px 16px 8px 12px';
 
-  // Área de las barras + líneas de referencia del eje Y (como en el Figma).
   const areaGrafico = document.createElement('div');
   areaGrafico.style.position = 'relative';
   areaGrafico.style.flex = '1';
   areaGrafico.style.display = 'flex';
   areaGrafico.style.alignItems = 'flex-end';
-  areaGrafico.style.gap = '4%';
-  areaGrafico.style.marginLeft = '24px';
-  areaGrafico.style.borderBottom = '1px solid #e2e2e2';
+  areaGrafico.style.marginLeft = '36px';
+  areaGrafico.style.borderBottom = '1px solid #e0e0e0';
   contenedor.appendChild(areaGrafico);
 
-  // Eje Y: 5 líneas horizontales parejas, con su valor a la izquierda.
-  const pasoEjeY = ESCALA_HUMEDAD / 5;
-  for (let i = 1; i <= 5; i = i + 1) {
-    const valorLinea = pasoEjeY * i;
-    const posicion = (valorLinea / ESCALA_HUMEDAD) * 100;
+  // Eje Y (0%, 25%, 50%, 75%, 100%)
+  for (let i = 0; i <= 4; i++) {
+    const porcentajePosicion = i * 25;
+    const valorLinea = Math.round((ESCALA_HUMEDAD / 100) * porcentajePosicion);
 
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
-    linea.style.bottom = posicion + '%';
-    linea.style.borderTop = '1px dashed #e2e2e2';
+    linea.style.bottom = `${porcentajePosicion}%`;
+    linea.style.borderTop = '1px solid #e5e5e5';
     areaGrafico.appendChild(linea);
 
     const etiquetaEje = document.createElement('div');
-    etiquetaEje.textContent = Math.round(valorLinea) + '%';
+    etiquetaEje.textContent = `${valorLinea}%`;
     etiquetaEje.style.position = 'absolute';
-    etiquetaEje.style.left = '-24px';
-    etiquetaEje.style.bottom = `calc(${posicion}% - 5px)`;
-    etiquetaEje.style.fontSize = '8px';
-    etiquetaEje.style.color = '#8a8a8a';
+    etiquetaEje.style.left = '-38px';
+    etiquetaEje.style.bottom = `calc(${porcentajePosicion}% - 6px)`;
+    etiquetaEje.style.fontSize = '10px';
+    etiquetaEje.style.color = '#888888';
+    etiquetaEje.style.width = '32px';
+    etiquetaEje.style.textAlign = 'right';
     areaGrafico.appendChild(etiquetaEje);
   }
 
-  const ultimos = historial.slice(-7);
+  const ultimos = historial.slice(-8);
 
-  // Fila de horarios debajo de cada barra (la última dice "AHORA").
+  const contenedorBarras = document.createElement('div');
+  contenedorBarras.style.position = 'relative';
+  contenedorBarras.style.width = '100%';
+  contenedorBarras.style.height = '100%';
+  contenedorBarras.style.display = 'flex';
+  contenedorBarras.style.alignItems = 'flex-end';
+  contenedorBarras.style.justifyContent = 'space-between';
+  contenedorBarras.style.zIndex = '2';
+  areaGrafico.appendChild(contenedorBarras);
+
   const filaHoras = document.createElement('div');
   filaHoras.style.display = 'flex';
-  filaHoras.style.gap = '4%';
-  filaHoras.style.marginLeft = '24px';
-  filaHoras.style.marginTop = '4px';
+  filaHoras.style.justifyContent = 'space-between';
+  filaHoras.style.marginLeft = '36px';
+  filaHoras.style.marginTop = '6px';
   contenedor.appendChild(filaHoras);
 
   ultimos.forEach((medicion, indice) => {
-    const valor = medicion.humedadSuelo;
-    const estadoBarra = calcularEstadoHumedad(valor);
+    const valor = medicion.humedadSuelo || 0;
+    const esUltima = indice === ultimos.length - 1;
 
     const columna = document.createElement('div');
     columna.style.display = 'flex';
@@ -145,42 +157,26 @@ function dibujarGrafico(historial) {
     columna.style.justifyContent = 'flex-end';
     columna.style.height = '100%';
     columna.style.flex = '1';
-    columna.style.zIndex = '3';
-
-    const etiqueta = document.createElement('div');
-    etiqueta.textContent = valor + '%';
-    etiqueta.style.fontSize = '10px';
-    etiqueta.style.fontWeight = 'bold';
-    etiqueta.style.marginBottom = '3px';
-    etiqueta.style.color = '#2D6A4F';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 8);
-    barra.title = `${valor}% — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
-    barra.style.height = alturaPorcentaje + '%';
-    barra.style.width = '65%';
-    barra.style.minHeight = '5px';
-    barra.style.borderRadius = '6px 6px 2px 2px';
-    barra.style.transition = 'transform 0.15s ease';
-    barra.style.background = estadoBarra === 'Óptimo'
-      ? 'linear-gradient(180deg, #6fd07f, #2D6A4F)'
-      : 'linear-gradient(180deg, #ffb15c, #e07a1f)';
+    const alturaPorcentaje = Math.min(Math.max((valor / ESCALA_HUMEDAD) * 100, 2), 100);
+    barra.title = `${valor}% — ${formatearHoraArgentina(medicion.timestamp)}`;
+    barra.style.height = `${alturaPorcentaje}%`;
+    barra.style.width = '60%';
+    barra.style.maxWidth = '24px';
+    barra.style.backgroundColor = '#2D6A4F';
+    barra.style.borderRadius = '12px 12px 0 0';
 
-    barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
-    barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
-
-    columna.appendChild(etiqueta);
     columna.appendChild(barra);
-    areaGrafico.appendChild(columna);
+    contenedorBarras.appendChild(columna);
 
-    const esUltima = indice === ultimos.length - 1;
     const etiquetaHora = document.createElement('div');
     etiquetaHora.textContent = esUltima ? 'AHORA' : formatearHoraCorta(medicion.timestamp);
     etiquetaHora.style.flex = '1';
     etiquetaHora.style.textAlign = 'center';
-    etiquetaHora.style.fontSize = '8px';
+    etiquetaHora.style.fontSize = '9px';
     etiquetaHora.style.fontWeight = esUltima ? 'bold' : 'normal';
-    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#8a8a8a';
+    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#666666';
     filaHoras.appendChild(etiquetaHora);
   });
 }
