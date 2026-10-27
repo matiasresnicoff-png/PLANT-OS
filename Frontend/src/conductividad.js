@@ -88,48 +88,47 @@ async function cargarConductividad() {
     if (elRecomendacion) elRecomendacion.textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
-
 function dibujarGrafico(historial) {
-  const contenedor = document.getElementById('grafico-conductividad');
+  const contenedor = document.getElementById('grafico-humedad');
   if (!contenedor) return;
 
   contenedor.innerHTML = '';
   contenedor.style.display = 'flex';
   contenedor.style.flexDirection = 'column';
-  contenedor.style.width = '100%';
-  contenedor.style.height = '100%';
+  contenedor.style.justifyContent = 'space-between';
   contenedor.style.boxSizing = 'border-box';
-  contenedor.style.padding = '12px 16px 8px 12px';
+  contenedor.style.fontFamily = "'Poppins', sans-serif";
 
+  // Área de barras y líneas del eje Y
   const areaGrafico = document.createElement('div');
   areaGrafico.style.position = 'relative';
   areaGrafico.style.flex = '1';
   areaGrafico.style.display = 'flex';
   areaGrafico.style.alignItems = 'flex-end';
-  areaGrafico.style.marginLeft = '36px';
-  areaGrafico.style.borderBottom = '1px solid #e0e0e0';
+  areaGrafico.style.marginLeft = '38px';
+  areaGrafico.style.borderBottom = '1px solid #e5e5e5';
   contenedor.appendChild(areaGrafico);
 
   // Eje Y (0%, 25%, 50%, 75%, 100%)
   for (let i = 0; i <= 4; i++) {
     const porcentajePosicion = i * 25;
-    const valorLinea = Math.round((ESCALA_CONDUCTIVIDAD / 100) * porcentajePosicion);
+    const valorLinea = Math.round((ESCALA_HUMEDAD / 100) * porcentajePosicion);
 
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
     linea.style.left = '0';
     linea.style.right = '0';
     linea.style.bottom = `${porcentajePosicion}%`;
-    linea.style.borderTop = '1px solid #e5e5e5';
+    linea.style.borderTop = '1px solid #f0f0f0';
     areaGrafico.appendChild(linea);
 
     const etiquetaEje = document.createElement('div');
-    etiquetaEje.textContent = valorLinea;
+    etiquetaEje.textContent = `${valorLinea}%`;
     etiquetaEje.style.position = 'absolute';
     etiquetaEje.style.left = '-38px';
     etiquetaEje.style.bottom = `calc(${porcentajePosicion}% - 6px)`;
-    etiquetaEje.style.fontSize = '10px';
-    etiquetaEje.style.color = '#888888';
+    etiquetaEje.style.fontSize = '9px';
+    etiquetaEje.style.color = '#8a8a8a';
     etiquetaEje.style.width = '32px';
     etiquetaEje.style.textAlign = 'right';
     areaGrafico.appendChild(etiquetaEje);
@@ -137,6 +136,7 @@ function dibujarGrafico(historial) {
 
   const ultimos = historial.slice(-8);
 
+  // Contenedor horizontal de columnas de barras
   const contenedorBarras = document.createElement('div');
   contenedorBarras.style.position = 'relative';
   contenedorBarras.style.width = '100%';
@@ -147,15 +147,16 @@ function dibujarGrafico(historial) {
   contenedorBarras.style.zIndex = '2';
   areaGrafico.appendChild(contenedorBarras);
 
+  // Fila de horas
   const filaHoras = document.createElement('div');
   filaHoras.style.display = 'flex';
   filaHoras.style.justifyContent = 'space-between';
-  filaHoras.style.marginLeft = '36px';
-  filaHoras.style.marginTop = '6px';
+  filaHoras.style.marginLeft = '38px';
+  filaHoras.style.marginTop = '4px';
   contenedor.appendChild(filaHoras);
 
   ultimos.forEach((medicion, indice) => {
-    const valor = medicion.conductividad || 0;
+    const valor = medicion.humedadSuelo || 0;
     const esUltima = indice === ultimos.length - 1;
 
     const columna = document.createElement('div');
@@ -167,13 +168,12 @@ function dibujarGrafico(historial) {
     columna.style.flex = '1';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.min(Math.max((valor / ESCALA_CONDUCTIVIDAD) * 100, 2), 100);
-    barra.title = `${valor} µS/cm — ${formatearHoraArgentina(medicion.timestamp)}`;
+    const alturaPorcentaje = Math.min(Math.max((valor / ESCALA_HUMEDAD) * 100, 2), 100);
+    barra.title = `${valor}% — ${formatearHoraArgentina(medicion.timestamp)}`;
     barra.style.height = `${alturaPorcentaje}%`;
-    barra.style.width = '60%';
-    barra.style.maxWidth = '24px';
+    barra.style.width = '16px';
     barra.style.backgroundColor = '#2D6A4F';
-    barra.style.borderRadius = '12px 12px 0 0';
+    barra.style.borderRadius = '8px 8px 0 0';
 
     columna.appendChild(barra);
     contenedorBarras.appendChild(columna);
@@ -182,13 +182,13 @@ function dibujarGrafico(historial) {
     etiquetaHora.textContent = esUltima ? 'AHORA' : formatearHoraCorta(medicion.timestamp);
     etiquetaHora.style.flex = '1';
     etiquetaHora.style.textAlign = 'center';
-    etiquetaHora.style.fontSize = '9px';
-    etiquetaHora.style.fontWeight = esUltima ? 'bold' : 'normal';
-    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#666666';
+    etiquetaHora.style.fontSize = '8px';
+    etiquetaHora.style.fontFamily = "'Poppins', sans-serif";
+    etiquetaHora.style.fontWeight = esUltima ? '700' : '400';
+    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#8a8a8a';
     filaHoras.appendChild(etiquetaHora);
   });
 }
-
 cargarConductividad();
 setInterval(cargarConductividad, 30 * 1000);
 document.addEventListener('visibilitychange', () => {
