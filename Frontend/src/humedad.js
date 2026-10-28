@@ -100,7 +100,6 @@ function dibujarGraficoHumedad(historial) {
   });
 
   const ultimos = historial.slice(-9);
-  const horariosFijos = ['0:00', '3:00', '6:00', '9:00', '12:00', '15:00', '18:00', '21:00', 'AHORA'];
 
   ultimos.forEach((medicion, index) => {
     const valor = medicion.humedadSuelo;
@@ -117,12 +116,17 @@ function dibujarGraficoHumedad(historial) {
     columna.style.position = 'relative';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 8);
+    
+    const proporcion = Math.min(Math.max(valor / ESCALA_HUMEDAD, 0.05), 1);
+    const alturaRem = proporcion * 7.6875;
+
     barra.title = `${valor}% — ${estadoBarra}`;
-    barra.style.height = alturaPorcentaje + '%';
-    barra.style.width = '70%';
-    barra.style.minHeight = '8px';
-    barra.style.borderRadius = '6px 6px 0 0';
+    barra.style.height = `${alturaRem}rem`;
+    
+    // Características de Figma
+    barra.style.width = '1.5625rem';
+    barra.style.borderRadius = '0.8125rem';
+    
     barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
     barra.style.transition = 'transform 0.15s ease';
 
@@ -134,10 +138,17 @@ function dibujarGraficoHumedad(historial) {
     barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
 
     const etiquetaHora = document.createElement('div');
-    if (index === ultimos.length - 1) {
-      etiquetaHora.textContent = 'AHORA';
-    } else if (index < horariosFijos.length) {
-      etiquetaHora.textContent = horariosFijos[index];
+    
+    if (medicion.fecha || medicion.createdAt) {
+      const fechaObj = new Date(medicion.fecha || medicion.createdAt);
+      etiquetaHora.textContent = new Intl.DateTimeFormat('es-AR', {
+        timeZone: 'America/Argentina/Buenos_Aires',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+      }).format(fechaObj);
+    } else {
+      etiquetaHora.textContent = index === ultimos.length - 1 ? 'AHORA' : '--:--';
     }
 
     etiquetaHora.style.position = 'absolute';

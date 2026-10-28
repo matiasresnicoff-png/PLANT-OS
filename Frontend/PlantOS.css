@@ -1,8 +1,6 @@
 html, body {
-        overflow: hidden;
         height: 100%;
         margin: 0;
-        font-size: 90%;
     }
 
     .wireframe {
@@ -152,11 +150,11 @@ html, body {
     .titulo {
         width: 9.125rem;
         height: 1rem;
-        color: #2D6A4F;
+        color: #000;
         font-family: "Inter", sans-serif;
         font-size: 0.75rem;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: normal;
         text-decoration: none;
         display: flex;
@@ -930,7 +928,7 @@ html, body {
     font-size: 2rem;
     width: 12.875rem;
     height: auto;
-    color: #184D36;
+    color: #000;
     font-family: "Playfair Display";
     font-style: normal;
     font-weight: 600;
@@ -982,7 +980,7 @@ html, body {
 }
 
 .titulo-estado {
-    color: #2D6A4F;
+    color: #000;
     font-family: "Inter", sans-serif;
     font-size: 1rem;
     font-style: normal;

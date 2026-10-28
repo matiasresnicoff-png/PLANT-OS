@@ -33,5 +33,12 @@
     "fechaNacimiento": "2011-01-24",
     "mail": "matias.resnicoff@gmail.com",
     "contraseña": "$2b$10$j4HG5k1xa/N8eOLBiHrxsuWohRgHvOFMejomLNF/VJ.FEwvf.Uilu"
+  },
+  {
+    "idUsuario": "6",
+    "nombre": "tomi",
+    "fechaNacimiento": "2010-02-20",
+    "mail": "tomi91972@gmail.com",
+    "contraseña": "$2b$10$tSAvYv0IWOoCZl6surbttuJkN.W68RR1UOdZXuWxUbK6h6AEGB212"
   }
 ]
