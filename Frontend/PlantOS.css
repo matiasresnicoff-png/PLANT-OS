@@ -647,14 +647,15 @@ html, body {
         line-height: normal;
     }
     .grafico-humedad {
-        width: 32.25rem;
-        height: 15.3125rem;
+        width: 35rem;
+        height: 15.3125rem; 
         background: white;
-        box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
+        box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.06);
         border-radius: 1rem;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-end; 
+        justify-content: space-between;
+        box-sizing: border-box;
     }
 
     .grafico-interior {
