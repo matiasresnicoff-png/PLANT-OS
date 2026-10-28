@@ -1,6 +1,14 @@
 const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const ESCALA_CONDUCTIVIDAD = 3000;
 
+// Colores idénticos a los de Inicio.
+const COLORES_CONDUCTIVIDAD = {
+  Bajo: '#3498db',
+  'Óptimo': '#27ae60',
+  Alto: '#e74c3c',
+  'Sin datos': '#7f8c8d'
+};
+
 function calcularEstadoConductividad(valor) {
   if (valor < UMBRAL_CONDUCTIVIDAD.bajo) return 'Bajo';
   if (valor > UMBRAL_CONDUCTIVIDAD.alto) return 'Alto';
@@ -13,11 +21,27 @@ function recomendacionConductividad(estado) {
   return 'El nivel de nutrientes en la tierra está en un rango óptimo.';
 }
 
+function actualizarEstadoConductividad(elValor, elEstado, valor, estado) {
+  const color = COLORES_CONDUCTIVIDAD[estado];
+
+  if (elValor) {
+    elValor.textContent = valor + ' µS/cm';
+    elValor.style.color = color;
+  }
+
+  if (elEstado) {
+    elEstado.textContent = estado;
+    elEstado.style.setProperty('background-color', color, 'important');
+    elEstado.style.setProperty('color', '#000000', 'important');
+  }
+}
+
 async function cargarConductividad() {
   const elValor = document.getElementById('valor-conductividad');
   const elEstado = document.getElementById('estado-conductividad');
   const elRecomendacion = document.getElementById('recomendacion-conductividad');
 
+  if (elRecomendacion) elRecomendacion.style.color = '#000000';
   if (elValor) elValor.textContent = 'Cargando...';
   if (elRecomendacion) elRecomendacion.innerHTML = '';
 
@@ -27,44 +51,76 @@ async function cargarConductividad() {
 
     const ultimo = await resUltimo.json();
 
-    if (!resUltimo.ok) {
-      if (elValor) elValor.textContent = '--';
-      if (elEstado) elEstado.textContent = 'Error';
-      if (elRecomendacion) elRecomendacion.innerHTML = '<strong>Recomendación:</strong> ' + (ultimo.error || 'No se pudo obtener los datos.');
+    if (!resUltimo.ok || !ultimo || ultimo.mensaje) {
+      if (elValor) {
+        elValor.textContent = '--';
+        elValor.style.color = COLORES_CONDUCTIVIDAD['Sin datos'];
+      }
+
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty(
+          'background-color',
+          COLORES_CONDUCTIVIDAD['Sin datos'],
+          'important'
+        );
+        elEstado.style.color = '#000000';
+      }
+
+      if (elRecomendacion) {
+        elRecomendacion.innerHTML =
+          '<strong>Recomendación:</strong> Todavía no hay mediciones disponibles.';
+      }
       return;
     }
 
-    if (ultimo.mensaje) {
-      if (elValor) elValor.textContent = '--';
-      if (elEstado) elEstado.textContent = 'Sin datos';
-      if (elRecomendacion) elRecomendacion.innerHTML = '<strong>Recomendación:</strong> Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+    const valorOriginal = ultimo.conductividad;
+    const valor = Number(valorOriginal);
+
+    const valido =
+      valorOriginal !== null &&
+      valorOriginal !== undefined &&
+      valorOriginal !== '' &&
+      Number.isFinite(valor);
+
+    if (!valido) {
+      if (elValor) {
+        elValor.textContent = 'Sin datos';
+        elValor.style.color = COLORES_CONDUCTIVIDAD['Sin datos'];
+      }
+
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty(
+          'background-color',
+          COLORES_CONDUCTIVIDAD['Sin datos'],
+          'important'
+        );
+        elEstado.style.color = '#000000';
+      }
+
+      if (elRecomendacion) {
+        elRecomendacion.innerHTML =
+          '<strong>Recomendación:</strong> El sensor de conductividad todavía no está conectado.';
+      }
       return;
     }
-
-    const valor = ultimo.conductividad;
-
-    if (valor === null || valor === undefined) {
-      if (elValor) elValor.textContent = 'Sin datos';
-      if (elEstado) elEstado.textContent = 'Sin datos';
-      if (elRecomendacion) elRecomendacion.innerHTML = '<strong>Recomendación:</strong> El sensor de conductividad todavía no está conectado.';
-      return;
-    }
-
-    if (elValor) elValor.textContent = valor + ' µS/cm';
 
     const estado = calcularEstadoConductividad(valor);
-
-    if (elEstado) elEstado.textContent = estado;
+    actualizarEstadoConductividad(elValor, elEstado, valor, estado);
 
     if (elRecomendacion) {
-      elRecomendacion.innerHTML = '<strong>Recomendación:</strong> ' + recomendacionConductividad(estado);
+      elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> ' +
+        recomendacionConductividad(estado);
+
+      elRecomendacion.style.color = '#000000';
     }
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
-    if (!resHistorial) return;
+    if (!resHistorial || !resHistorial.ok) return;
 
     const historial = await resHistorial.json();
-
     dibujarGraficoConductividad(historial);
 
   } catch (error) {
@@ -74,7 +130,8 @@ async function cargarConductividad() {
     if (elEstado) elEstado.textContent = 'Error';
 
     if (elRecomendacion) {
-      elRecomendacion.innerHTML = '<strong>Recomendación:</strong> No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
+      elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
     }
   }
 }
@@ -84,7 +141,6 @@ function dibujarGraficoConductividad(historial) {
   if (!contenedor) return;
 
   contenedor.innerHTML = '';
-
   contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
   contenedor.style.alignItems = 'flex-end';
@@ -96,30 +152,23 @@ function dibujarGraficoConductividad(historial) {
   contenedor.style.fontFamily = 'Arial, sans-serif';
   contenedor.style.overflow = 'hidden';
 
-  // Área disponible para las barras.
   const alturaGrafico = 175 - 12 - 45;
 
-  // Líneas horizontales y valores del eje Y.
   [0, 25, 50, 75, 100].forEach((porcentaje) => {
-
     const linea = document.createElement('div');
 
     linea.style.position = 'absolute';
     linea.style.left = '50px';
     linea.style.right = '20px';
-
     linea.style.bottom = `${45 + (porcentaje / 100) * alturaGrafico}px`;
-
     linea.style.borderTop = porcentaje === 0
       ? '1px solid rgba(0,0,0,0.3)'
       : '1px dashed rgba(0,0,0,0.15)';
-
     linea.style.zIndex = '1';
 
     contenedor.appendChild(linea);
 
     const etiquetaEje = document.createElement('div');
-
     const valorEje = Math.round(
       (porcentaje / 100) * ESCALA_CONDUCTIVIDAD
     );
@@ -127,9 +176,7 @@ function dibujarGraficoConductividad(historial) {
     etiquetaEje.textContent = valorEje;
     etiquetaEje.style.position = 'absolute';
     etiquetaEje.style.left = '8px';
-
     etiquetaEje.style.bottom = `${40 + (porcentaje / 100) * alturaGrafico}px`;
-
     etiquetaEje.style.fontSize = '9px';
     etiquetaEje.style.color = '#555';
     etiquetaEje.style.fontWeight = '600';
@@ -138,14 +185,23 @@ function dibujarGraficoConductividad(historial) {
     contenedor.appendChild(etiquetaEje);
   });
 
-  // Obtener las últimas 9 mediciones válidas.
   const ultimos = Array.isArray(historial)
-    ? historial.filter((medicion) =>
-        medicion &&
-        medicion.conductividad !== null &&
-        medicion.conductividad !== undefined &&
-        Number.isFinite(Number(medicion.conductividad))
-      ).slice(-9)
+    ? historial.filter(medicion => {
+        if (!medicion) return false;
+
+        const valorOriginal = medicion.conductividad;
+
+        return valorOriginal !== null &&
+          valorOriginal !== undefined &&
+          valorOriginal !== '' &&
+          Number.isFinite(Number(valorOriginal));
+      }).sort((a, b) => {
+        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
+        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
+
+        return (Number.isFinite(fechaA) ? fechaA : 0) -
+          (Number.isFinite(fechaB) ? fechaB : 0);
+      }).slice(-9)
     : [];
 
   if (ultimos.length === 0) {
@@ -164,7 +220,6 @@ function dibujarGraficoConductividad(historial) {
   }
 
   ultimos.forEach((medicion, index) => {
-
     const valor = Number(medicion.conductividad);
     const estadoBarra = calcularEstadoConductividad(valor);
 
@@ -182,29 +237,20 @@ function dibujarGraficoConductividad(historial) {
 
     const barra = document.createElement('div');
 
-    // Altura proporcional al valor, sin salir del rectángulo.
     const proporcion = Math.min(
       Math.max(valor / ESCALA_CONDUCTIVIDAD, 0.05),
       1
     );
 
-    const alturaBarra = proporcion * alturaGrafico;
-
     barra.title = `${valor} µS/cm — ${estadoBarra}`;
-    barra.style.height = `${alturaBarra}px`;
+    barra.style.height = `${proporcion * alturaGrafico}px`;
     barra.style.flexShrink = '0';
-
-    // Mantener el diseño original.
     barra.style.width = '1.5625rem';
     barra.style.maxWidth = '80%';
-    barra.style.borderRadius = '0.8125rem';
-
     barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
     barra.style.transition = 'transform 0.15s ease';
-
-    barra.style.background = estadoBarra === 'Óptimo'
-      ? 'linear-gradient(180deg, #3b7a42, #244b29)'
-      : 'linear-gradient(180deg, #f59e0b, #d97706)';
+    barra.style.backgroundColor = COLORES_CONDUCTIVIDAD[estadoBarra];
+    barra.style.borderRadius = '0.8125rem';
 
     barra.addEventListener('mouseenter', () => {
       barra.style.transform = 'scaleY(1.03)';
@@ -214,7 +260,6 @@ function dibujarGraficoConductividad(historial) {
       barra.style.transform = 'scaleY(1)';
     });
 
-    // Contenedor inferior para horario y valor.
     const contenedorEtiquetas = document.createElement('div');
 
     contenedorEtiquetas.style.position = 'absolute';
@@ -225,7 +270,6 @@ function dibujarGraficoConductividad(historial) {
     contenedorEtiquetas.style.alignItems = 'center';
     contenedorEtiquetas.style.width = '100%';
 
-    // Horario de la medición.
     const etiquetaHora = document.createElement('div');
 
     const fechaMedicion =
@@ -244,10 +288,12 @@ function dibujarGraficoConductividad(historial) {
             minute: '2-digit',
             hour12: false
           }).format(fechaObj);
-
     } else {
-      etiquetaHora.textContent =
-        index === ultimos.length - 1 ? 'AHORA' : '--:--';
+      etiquetaHora.textContent = '--:--';
+    }
+
+    if (index === ultimos.length - 1) {
+      etiquetaHora.textContent = 'AHORA';
     }
 
     etiquetaHora.style.fontSize = '9px';
@@ -255,7 +301,6 @@ function dibujarGraficoConductividad(historial) {
     etiquetaHora.style.fontWeight = '700';
     etiquetaHora.style.whiteSpace = 'nowrap';
 
-    // Valor debajo del horario.
     const etiquetaValor = document.createElement('div');
 
     etiquetaValor.textContent = valor + ' µS/cm';
@@ -276,5 +321,4 @@ function dibujarGraficoConductividad(historial) {
 }
 
 cargarConductividad();
-
 setInterval(cargarConductividad, 15 * 60 * 1000);

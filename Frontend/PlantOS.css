@@ -58,11 +58,11 @@ html, body {
 
     .title {
         width: 100%;          
-        color: #2D6A4F;
+        color: #000;
         font-family: "Playfair Display";
         font-size: 2rem;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 700;
         line-height: normal;
         margin: 0;
         box-sizing: border-box;  
@@ -71,7 +71,7 @@ html, body {
 
     .title2 {
         width: 100%;             
-        color: #2D6A4F;
+        color: #000;
         font-family: "Inter", sans-serif;
         font-size: 1.25rem;
         font-weight: 400;
@@ -577,11 +577,11 @@ html, body {
     }
 
     .dato-estado {
-        color: #2D6A4F;
+        color: #000;
         font-family:"Inter", sans-serif;
         font-size: 1.125rem;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: normal;
         margin-top: -0.3rem;
     }
@@ -676,7 +676,7 @@ html, body {
     .informacion-interior {
         width: 19.625rem;
         height: auto;
-        color: #2D6A4F;
+        color: #000;
         font-family: "Poppins", sans-serif;
         font-size: 0.875rem;
         font-style: normal;

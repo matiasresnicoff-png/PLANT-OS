@@ -1,6 +1,14 @@
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
 const ESCALA_TEMPERATURA = 40;
 
+// Colores idénticos a los de Inicio.
+const COLORES_TEMPERATURA = {
+  Bajo: '#3498db',
+  'Óptimo': '#27ae60',
+  Alto: '#e74c3c',
+  'Sin datos': '#7f8c8d'
+};
+
 function calcularEstadoTemperatura(valor) {
   if (valor < UMBRAL_TEMPERATURA.bajo) return 'Bajo';
   if (valor > UMBRAL_TEMPERATURA.alto) return 'Alto';
@@ -13,11 +21,27 @@ function recomendacionTemperatura(estado) {
   return 'La temperatura está en un rango óptimo para la planta.';
 }
 
+function actualizarEstadoTemperatura(elValor, elEstado, valor, estado) {
+  const color = COLORES_TEMPERATURA[estado];
+
+  if (elValor) {
+    elValor.textContent = valor + '°C';
+    elValor.style.color = color;
+  }
+
+  if (elEstado) {
+    elEstado.textContent = estado;
+    elEstado.style.setProperty('background-color', color, 'important');
+    elEstado.style.setProperty('color', '#000000', 'important');
+  }
+}
+
 async function cargarTemperatura() {
   const elValor = document.getElementById('valor-temperatura');
   const elEstado = document.getElementById('estado-temperatura');
   const elRecomendacion = document.getElementById('recomendacion-temperatura');
 
+  if (elRecomendacion) elRecomendacion.style.color = '#000000';
   if (elValor) elValor.textContent = 'Cargando...';
   if (elRecomendacion) elRecomendacion.innerHTML = '';
 
@@ -27,46 +51,77 @@ async function cargarTemperatura() {
 
     const ultimo = await resUltimo.json();
 
-    if (!resUltimo.ok || ultimo.mensaje || ultimo.temperaturaBME280 === undefined) {
-      if (elValor) elValor.textContent = '--';
-      if (elEstado) elEstado.textContent = 'Sin datos';
+    if (!resUltimo.ok || !ultimo || ultimo.mensaje) {
+      if (elValor) {
+        elValor.textContent = '--';
+        elValor.style.color = COLORES_TEMPERATURA['Sin datos'];
+      }
+
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty(
+          'background-color',
+          COLORES_TEMPERATURA['Sin datos'],
+          'important'
+        );
+        elEstado.style.color = '#000000';
+      }
+
+      if (elRecomendacion) {
+        elRecomendacion.innerHTML =
+          '<strong>Recomendación:</strong> Todavía no hay mediciones disponibles.';
+      }
       return;
     }
 
-    const valor = Number(ultimo.temperaturaBME280);
+    const valorOriginal = ultimo.temperaturaBME280;
+    const valor = Number(valorOriginal);
 
-    // Evitar mostrar errores del sensor como temperaturas reales.
-    if (
-      ultimo.temperaturaBME280 === null ||
-      !Number.isFinite(valor) ||
-      valor === -127
-    ) {
-      if (elValor) elValor.textContent = '--';
-      if (elEstado) elEstado.textContent = 'Sin datos';
+    const valido =
+      valorOriginal !== null &&
+      valorOriginal !== undefined &&
+      valorOriginal !== '' &&
+      Number.isFinite(valor) &&
+      valor !== -127;
+
+    if (!valido) {
+      if (elValor) {
+        elValor.textContent = 'Sin datos';
+        elValor.style.color = COLORES_TEMPERATURA['Sin datos'];
+      }
+
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty(
+          'background-color',
+          COLORES_TEMPERATURA['Sin datos'],
+          'important'
+        );
+        elEstado.style.color = '#000000';
+      }
 
       if (elRecomendacion) {
         elRecomendacion.innerHTML =
           '<strong>Recomendación:</strong> No se pudo obtener una temperatura válida. Revisá la conexión del sensor.';
       }
-
       return;
     }
 
-    if (elValor) elValor.textContent = valor + '°C';
-
     const estado = calcularEstadoTemperatura(valor);
-
-    if (elEstado) elEstado.textContent = estado;
+    actualizarEstadoTemperatura(elValor, elEstado, valor, estado);
 
     if (elRecomendacion) {
-      elRecomendacion.innerHTML = '<strong>Recomendación:</strong> ' + recomendacionTemperatura(estado);
+      elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> ' +
+        recomendacionTemperatura(estado);
+
+      elRecomendacion.style.color = '#000000';
     }
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
-    if (!resHistorial) return;
+    if (!resHistorial || !resHistorial.ok) return;
 
     const historial = await resHistorial.json();
-
     dibujarGraficoTemperatura(historial);
 
   } catch (error) {
@@ -87,7 +142,6 @@ function dibujarGraficoTemperatura(historial) {
   if (!contenedor) return;
 
   contenedor.innerHTML = '';
-
   contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
   contenedor.style.alignItems = 'flex-end';
@@ -99,24 +153,18 @@ function dibujarGraficoTemperatura(historial) {
   contenedor.style.fontFamily = 'Arial, sans-serif';
   contenedor.style.overflow = 'hidden';
 
-  // Área disponible para las barras.
   const alturaGrafico = 175 - 12 - 45;
 
-  // Líneas horizontales y valores del eje Y.
   [0, 25, 50, 75, 100].forEach((porcentaje) => {
-
     const linea = document.createElement('div');
 
     linea.style.position = 'absolute';
     linea.style.left = '42px';
     linea.style.right = '20px';
-
     linea.style.bottom = `${45 + (porcentaje / 100) * alturaGrafico}px`;
-
     linea.style.borderTop = porcentaje === 0
       ? '1px solid rgba(0,0,0,0.3)'
       : '1px dashed rgba(0,0,0,0.15)';
-
     linea.style.zIndex = '1';
 
     contenedor.appendChild(linea);
@@ -130,9 +178,7 @@ function dibujarGraficoTemperatura(historial) {
     etiquetaEje.textContent = valorEje + '°';
     etiquetaEje.style.position = 'absolute';
     etiquetaEje.style.left = '6px';
-
     etiquetaEje.style.bottom = `${40 + (porcentaje / 100) * alturaGrafico}px`;
-
     etiquetaEje.style.fontSize = '9px';
     etiquetaEje.style.color = '#555';
     etiquetaEje.style.fontWeight = '600';
@@ -141,15 +187,24 @@ function dibujarGraficoTemperatura(historial) {
     contenedor.appendChild(etiquetaEje);
   });
 
-  // Obtener las últimas 9 mediciones válidas.
   const ultimos = Array.isArray(historial)
-    ? historial.filter((medicion) =>
-        medicion &&
-        medicion.temperaturaBME280 !== null &&
-        medicion.temperaturaBME280 !== undefined &&
-        Number.isFinite(Number(medicion.temperaturaBME280)) &&
-        Number(medicion.temperaturaBME280) !== -127
-      ).slice(-9)
+    ? historial.filter(medicion => {
+        if (!medicion) return false;
+
+        const valorOriginal = medicion.temperaturaBME280;
+
+        return valorOriginal !== null &&
+          valorOriginal !== undefined &&
+          valorOriginal !== '' &&
+          Number.isFinite(Number(valorOriginal)) &&
+          Number(valorOriginal) !== -127;
+      }).sort((a, b) => {
+        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
+        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
+
+        return (Number.isFinite(fechaA) ? fechaA : 0) -
+          (Number.isFinite(fechaB) ? fechaB : 0);
+      }).slice(-9)
     : [];
 
   if (ultimos.length === 0) {
@@ -168,7 +223,6 @@ function dibujarGraficoTemperatura(historial) {
   }
 
   ultimos.forEach((medicion, index) => {
-
     const valor = Number(medicion.temperaturaBME280);
     const estadoBarra = calcularEstadoTemperatura(valor);
 
@@ -186,34 +240,24 @@ function dibujarGraficoTemperatura(historial) {
 
     const barra = document.createElement('div');
 
-    // Altura proporcional al valor, sin salir del rectángulo.
     const proporcion = Math.min(
       Math.max(valor / ESCALA_TEMPERATURA, 0.05),
       1
     );
 
-    const alturaBarra = proporcion * alturaGrafico;
-
     barra.title = `${valor}°C — ${estadoBarra}`;
-    barra.style.height = `${alturaBarra}px`;
+    barra.style.height = `${proporcion * alturaGrafico}px`;
     barra.style.flexShrink = '0';
-
-    // Mantener el diseño original.
     barra.style.width = '1.5625rem';
     barra.style.maxWidth = '80%';
+    barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
+    barra.style.transition = 'transform 0.15s ease';
+    barra.style.backgroundColor = COLORES_TEMPERATURA[estadoBarra];
 
-    // Esquinas superiores redondeadas y base recta.
     barra.style.borderTopLeftRadius = '0.8125rem';
     barra.style.borderTopRightRadius = '0.8125rem';
     barra.style.borderBottomLeftRadius = '0px';
     barra.style.borderBottomRightRadius = '0px';
-
-    barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
-    barra.style.transition = 'transform 0.15s ease';
-
-    barra.style.background = estadoBarra === 'Óptimo'
-      ? 'linear-gradient(180deg, #3b7a42, #244b29)'
-      : 'linear-gradient(180deg, #f59e0b, #d97706)';
 
     barra.addEventListener('mouseenter', () => {
       barra.style.transform = 'scaleY(1.03)';
@@ -223,7 +267,6 @@ function dibujarGraficoTemperatura(historial) {
       barra.style.transform = 'scaleY(1)';
     });
 
-    // Contenedor inferior para horario y valor.
     const contenedorEtiquetas = document.createElement('div');
 
     contenedorEtiquetas.style.position = 'absolute';
@@ -234,7 +277,6 @@ function dibujarGraficoTemperatura(historial) {
     contenedorEtiquetas.style.alignItems = 'center';
     contenedorEtiquetas.style.width = '100%';
 
-    // Horario de la medición.
     const etiquetaHora = document.createElement('div');
 
     const fechaMedicion =
@@ -253,10 +295,12 @@ function dibujarGraficoTemperatura(historial) {
             minute: '2-digit',
             hour12: false
           }).format(fechaObj);
-
     } else {
-      etiquetaHora.textContent =
-        index === ultimos.length - 1 ? 'AHORA' : '--:--';
+      etiquetaHora.textContent = '--:--';
+    }
+
+    if (index === ultimos.length - 1) {
+      etiquetaHora.textContent = 'AHORA';
     }
 
     etiquetaHora.style.fontSize = '9px';
@@ -264,7 +308,6 @@ function dibujarGraficoTemperatura(historial) {
     etiquetaHora.style.fontWeight = '700';
     etiquetaHora.style.whiteSpace = 'nowrap';
 
-    // Valor debajo del horario.
     const etiquetaValor = document.createElement('div');
 
     etiquetaValor.textContent = valor.toFixed(1) + '°';
@@ -285,5 +328,4 @@ function dibujarGraficoTemperatura(historial) {
 }
 
 cargarTemperatura();
-
 setInterval(cargarTemperatura, 15 * 60 * 1000);
