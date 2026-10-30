@@ -48,11 +48,11 @@ interface RegistroLectura {
 // mojado en el Monitor Serie), solo hay que cambiar estos dos números.
 const HUMEDAD_SECO: number = 1023;
 const HUMEDAD_MOJADO: number = 400;
-
+//console.log(convertirHumedadAPorcentaje(600))//
 // Convierte el valor crudo del sensor de humedad a un porcentaje de 0% a 100%.
 function convertirHumedadAPorcentaje(valorCrudo: number): number {
-  let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;
-
+  /*let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;*/
+  let porcentaje: number = ((HUMEDAD_MOJADO-valorCrudo)+(HUMEDAD_MOJADO-HUMEDAD_MOJADO+(Math.abs(HUMEDAD_MOJADO-HUMEDAD_SECO))))/(HUMEDAD_MOJADO-HUMEDAD_MOJADO+(Math.abs(HUMEDAD_MOJADO-HUMEDAD_SECO)))*100
   // Si el valor crudo se escapa del rango esperado, lo recortamos entre
   // 0% y 100% para que no se vean números raros (negativos o mayores a 100).
   if (porcentaje < 0) porcentaje = 0;
