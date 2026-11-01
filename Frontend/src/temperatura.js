@@ -1,27 +1,12 @@
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
 const ESCALA_TEMPERATURA = 40;
 
-// El backend guarda el timestamp en UTC (hora universal). Esta función lo
-// convierte a hora de Argentina (UTC-3) para mostrarlo en pantalla.
-function formatearHoraArgentina(timestampUTC) {
-  return new Date(timestampUTC).toLocaleString('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    day: '2-digit',
-    month: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-// Versión corta, solo "HH:MM", para las etiquetas debajo de cada barra del gráfico.
-function formatearHoraCorta(timestampUTC) {
-  return new Date(timestampUTC).toLocaleString('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-}
+const COLORES_TEMPERATURA = {
+  Bajo: '#3498db',
+  'Óptimo': '#27ae60',
+  Alto: '#e74c3c',
+  'Sin datos': '#7f8c8d'
+};
 
 function calcularEstadoTemperatura(valor) {
   if (valor < UMBRAL_TEMPERATURA.bajo) return 'Bajo';
@@ -30,173 +15,316 @@ function calcularEstadoTemperatura(valor) {
 }
 
 function recomendacionTemperatura(estado) {
-  if (estado === 'Bajo') return 'La temperatura es baja para la planta. Te recomendamos moverla a un lugar más cálido o alejada de corrientes de aire frío.';
-  if (estado === 'Alto') return 'La temperatura es alta para la planta. Te recomendamos ubicarla en un lugar más fresco o con menos sol directo.';
+  if (estado === 'Bajo') return 'La temperatura es baja para la planta. Te recomendamos moverla a un lugar más cálido.';
+  if (estado === 'Alto') return 'La temperatura es alta para la planta. Te recomendamos ubicarla en un lugar más fresco.';
   return 'La temperatura está en un rango óptimo para la planta.';
 }
 
+function actualizarEstadoTemperatura(elValor, elEstado, valor, estado) {
+  const color = COLORES_TEMPERATURA[estado];
+
+  if (elValor) {
+    elValor.textContent = valor + '°C';
+    elValor.style.color = color;
+  }
+
+  if (elEstado) {
+    elEstado.textContent = estado;
+    elEstado.style.setProperty('background-color', color, 'important');
+    elEstado.style.setProperty('color', '#000000', 'important');
+  }
+}
+
 async function cargarTemperatura() {
-  document.getElementById('valor-temperatura').textContent = 'Cargando...';
-  document.getElementById('recomendacion-temperatura').textContent = '';
+  const elValor = document.getElementById('valor-temperatura');
+  const elEstado = document.getElementById('estado-temperatura');
+  const elRecomendacion = document.getElementById('recomendacion-temperatura');
+
+  if (elRecomendacion) elRecomendacion.style.color = '#000000';
+  if (elValor) elValor.textContent = 'Cargando...';
+  if (elRecomendacion) elRecomendacion.innerHTML = '';
 
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
     if (!resUltimo) return;
+
     const ultimo = await resUltimo.json();
 
-    if (!resUltimo.ok) {
-      document.getElementById('valor-temperatura').textContent = '--';
-      document.getElementById('estado-temperatura').textContent = 'Error';
-      document.getElementById('recomendacion-temperatura').textContent = ultimo.error || 'No se pudo obtener los datos.';
+    if (!resUltimo.ok || !ultimo || ultimo.mensaje) {
+      if (elValor) {
+        elValor.textContent = '--';
+        elValor.style.color = COLORES_TEMPERATURA['Sin datos'];
+      }
+
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty(
+          'background-color',
+          COLORES_TEMPERATURA['Sin datos'],
+          'important'
+        );
+        elEstado.style.color = '#000000';
+      }
+
+      if (elRecomendacion) {
+        elRecomendacion.innerHTML =
+          '<strong>Recomendación:</strong> Todavía no hay mediciones disponibles.';
+      }
       return;
     }
 
-    if (ultimo.mensaje) {
-      document.getElementById('valor-temperatura').textContent = '--';
-      document.getElementById('estado-temperatura').textContent = 'Sin datos';
-      document.getElementById('recomendacion-temperatura').textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+    const valorOriginal = ultimo.temperaturaBME280;
+    const valor = Number(valorOriginal);
+
+    const valido =
+      valorOriginal !== null &&
+      valorOriginal !== undefined &&
+      valorOriginal !== '' &&
+      Number.isFinite(valor) &&
+      valor !== -127;
+
+    if (!valido) {
+      if (elValor) {
+        elValor.textContent = 'Sin datos';
+        elValor.style.color = COLORES_TEMPERATURA['Sin datos'];
+      }
+
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty(
+          'background-color',
+          COLORES_TEMPERATURA['Sin datos'],
+          'important'
+        );
+        elEstado.style.color = '#000000';
+      }
+
+      if (elRecomendacion) {
+        elRecomendacion.innerHTML =
+          '<strong>Recomendación:</strong> No se pudo obtener una temperatura válida. Revisá la conexión del sensor.';
+      }
       return;
     }
-
-    const valor = ultimo.temperaturaBME280;
-
-    if (valor === null) {
-      document.getElementById('valor-temperatura').textContent = 'Sin datos';
-      document.getElementById('estado-temperatura').textContent = 'Sin datos';
-      document.getElementById('recomendacion-temperatura').textContent = 'El sensor de temperatura todavía no está conectado.';
-      return;
-    }
-
-    document.getElementById('valor-temperatura').textContent = valor + '°C';
 
     const estado = calcularEstadoTemperatura(valor);
-    document.getElementById('estado-temperatura').textContent = estado;
-    document.getElementById('recomendacion-temperatura').textContent =
-      recomendacionTemperatura(estado) + ' (Última lectura: ' + formatearHoraArgentina(ultimo.timestamp) + ' hs. Arg.)';
+    actualizarEstadoTemperatura(elValor, elEstado, valor, estado);
+
+    if (elRecomendacion) {
+      elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> ' +
+        recomendacionTemperatura(estado);
+
+      elRecomendacion.style.color = '#000000';
+    }
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
-    if (!resHistorial) return;
+    if (!resHistorial || !resHistorial.ok) return;
+
     const historial = await resHistorial.json();
-    dibujarGrafico(historial);
+    dibujarGraficoTemperatura(historial);
+
   } catch (error) {
     console.error('Error cargando datos de temperatura:', error);
-    document.getElementById('valor-temperatura').textContent = '--';
-    document.getElementById('estado-temperatura').textContent = 'Error';
-    document.getElementById('recomendacion-temperatura').textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
+
+    if (elValor) elValor.textContent = '--';
+    if (elEstado) elEstado.textContent = 'Error';
+
+    if (elRecomendacion) {
+      elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
+    }
   }
 }
 
-function dibujarGrafico(historial) {
+function dibujarGraficoTemperatura(historial) {
   const contenedor = document.getElementById('grafico-temperatura');
   if (!contenedor) return;
 
   contenedor.innerHTML = '';
+  contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
-  contenedor.style.flexDirection = 'column';
+  contenedor.style.alignItems = 'flex-end';
+  contenedor.style.justifyContent = 'space-between';
+  contenedor.style.width = '100%';
+  contenedor.style.height = '175px';
+  contenedor.style.padding = '12px 20px 45px 42px';
   contenedor.style.boxSizing = 'border-box';
-  contenedor.style.padding = '10px 10px 6px';
   contenedor.style.fontFamily = 'Arial, sans-serif';
+  contenedor.style.overflow = 'hidden';
 
-  // Área de las barras + líneas de referencia del eje Y (como en el Figma).
-  const areaGrafico = document.createElement('div');
-  areaGrafico.style.position = 'relative';
-  areaGrafico.style.flex = '1';
-  areaGrafico.style.display = 'flex';
-  areaGrafico.style.alignItems = 'flex-end';
-  areaGrafico.style.gap = '4%';
-  areaGrafico.style.marginLeft = '24px';
-  areaGrafico.style.borderBottom = '1px solid #e2e2e2';
-  contenedor.appendChild(areaGrafico);
+  const alturaGrafico = 175 - 12 - 45;
 
-  // Eje Y: 5 líneas horizontales parejas, con su valor a la izquierda.
-  const pasoEjeY = ESCALA_TEMPERATURA / 5;
-  for (let i = 1; i <= 5; i = i + 1) {
-    const valorLinea = pasoEjeY * i;
-    const posicion = (valorLinea / ESCALA_TEMPERATURA) * 100;
-
+  [0, 25, 50, 75, 100].forEach((porcentaje) => {
     const linea = document.createElement('div');
+
     linea.style.position = 'absolute';
-    linea.style.left = '0';
-    linea.style.right = '0';
-    linea.style.bottom = posicion + '%';
-    linea.style.borderTop = '1px dashed #e2e2e2';
-    areaGrafico.appendChild(linea);
+    linea.style.left = '42px';
+    linea.style.right = '20px';
+    linea.style.bottom = `${45 + (porcentaje / 100) * alturaGrafico}px`;
+    linea.style.borderTop = porcentaje === 0
+      ? '1px solid rgba(0,0,0,0.3)'
+      : '1px dashed rgba(0,0,0,0.15)';
+    linea.style.zIndex = '1';
+
+    contenedor.appendChild(linea);
 
     const etiquetaEje = document.createElement('div');
-    etiquetaEje.textContent = Math.round(valorLinea) + '°c';
+
+    const valorEje = Math.round(
+      (porcentaje / 100) * ESCALA_TEMPERATURA
+    );
+
+    etiquetaEje.textContent = valorEje + '°';
     etiquetaEje.style.position = 'absolute';
-    etiquetaEje.style.left = '-24px';
-    etiquetaEje.style.bottom = `calc(${posicion}% - 5px)`;
-    etiquetaEje.style.fontSize = '8px';
-    etiquetaEje.style.color = '#8a8a8a';
-    areaGrafico.appendChild(etiquetaEje);
+    etiquetaEje.style.left = '6px';
+    etiquetaEje.style.bottom = `${40 + (porcentaje / 100) * alturaGrafico}px`;
+    etiquetaEje.style.fontSize = '9px';
+    etiquetaEje.style.color = '#555';
+    etiquetaEje.style.fontWeight = '600';
+    etiquetaEje.style.zIndex = '2';
+
+    contenedor.appendChild(etiquetaEje);
+  });
+
+  const ultimos = Array.isArray(historial)
+    ? historial.filter(medicion => {
+        if (!medicion) return false;
+
+        const valorOriginal = medicion.temperaturaBME280;
+
+        return valorOriginal !== null &&
+          valorOriginal !== undefined &&
+          valorOriginal !== '' &&
+          Number.isFinite(Number(valorOriginal)) &&
+          Number(valorOriginal) !== -127;
+      }).sort((a, b) => {
+        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
+        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
+
+        return (Number.isFinite(fechaA) ? fechaA : 0) -
+          (Number.isFinite(fechaB) ? fechaB : 0);
+      }).slice(-9)
+    : [];
+
+  if (ultimos.length === 0) {
+    const mensaje = document.createElement('div');
+
+    mensaje.textContent = 'No hay mediciones disponibles.';
+    mensaje.style.position = 'absolute';
+    mensaje.style.top = '50%';
+    mensaje.style.left = '50%';
+    mensaje.style.transform = 'translate(-50%, -50%)';
+    mensaje.style.fontSize = '12px';
+    mensaje.style.color = '#777';
+
+    contenedor.appendChild(mensaje);
+    return;
   }
 
-  const ultimos = historial.slice(-7);
-
-  // Fila de horarios debajo de cada barra (la última dice "AHORA").
-  const filaHoras = document.createElement('div');
-  filaHoras.style.display = 'flex';
-  filaHoras.style.gap = '4%';
-  filaHoras.style.marginLeft = '24px';
-  filaHoras.style.marginTop = '4px';
-  contenedor.appendChild(filaHoras);
-
-  ultimos.forEach((medicion, indice) => {
-    const valor = medicion.temperaturaBME280;
+  ultimos.forEach((medicion, index) => {
+    const valor = Number(medicion.temperaturaBME280);
     const estadoBarra = calcularEstadoTemperatura(valor);
 
     const columna = document.createElement('div');
+
     columna.style.display = 'flex';
     columna.style.flexDirection = 'column';
     columna.style.alignItems = 'center';
     columna.style.justifyContent = 'flex-end';
     columna.style.height = '100%';
     columna.style.flex = '1';
+    columna.style.minWidth = '0';
     columna.style.zIndex = '3';
-
-    const etiqueta = document.createElement('div');
-    etiqueta.textContent = valor + '°';
-    etiqueta.style.fontSize = '10px';
-    etiqueta.style.fontWeight = 'bold';
-    etiqueta.style.marginBottom = '3px';
-    etiqueta.style.color = '#2D6A4F';
+    columna.style.position = 'relative';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.max((valor / ESCALA_TEMPERATURA) * 100, 8);
-    barra.title = `${valor}°C — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
-    barra.style.height = alturaPorcentaje + '%';
-    barra.style.width = '65%';
-    barra.style.minHeight = '5px';
-    barra.style.borderRadius = '6px 6px 2px 2px';
+
+    const proporcion = Math.min(
+      Math.max(valor / ESCALA_TEMPERATURA, 0.05),
+      1
+    );
+
+    barra.title = `${valor}°C — ${estadoBarra}`;
+    barra.style.height = `${proporcion * alturaGrafico}px`;
+    barra.style.flexShrink = '0';
+    barra.style.width = '1.5625rem';
+    barra.style.maxWidth = '80%';
+    barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
     barra.style.transition = 'transform 0.15s ease';
-    barra.style.background = estadoBarra === 'Óptimo'
-      ? 'linear-gradient(180deg, #6fd07f, #2D6A4F)'
-      : 'linear-gradient(180deg, #ffb15c, #e07a1f)';
+    barra.style.backgroundColor = COLORES_TEMPERATURA[estadoBarra];
 
-    barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
-    barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
+    barra.style.borderTopLeftRadius = '0.8125rem';
+    barra.style.borderTopRightRadius = '0.8125rem';
+    barra.style.borderBottomLeftRadius = '0px';
+    barra.style.borderBottomRightRadius = '0px';
 
-    columna.appendChild(etiqueta);
-    columna.appendChild(barra);
-    areaGrafico.appendChild(columna);
+    barra.addEventListener('mouseenter', () => {
+      barra.style.transform = 'scaleY(1.03)';
+    });
 
-    const esUltima = indice === ultimos.length - 1;
+    barra.addEventListener('mouseleave', () => {
+      barra.style.transform = 'scaleY(1)';
+    });
+
+    const contenedorEtiquetas = document.createElement('div');
+
+    contenedorEtiquetas.style.position = 'absolute';
+    contenedorEtiquetas.style.top = '100%';
+    contenedorEtiquetas.style.marginTop = '5px';
+    contenedorEtiquetas.style.display = 'flex';
+    contenedorEtiquetas.style.flexDirection = 'column';
+    contenedorEtiquetas.style.alignItems = 'center';
+    contenedorEtiquetas.style.width = '100%';
+
     const etiquetaHora = document.createElement('div');
-    etiquetaHora.textContent = esUltima ? 'AHORA' : formatearHoraCorta(medicion.timestamp);
-    etiquetaHora.style.flex = '1';
-    etiquetaHora.style.textAlign = 'center';
-    etiquetaHora.style.fontSize = '8px';
-    etiquetaHora.style.fontWeight = esUltima ? 'bold' : 'normal';
-    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#8a8a8a';
-    filaHoras.appendChild(etiquetaHora);
+
+    const fechaMedicion =
+      medicion.fecha ||
+      medicion.createdAt ||
+      medicion.timestamp;
+
+    if (fechaMedicion) {
+      const fechaObj = new Date(fechaMedicion);
+
+      etiquetaHora.textContent = Number.isNaN(fechaObj.getTime())
+        ? '--:--'
+        : new Intl.DateTimeFormat('es-AR', {
+            timeZone: 'America/Argentina/Buenos_Aires',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+          }).format(fechaObj);
+    } else {
+      etiquetaHora.textContent = '--:--';
+    }
+
+    if (index === ultimos.length - 1) {
+      etiquetaHora.textContent = 'AHORA';
+    }
+
+    etiquetaHora.style.fontSize = '9px';
+    etiquetaHora.style.color = '#555';
+    etiquetaHora.style.fontWeight = '700';
+    etiquetaHora.style.whiteSpace = 'nowrap';
+
+    const etiquetaValor = document.createElement('div');
+
+    etiquetaValor.textContent = valor.toFixed(1) + '°';
+    etiquetaValor.style.fontSize = '8px';
+    etiquetaValor.style.color = '#777';
+    etiquetaValor.style.fontWeight = '600';
+    etiquetaValor.style.whiteSpace = 'nowrap';
+    etiquetaValor.style.marginTop = '3px';
+
+    contenedorEtiquetas.appendChild(etiquetaHora);
+    contenedorEtiquetas.appendChild(etiquetaValor);
+
+    columna.appendChild(barra);
+    columna.appendChild(contenedorEtiquetas);
+
+    contenedor.appendChild(columna);
   });
 }
 
 cargarTemperatura();
-setInterval(cargarTemperatura, 30 * 1000);
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    cargarTemperatura();
-  }
-});
+setInterval(cargarTemperatura, 15 * 60 * 1000);

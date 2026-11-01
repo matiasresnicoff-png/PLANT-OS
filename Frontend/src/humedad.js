@@ -1,27 +1,12 @@
 const UMBRAL_HUMEDAD = { bajo: 30, alto: 70 };
 const ESCALA_HUMEDAD = 100;
 
-// El backend guarda el timestamp en UTC (hora universal). Esta función lo
-// convierte a hora de Argentina (UTC-3) para mostrarlo en pantalla.
-function formatearHoraArgentina(timestampUTC) {
-  return new Date(timestampUTC).toLocaleString('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    day: '2-digit',
-    month: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
-
-// Versión corta, solo "HH:MM", para las etiquetas debajo de cada barra del gráfico.
-function formatearHoraCorta(timestampUTC) {
-  return new Date(timestampUTC).toLocaleString('es-AR', {
-    timeZone: 'America/Argentina/Buenos_Aires',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  });
-}
+const COLORES_HUMEDAD = {
+  Bajo: '#3498db',
+  'Óptimo': '#27ae60',
+  Alto: '#e74c3c',
+  'Sin datos': '#7f8c8d'
+};
 
 function calcularEstadoHumedad(valor) {
   if (valor < UMBRAL_HUMEDAD.bajo) return 'Bajo';
@@ -35,107 +20,163 @@ function recomendacionHumedad(estado) {
   return 'La humedad del suelo está en un rango óptimo. No hace falta regar todavía.';
 }
 
+function actualizarEstadoHumedad(elValor, elEstado, valor, estado) {
+  const color = COLORES_HUMEDAD[estado];
+  if (elValor) {
+    elValor.textContent = valor + '%';
+    elValor.style.color = color;
+  }
+  if (elEstado) {
+    elEstado.textContent = estado;
+    elEstado.style.setProperty('background-color', color, 'important');
+    elEstado.style.setProperty('color', '#000000', 'important');
+  }
+}
+
 async function cargarHumedad() {
-  document.getElementById('valor-humedad').textContent = 'Cargando...';
-  document.getElementById('recomendacion-humedad').innerHTML = '';
+  const elValor = document.getElementById('valor-humedad');
+  const elEstado = document.getElementById('estado-humedad');
+  const elRecomendacion = document.getElementById('recomendacion-humedad');
+
+  if (elRecomendacion) elRecomendacion.style.color = '#000000';
+  if (elValor) elValor.textContent = 'Cargando...';
+  if (elRecomendacion) elRecomendacion.innerHTML = '';
 
   try {
     const resUltimo = await fetchProtegido('http://localhost:3000/api/sensores/ultimo');
     if (!resUltimo) return;
     const ultimo = await resUltimo.json();
 
-    if (!resUltimo.ok) {
-      document.getElementById('valor-humedad').textContent = '--';
-      document.getElementById('estado-humedad').textContent = 'Error';
-      document.getElementById('recomendacion-humedad').textContent = ultimo.error || 'No se pudo obtener los datos.';
+    if (!resUltimo.ok || !ultimo || ultimo.mensaje) {
+      if (elValor) {
+        elValor.textContent = '--';
+        elValor.style.color = COLORES_HUMEDAD['Sin datos'];
+      }
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.backgroundColor = COLORES_HUMEDAD['Sin datos'];
+        elEstado.style.color = '#000000';
+      }
+      if (elRecomendacion) elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> Todavía no hay mediciones disponibles.';
       return;
     }
 
-    if (ultimo.mensaje) {
-      document.getElementById('valor-humedad').textContent = '--';
-      document.getElementById('estado-humedad').textContent = 'Sin datos';
-      document.getElementById('recomendacion-humedad').textContent = 'Todavía no hay mediciones. Esperá a que el sensor mande datos.';
+    const valorOriginal = ultimo.humedadSuelo;
+    const valor = Number(valorOriginal);
+    const valido = valorOriginal !== null && valorOriginal !== undefined &&
+      valorOriginal !== '' && Number.isFinite(valor);
+
+    if (!valido) {
+      if (elValor) {
+        elValor.textContent = 'Sin datos';
+        elValor.style.color = COLORES_HUMEDAD['Sin datos'];
+      }
+      if (elEstado) {
+        elEstado.textContent = 'Sin datos';
+        elEstado.style.setProperty('background-color', COLORES_HUMEDAD['Sin datos'], 'important');
+        elEstado.style.color = '#000000';
+      }
+      if (elRecomendacion) elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> El sensor de humedad todavía no está conectado.';
       return;
     }
-
-    const valor = ultimo.humedadSuelo;
-    document.getElementById('valor-humedad').textContent = valor + '%';
 
     const estado = calcularEstadoHumedad(valor);
-    document.getElementById('estado-humedad').textContent = estado;
-    document.getElementById('recomendacion-humedad').textContent =
-      recomendacionHumedad(estado) + ' (Última lectura: ' + formatearHoraArgentina(ultimo.timestamp) + ' hs. Arg.)';
+    actualizarEstadoHumedad(elValor, elEstado, valor, estado);
+
+    if (elRecomendacion) {
+      elRecomendacion.innerHTML =
+        '<strong>Recomendación:</strong> ' + recomendacionHumedad(estado);
+      elRecomendacion.style.color = '#000000';
+    }
 
     const resHistorial = await fetchProtegido('http://localhost:3000/api/sensores');
     if (!resHistorial) return;
+    if (!resHistorial.ok) return;
     const historial = await resHistorial.json();
-    dibujarGrafico(historial);
+    dibujarGraficoHumedad(historial);
   } catch (error) {
     console.error('Error cargando datos de humedad:', error);
-    document.getElementById('valor-humedad').textContent = '--';
-    document.getElementById('estado-humedad').textContent = 'Error';
-    document.getElementById('recomendacion-humedad').textContent = 'No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
+    if (elValor) elValor.textContent = '--';
+    if (elEstado) elEstado.textContent = 'Error';
+    if (elRecomendacion) elRecomendacion.innerHTML =
+      '<strong>Recomendación:</strong> No se pudo conectar con el servidor. Revisá que el backend esté corriendo.';
   }
 }
 
-function dibujarGrafico(historial) {
+function dibujarGraficoHumedad(historial) {
   const contenedor = document.getElementById('grafico-humedad');
   if (!contenedor) return;
 
   contenedor.innerHTML = '';
+  contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
-  contenedor.style.flexDirection = 'column';
+  contenedor.style.alignItems = 'flex-end';
+  contenedor.style.justifyContent = 'space-between';
+  contenedor.style.width = '100%';
+  contenedor.style.height = '175px';
+  contenedor.style.padding = '12px 20px 45px 45px';
   contenedor.style.boxSizing = 'border-box';
-  contenedor.style.padding = '10px 10px 6px';
   contenedor.style.fontFamily = 'Arial, sans-serif';
+  contenedor.style.overflow = 'hidden';
 
-  // Área de las barras + líneas de referencia del eje Y (como en el Figma).
-  const areaGrafico = document.createElement('div');
-  areaGrafico.style.position = 'relative';
-  areaGrafico.style.flex = '1';
-  areaGrafico.style.display = 'flex';
-  areaGrafico.style.alignItems = 'flex-end';
-  areaGrafico.style.gap = '4%';
-  areaGrafico.style.marginLeft = '24px';
-  areaGrafico.style.borderBottom = '1px solid #e2e2e2';
-  contenedor.appendChild(areaGrafico);
+  const alturaGrafico = 175 - 12 - 45;
 
-  // Eje Y: 5 líneas horizontales parejas, con su valor a la izquierda.
-  const pasoEjeY = ESCALA_HUMEDAD / 5;
-  for (let i = 1; i <= 5; i = i + 1) {
-    const valorLinea = pasoEjeY * i;
-    const posicion = (valorLinea / ESCALA_HUMEDAD) * 100;
-
+  [0, 25, 50, 75, 100].forEach((porcentaje) => {
     const linea = document.createElement('div');
     linea.style.position = 'absolute';
-    linea.style.left = '0';
-    linea.style.right = '0';
-    linea.style.bottom = posicion + '%';
-    linea.style.borderTop = '1px dashed #e2e2e2';
-    areaGrafico.appendChild(linea);
+    linea.style.left = '45px';
+    linea.style.right = '20px';
+    linea.style.bottom = `${45 + (porcentaje / 100) * alturaGrafico}px`;
+    linea.style.borderTop = porcentaje === 0
+      ? '1px solid rgba(0,0,0,0.3)'
+      : '1px dashed rgba(0,0,0,0.15)';
+    linea.style.zIndex = '1';
+    contenedor.appendChild(linea);
 
     const etiquetaEje = document.createElement('div');
-    etiquetaEje.textContent = Math.round(valorLinea) + '%';
+    const valorEje = Math.round((porcentaje / 100) * ESCALA_HUMEDAD);
+    etiquetaEje.textContent = valorEje + '%';
     etiquetaEje.style.position = 'absolute';
-    etiquetaEje.style.left = '-24px';
-    etiquetaEje.style.bottom = `calc(${posicion}% - 5px)`;
-    etiquetaEje.style.fontSize = '8px';
-    etiquetaEje.style.color = '#8a8a8a';
-    areaGrafico.appendChild(etiquetaEje);
+    etiquetaEje.style.left = '6px';
+    etiquetaEje.style.bottom = `${40 + (porcentaje / 100) * alturaGrafico}px`;
+    etiquetaEje.style.fontSize = '9px';
+    etiquetaEje.style.color = '#555';
+    etiquetaEje.style.fontWeight = '600';
+    etiquetaEje.style.zIndex = '2';
+    contenedor.appendChild(etiquetaEje);
+  });
+
+  const ultimos = Array.isArray(historial)
+    ? historial.filter(medicion => {
+        if (!medicion) return false;
+        const valorOriginal = medicion.humedadSuelo;
+        return valorOriginal !== null && valorOriginal !== undefined &&
+          valorOriginal !== '' && Number.isFinite(Number(valorOriginal));
+      }).sort((a, b) => {
+        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
+        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
+        return (Number.isFinite(fechaA) ? fechaA : 0) -
+          (Number.isFinite(fechaB) ? fechaB : 0);
+      }).slice(-9)
+    : [];
+
+  if (ultimos.length === 0) {
+    const mensaje = document.createElement('div');
+    mensaje.textContent = 'No hay mediciones disponibles.';
+    mensaje.style.position = 'absolute';
+    mensaje.style.top = '50%';
+    mensaje.style.left = '50%';
+    mensaje.style.transform = 'translate(-50%, -50%)';
+    mensaje.style.fontSize = '12px';
+    mensaje.style.color = '#777';
+    contenedor.appendChild(mensaje);
+    return;
   }
 
-  const ultimos = historial.slice(-7);
-
-  // Fila de horarios debajo de cada barra (la última dice "AHORA").
-  const filaHoras = document.createElement('div');
-  filaHoras.style.display = 'flex';
-  filaHoras.style.gap = '4%';
-  filaHoras.style.marginLeft = '24px';
-  filaHoras.style.marginTop = '4px';
-  contenedor.appendChild(filaHoras);
-
-  ultimos.forEach((medicion, indice) => {
-    const valor = medicion.humedadSuelo;
+  ultimos.forEach((medicion, index) => {
+    const valor = Number(medicion.humedadSuelo);
     const estadoBarra = calcularEstadoHumedad(valor);
 
     const columna = document.createElement('div');
@@ -145,50 +186,72 @@ function dibujarGrafico(historial) {
     columna.style.justifyContent = 'flex-end';
     columna.style.height = '100%';
     columna.style.flex = '1';
+    columna.style.minWidth = '0';
     columna.style.zIndex = '3';
-
-    const etiqueta = document.createElement('div');
-    etiqueta.textContent = valor + '%';
-    etiqueta.style.fontSize = '10px';
-    etiqueta.style.fontWeight = 'bold';
-    etiqueta.style.marginBottom = '3px';
-    etiqueta.style.color = '#2D6A4F';
+    columna.style.position = 'relative';
 
     const barra = document.createElement('div');
-    const alturaPorcentaje = Math.max((valor / ESCALA_HUMEDAD) * 100, 8);
-    barra.title = `${valor}% — ${estadoBarra} — ${formatearHoraArgentina(medicion.timestamp)} hs. Arg.`;
-    barra.style.height = alturaPorcentaje + '%';
-    barra.style.width = '65%';
-    barra.style.minHeight = '5px';
-    barra.style.borderRadius = '6px 6px 2px 2px';
+    const proporcion = Math.min(Math.max(valor / ESCALA_HUMEDAD, 0.05), 1);
+    barra.title = `${valor}% — ${estadoBarra}`;
+    barra.style.height = `${proporcion * alturaGrafico}px`;
+    barra.style.flexShrink = '0';
+    barra.style.width = '1.5625rem';
+    barra.style.maxWidth = '80%';
+    barra.style.boxShadow = '0 3px 6px rgba(0,0,0,0.12)';
     barra.style.transition = 'transform 0.15s ease';
-    barra.style.background = estadoBarra === 'Óptimo'
-      ? 'linear-gradient(180deg, #6fd07f, #2D6A4F)'
-      : 'linear-gradient(180deg, #ffb15c, #e07a1f)';
+    barra.style.backgroundColor = COLORES_HUMEDAD[estadoBarra];
+    barra.style.borderRadius = '0.8125rem';
 
-    barra.addEventListener('mouseenter', () => { barra.style.transform = 'scaleY(1.03)'; });
-    barra.addEventListener('mouseleave', () => { barra.style.transform = 'scaleY(1)'; });
+    barra.addEventListener('mouseenter', () => {
+      barra.style.transform = 'scaleY(1.03)';
+    });
+    barra.addEventListener('mouseleave', () => {
+      barra.style.transform = 'scaleY(1)';
+    });
 
-    columna.appendChild(etiqueta);
-    columna.appendChild(barra);
-    areaGrafico.appendChild(columna);
+    const contenedorEtiquetas = document.createElement('div');
+    contenedorEtiquetas.style.position = 'absolute';
+    contenedorEtiquetas.style.top = '100%';
+    contenedorEtiquetas.style.marginTop = '5px';
+    contenedorEtiquetas.style.display = 'flex';
+    contenedorEtiquetas.style.flexDirection = 'column';
+    contenedorEtiquetas.style.alignItems = 'center';
+    contenedorEtiquetas.style.width = '100%';
 
-    const esUltima = indice === ultimos.length - 1;
     const etiquetaHora = document.createElement('div');
-    etiquetaHora.textContent = esUltima ? 'AHORA' : formatearHoraCorta(medicion.timestamp);
-    etiquetaHora.style.flex = '1';
-    etiquetaHora.style.textAlign = 'center';
-    etiquetaHora.style.fontSize = '8px';
-    etiquetaHora.style.fontWeight = esUltima ? 'bold' : 'normal';
-    etiquetaHora.style.color = esUltima ? '#2D6A4F' : '#8a8a8a';
-    filaHoras.appendChild(etiquetaHora);
+    const fechaMedicion = medicion.fecha || medicion.createdAt || medicion.timestamp;
+    if (fechaMedicion) {
+      const fechaObj = new Date(fechaMedicion);
+      etiquetaHora.textContent = Number.isNaN(fechaObj.getTime())
+        ? '--:--'
+        : new Intl.DateTimeFormat('es-AR', {
+            timeZone: 'America/Argentina/Buenos_Aires',
+            hour: '2-digit', minute: '2-digit', hour12: false
+          }).format(fechaObj);
+    } else {
+      etiquetaHora.textContent = '--:--';
+    }
+    if (index === ultimos.length - 1) etiquetaHora.textContent = 'AHORA';
+    etiquetaHora.style.fontSize = '9px';
+    etiquetaHora.style.color = '#555';
+    etiquetaHora.style.fontWeight = '700';
+    etiquetaHora.style.whiteSpace = 'nowrap';
+
+    const etiquetaValor = document.createElement('div');
+    etiquetaValor.textContent = valor + '%';
+    etiquetaValor.style.fontSize = '8px';
+    etiquetaValor.style.color = '#777';
+    etiquetaValor.style.fontWeight = '600';
+    etiquetaValor.style.whiteSpace = 'nowrap';
+    etiquetaValor.style.marginTop = '3px';
+
+    contenedorEtiquetas.appendChild(etiquetaHora);
+    contenedorEtiquetas.appendChild(etiquetaValor);
+    columna.appendChild(barra);
+    columna.appendChild(contenedorEtiquetas);
+    contenedor.appendChild(columna);
   });
 }
 
 cargarHumedad();
-setInterval(cargarHumedad, 30 * 1000);
-document.addEventListener('visibilitychange', () => {
-  if (document.visibilityState === 'visible') {
-    cargarHumedad();
-  }
-});
+setInterval(cargarHumedad, 15 * 60 * 1000);
