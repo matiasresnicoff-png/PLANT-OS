@@ -1,7 +1,6 @@
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
 const ESCALA_TEMPERATURA = 40;
 
-// Colores idénticos a los de Inicio.
 const COLORES_TEMPERATURA = {
   Bajo: '#3498db',
   'Óptimo': '#27ae60',

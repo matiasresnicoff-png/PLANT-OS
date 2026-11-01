@@ -2,7 +2,6 @@ const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const UMBRAL_HUMEDAD = { bajo: 30, alto: 70 };
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
 
-// Los mismos colores para todos los sensores.
 const COLORES_ESTADO = {
   Bajo: '#3498db',
   'Óptimo': '#27ae60',

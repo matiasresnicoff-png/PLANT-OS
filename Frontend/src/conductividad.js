@@ -1,7 +1,6 @@
 const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const ESCALA_CONDUCTIVIDAD = 3000;
 
-// Colores idénticos a los de Inicio.
 const COLORES_CONDUCTIVIDAD = {
   Bajo: '#3498db',
   'Óptimo': '#27ae60',

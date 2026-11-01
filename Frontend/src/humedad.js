@@ -1,7 +1,6 @@
 const UMBRAL_HUMEDAD = { bajo: 30, alto: 70 };
 const ESCALA_HUMEDAD = 100;
 
-// Colores idénticos a los de Inicio.
 const COLORES_HUMEDAD = {
   Bajo: '#3498db',
   'Óptimo': '#27ae60',
