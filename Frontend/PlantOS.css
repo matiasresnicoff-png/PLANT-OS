@@ -559,7 +559,7 @@ html, body {
     box-sizing: border-box;
 }
 .dato-estado2{
-    color: #2D6A4F;
+    color: #000;
     font-family: "Inter", sans-serif;
     font-size: 1.125rem;
     font-style: normal;
@@ -614,7 +614,7 @@ html, body {
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    width: 5.1875rem;
+    width: 10.1875rem;
     height: 1.125rem;
     border-radius: 0.625rem;
     background: rgba(130, 244, 193, 0.53);

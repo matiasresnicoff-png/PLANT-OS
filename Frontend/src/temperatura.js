@@ -1,3 +1,4 @@
+
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
 const ESCALA_TEMPERATURA = 40;
 
@@ -23,13 +24,19 @@ function recomendacionTemperatura(estado) {
 function actualizarEstadoTemperatura(elValor, elEstado, valor, estado) {
   const color = COLORES_TEMPERATURA[estado];
 
+  const mensajesEstado = {
+    Bajo: '¡Frío!',
+    'Óptimo': '¡Perfecto!',
+    Alto: '¡Calor!'
+  };
+
   if (elValor) {
     elValor.textContent = valor + '°C';
     elValor.style.color = color;
   }
 
   if (elEstado) {
-    elEstado.textContent = estado;
+    elEstado.textContent = mensajesEstado[estado] || estado;
     elEstado.style.setProperty('background-color', color, 'important');
     elEstado.style.setProperty('color', '#000000', 'important');
   }

@@ -1,3 +1,4 @@
+
 const UMBRAL_HUMEDAD = { bajo: 30, alto: 70 };
 const ESCALA_HUMEDAD = 100;
 
@@ -22,12 +23,20 @@ function recomendacionHumedad(estado) {
 
 function actualizarEstadoHumedad(elValor, elEstado, valor, estado) {
   const color = COLORES_HUMEDAD[estado];
+
+  const mensajesEstado = {
+    Bajo: '¡Seco!',
+    'Óptimo': '¡Ideal!',
+    Alto: '¡Húmedo!'
+  };
+
   if (elValor) {
     elValor.textContent = valor + '%';
     elValor.style.color = color;
   }
+
   if (elEstado) {
-    elEstado.textContent = estado;
+    elEstado.textContent = mensajesEstado[estado] || estado;
     elEstado.style.setProperty('background-color', color, 'important');
     elEstado.style.setProperty('color', '#000000', 'important');
   }
