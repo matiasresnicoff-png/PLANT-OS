@@ -49,7 +49,7 @@ function convertirHumedadAPorcentaje(valorCrudo: number): number {
   if (valorCrudo === 0) return 0;
 
   // Si el valor capturado es menor al mínimo ajustado, es 0% (tierra totalmente seca)
-  if (valorCrudo < HUMEDAD_MINIMA_SECO) return 0; 
+  if (valorCrudo < HUMEDAD_MINIMA_SECO) return 0;
 
   // Regla de tres simple basada en el nuevo rango calibrado (300 a 1000)
   let porcentaje: number = ((valorCrudo - HUMEDAD_MINIMA_SECO) / (HUMEDAD_MAXIMA_MOJADO - HUMEDAD_MINIMA_SECO)) * 100;
@@ -130,16 +130,30 @@ app.listen(PORT_HTTP, function () {
   console.log('=======================================');
 });
 
-// Acá abrimos la conexión con el Arduino por el puerto serie (COM3).
-// "parser" separa lo que llega en líneas de texto (una lectura por línea).
+// autoOpen: false = no intentamos abrir el puerto automáticamente al crear
+// el objeto. Lo abrimos nosotros a mano con port.open(), para poder
+// atrapar el error con un callback común y corriente. Esto es necesario
+// porque si el puerto no existe en esta compu (por ejemplo, alguien del
+// equipo corre el server sin el Arduino conectado, o con drivers que
+// todavía no andan), con autoOpen:true el error se escapa como una
+// excepción no atrapada y tira ABAJO TODO EL SERVIDOR — no solo la parte
+// del Arduino.
 const port = new SerialPort({
   path: 'COM3',
   baudRate: 9600,
+  autoOpen: false,
 });
 
 const parser = port.pipe(new ReadlineParser({ delimiter: '\r\n' }));
 
-port.on('open', function () {
+port.open(function (err: Error | null) {
+  if (err) {
+    // No hay Arduino conectado en este puerto (o está en otro puerto COM,
+    // o falta el driver). El servidor HTTP sigue funcionando igual, solo
+    // que sin lecturas nuevas del Arduino hasta que se conecte.
+    console.error('[UART] No se pudo abrir el puerto serie (seguimos sin Arduino):', err.message);
+    return;
+  }
   console.log('[UART] Puerto serial abierto correctamente.');
 });
 
