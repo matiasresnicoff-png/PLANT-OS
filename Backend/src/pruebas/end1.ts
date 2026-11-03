@@ -39,27 +39,26 @@ interface RegistroLectura {
   temperaturaBME280: number | null;
 }
 
-// El sensor de humedad manda un valor "crudo" (analogRead de Arduino, de 0 a
-// 1023), no un porcentaje. Estos dos números son de calibración.
-const HUMEDAD_SECO: number = 1023;
-const HUMEDAD_MOJADO: number = 400;
-//console.log(convertirHumedadAPorcentaje(600))//
-// Convierte el valor crudo del sensor de humedad a un porcentaje de 0% a 100%.
+// CONSTANTES DE CALIBRACIÓN AJUSTADAS: Basadas en tus lecturas reales de consola
+const HUMEDAD_MINIMA_SECO: number = 300;   // Ajustado a 300 (antes 400) para registrar valores secos bajos
+const HUMEDAD_MAXIMA_MOJADO: number = 1000; // Ajustado a 1000 (antes 1023) para un acople más preciso
+
+// Convierte el valor crudo del sensor de humedad a un porcentaje directo de 0% a 100%.
 function convertirHumedadAPorcentaje(valorCrudo: number): number {
-  /*let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;*/
-  let porcentaje: number = ((HUMEDAD_MOJADO-valorCrudo)+(HUMEDAD_MOJADO-HUMEDAD_MOJADO+(Math.abs(HUMEDAD_MOJADO-HUMEDAD_SECO))))/(HUMEDAD_MOJADO-HUMEDAD_MOJADO+(Math.abs(HUMEDAD_MOJADO-HUMEDAD_SECO)))*100
-  // Si el valor crudo se escapa del rango esperado, lo recortamos entre
-  // 0% y 100% para que no se vean números raros (negativos o mayores a 100).
+  // Ignoramos el 0 absoluto por si es una desconexión física del cable
+  if (valorCrudo === 0) return 0;
+
+  // Si el valor capturado es menor al mínimo ajustado, es 0% (tierra totalmente seca)
+  if (valorCrudo < HUMEDAD_MINIMA_SECO) return 0; 
+
+  // Regla de tres simple basada en el nuevo rango calibrado (300 a 1000)
+  let porcentaje: number = ((valorCrudo - HUMEDAD_MINIMA_SECO) / (HUMEDAD_MAXIMA_MOJADO - HUMEDAD_MINIMA_SECO)) * 100;
+
+  // Si el valor calculado se escapa de los rangos, lo recortamos
   if (porcentaje < 0) porcentaje = 0;
   if (porcentaje > 100) porcentaje = 100;
 
-  // CORRECCIÓN: con el sensor real que probaron en el colegio, la tierra
-  // seca daba 100% en vez de 0% — el sensor funciona al revés de lo que
-  // asumimos al principio (en vez de dar un número alto cuando está seco,
-  // da un número bajo). Por eso invertimos acá el resultado final (100
-  // menos el porcentaje calculado), para que quede bien: tierra seca cerca
-  // de 0%, tierra mojada cerca de 100%.
-  return 100 - Math.round(porcentaje);
+  return Math.round(porcentaje);
 }
 
 // Guarda una lectura nueva en sensores.json: lee el historial que ya
@@ -71,7 +70,6 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     historial = JSON.parse(contenidoTexto);
   } catch {
-    // Si el archivo todavía no existe (o está corrupto), arrancamos con el historial vacío.
     historial = [];
   }
 
@@ -211,14 +209,10 @@ function procesarBloqueLimpio(lineas: string[]): void {
       timestamp: fechaActual,
       humedadSuelo: conductividad !== null ? convertirHumedadAPorcentaje(conductividad) : null,
       conductividad: conductividad,
-      temperaturaBME280: temperatura,
+      temperaturaBME280: temperatura
     };
 
     guardarEnJson(registro);
-    console.log('[PLANT-OS] Nueva lectura registrada con éxito:', registro);
+    console.log('[UART] Nuevo registro guardado con éxito:', registro);
   }
 }
-
-port.on('error', function (err: Error) {
-  console.error('[UART Error]:', err.message);
-});
