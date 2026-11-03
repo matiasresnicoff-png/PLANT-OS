@@ -41,8 +41,9 @@ html, body {
 }
 
 .icono-registro {
-    width: 1.625rem;
-    height: 1.1875rem;
+    width: 3.125rem;
+    height: 3.125rem;
+    aspect-ratio: 1/1;
     display: flex;
     justify-content: flex-start;
     align-items: center;
