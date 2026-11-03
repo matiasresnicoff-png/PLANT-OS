@@ -762,6 +762,7 @@ html, body {
     gap: 0.625rem;
     border-radius: 0.9375rem;
     background: #FFF;
+    margin-top: -1rem;
 }
 
 .informacion-proyecto {

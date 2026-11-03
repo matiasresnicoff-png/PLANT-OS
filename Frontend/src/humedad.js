@@ -1,4 +1,3 @@
-
 const UMBRAL_HUMEDAD = { bajo: 30, alto: 70 };
 const ESCALA_HUMEDAD = 100;
 
