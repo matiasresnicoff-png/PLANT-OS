@@ -39,22 +39,22 @@ interface RegistroLectura {
   temperaturaBME280: number | null;
 }
 
-// El sensor de humedad manda un valor "crudo" (analogRead de Arduino, de 0 a
-// 1023), no un porcentaje. Estos dos números son de calibración: la mayoría
-// de estos sensores resistivos de 2 patitas dan un valor ALTO (cerca de
-// 1023) cuando están secos, y el valor BAJA a medida que se mojan. Son
-// valores típicos, no medidos con este sensor en particular — si en algún
-// momento lo calibran de verdad (ver el valor crudo bien seco y bien
-// mojado en el Monitor Serie), solo hay que cambiar estos dos números.
-const HUMEDAD_SECO: number = 1023;
-const HUMEDAD_MOJADO: number = 400;
+// CONSTANTES DE CALIBRACIÓN AJUSTADAS: Basadas en tus lecturas reales de consola
+const HUMEDAD_MINIMA_SECO: number = 300;   // Ajustado a 300 (antes 400) para registrar valores secos bajos
+const HUMEDAD_MAXIMA_MOJADO: number = 1000; // Ajustado a 1000 (antes 1023) para un acople más preciso
 
-// Convierte el valor crudo del sensor de humedad a un porcentaje de 0% a 100%.
+// Convierte el valor crudo del sensor de humedad a un porcentaje directo de 0% a 100%.
 function convertirHumedadAPorcentaje(valorCrudo: number): number {
-  let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;
+  // Ignoramos el 0 absoluto por si es una desconexión física del cable
+  if (valorCrudo === 0) return 0;
 
-  // Si el valor crudo se escapa del rango esperado, lo recortamos entre
-  // 0% y 100% para que no se vean números raros (negativos o mayores a 100).
+  // Si el valor capturado es menor al mínimo ajustado, es 0% (tierra totalmente seca)
+  if (valorCrudo < HUMEDAD_MINIMA_SECO) return 0; 
+
+  // Regla de tres simple basada en el nuevo rango calibrado (300 a 1000)
+  let porcentaje: number = ((valorCrudo - HUMEDAD_MINIMA_SECO) / (HUMEDAD_MAXIMA_MOJADO - HUMEDAD_MINIMA_SECO)) * 100;
+
+  // Si el valor calculado se escapa de los rangos, lo recortamos
   if (porcentaje < 0) porcentaje = 0;
   if (porcentaje > 100) porcentaje = 100;
 
@@ -70,7 +70,6 @@ function guardarEnJson(datosNuevos: RegistroLectura): void {
     let contenidoTexto: string = fs.readFileSync(filePath, 'utf-8');
     historial = JSON.parse(contenidoTexto);
   } catch {
-    // Si el archivo todavía no existe (o está corrupto), arrancamos con el historial vacío.
     historial = [];
   }
 
@@ -224,14 +223,10 @@ function procesarBloqueLimpio(lineas: string[]): void {
       timestamp: fechaActual,
       humedadSuelo: conductividad !== null ? convertirHumedadAPorcentaje(conductividad) : null,
       conductividad: conductividad,
-      temperaturaBME280: temperatura,
+      temperaturaBME280: temperatura
     };
 
     guardarEnJson(registro);
-    console.log('[PLANT-OS] Nueva lectura registrada con éxito:', registro);
+    console.log('[UART] Nuevo registro guardado con éxito:', registro);
   }
 }
-
-port.on('error', function (err: Error) {
-  console.error('[UART Error]:', err.message);
-});

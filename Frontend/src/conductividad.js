@@ -1,3 +1,4 @@
+
 const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const ESCALA_CONDUCTIVIDAD = 3000;
 
@@ -23,15 +24,22 @@ function recomendacionConductividad(estado) {
 function actualizarEstadoConductividad(elValor, elEstado, valor, estado) {
   const color = COLORES_CONDUCTIVIDAD[estado];
 
+  const mensajesEstado = {
+    Bajo: '¡Bajo!',
+    'Óptimo': '¡Rango Saludable!',
+    Alto: '¡Alto!'
+  };
+
   if (elValor) {
     elValor.textContent = valor + ' µS/cm';
     elValor.style.color = color;
   }
 
   if (elEstado) {
-    elEstado.textContent = estado;
-    elEstado.style.setProperty('background-color', color, 'important');
-    elEstado.style.setProperty('color', '#000000', 'important');
+  elEstado.textContent = mensajesEstado[estado] || estado;
+  elEstado.style.whiteSpace = 'nowrap';
+  elEstado.style.setProperty('background-color', color, 'important');
+  elEstado.style.setProperty('color', '#000000', 'important');
   }
 }
 
