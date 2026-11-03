@@ -40,26 +40,25 @@ interface RegistroLectura {
 }
 
 // El sensor de humedad manda un valor "crudo" (analogRead de Arduino, de 0 a
-// 1023), no un porcentaje. Estos dos números son de calibración.
+// 1023), no un porcentaje. Estos dos números son de calibración: la mayoría
+// de estos sensores resistivos de 2 patitas dan un valor ALTO (cerca de
+// 1023) cuando están secos, y el valor BAJA a medida que se mojan. Son
+// valores típicos, no medidos con este sensor en particular — si en algún
+// momento lo calibran de verdad (ver el valor crudo bien seco y bien
+// mojado en el Monitor Serie), solo hay que cambiar estos dos números.
 const HUMEDAD_SECO: number = 1023;
 const HUMEDAD_MOJADO: number = 400;
-//console.log(convertirHumedadAPorcentaje(600))//
+
 // Convierte el valor crudo del sensor de humedad a un porcentaje de 0% a 100%.
 function convertirHumedadAPorcentaje(valorCrudo: number): number {
-  /*let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;*/
-  let porcentaje: number = ((HUMEDAD_MOJADO-valorCrudo)+(HUMEDAD_MOJADO-HUMEDAD_MOJADO+(Math.abs(HUMEDAD_MOJADO-HUMEDAD_SECO))))/(HUMEDAD_MOJADO-HUMEDAD_MOJADO+(Math.abs(HUMEDAD_MOJADO-HUMEDAD_SECO)))*100
+  let porcentaje: number = ((HUMEDAD_SECO - valorCrudo) / (HUMEDAD_SECO - HUMEDAD_MOJADO)) * 100;
+
   // Si el valor crudo se escapa del rango esperado, lo recortamos entre
   // 0% y 100% para que no se vean números raros (negativos o mayores a 100).
   if (porcentaje < 0) porcentaje = 0;
   if (porcentaje > 100) porcentaje = 100;
 
-  // CORRECCIÓN: con el sensor real que probaron en el colegio, la tierra
-  // seca daba 100% en vez de 0% — el sensor funciona al revés de lo que
-  // asumimos al principio (en vez de dar un número alto cuando está seco,
-  // da un número bajo). Por eso invertimos acá el resultado final (100
-  // menos el porcentaje calculado), para que quede bien: tierra seca cerca
-  // de 0%, tierra mojada cerca de 100%.
-  return 100 - Math.round(porcentaje);
+  return Math.round(porcentaje);
 }
 
 // Guarda una lectura nueva en sensores.json: lee el historial que ya
@@ -88,6 +87,7 @@ app.get('/api/sensores', verificarToken, function (req: Request, res: Response) 
     let datosCargados: RegistroLectura[] = JSON.parse(contenidoTexto);
     res.json(datosCargados);
   } catch {
+    // Si el archivo todavía no existe (o hay algún problema al leerlo), no hay datos para mostrar.
     res.json([]);
   }
 });
@@ -113,6 +113,7 @@ app.get('/api/sensores/ultimo', verificarToken, function (req: Request, res: Res
       res.json({ mensaje: 'No se encontró el último registro' });
     }
   } catch {
+    // Si el archivo todavía no existe (o hay algún problema al leerlo), avisamos que no hay datos.
     res.json({ mensaje: 'No hay datos registrados aún' });
   }
 });
@@ -130,7 +131,7 @@ app.listen(PORT_HTTP, function () {
   console.log('=======================================');
 });
 
-// Acá abrimos la conexión con el Arduino por el puerto serie.
+// Acá abrimos la conexión con el Arduino por el puerto serie (COM3).
 // "parser" separa lo que llega en líneas de texto (una lectura por línea).
 const port = new SerialPort({
   path: 'COM3',
@@ -149,11 +150,18 @@ port.on('open', function () {
 let lineasBloque: string[] = [];
 
 parser.on('data', function (lineaCruda: string) {
+  // DEBUG: esto muestra en consola CADA línea que llega del Arduino, tal
+  // cual la recibe el backend, antes de procesarla. Es solo para diagnosticar
+  // por qué no estaban apareciendo las lecturas — después lo sacamos.
+  console.log('[DEBUG] Línea cruda recibida:', JSON.stringify(lineaCruda));
+
   let lineaLimpia: string = lineaCruda.trim();
 
   let empiezaConGuiones: boolean = lineaLimpia.startsWith('---');
 
   if (empiezaConGuiones === true) {
+    // Llegó el separador: ya tenemos el bloque completo, lo procesamos
+    // y vaciamos la lista para empezar a juntar el próximo.
     procesarBloqueLimpio(lineasBloque);
     lineasBloque = [];
   } else {
@@ -207,6 +215,11 @@ function procesarBloqueLimpio(lineas: string[]): void {
   if (llegoAlgunDato === true) {
     let fechaActual: string = new Date().toISOString();
 
+    // Por ahora el único sensor analógico que tenemos conectado es el de
+    // humedad de 2 patitas (todavía no llegó el sensor de conductividad de
+    // verdad). "humedadSuelo" usa ese valor ya convertido a porcentaje;
+    // "conductividad" por ahora queda con el mismo valor crudo, como relleno
+    // temporal, hasta que llegue el sensor real y lo reemplacemos.
     let registro: RegistroLectura = {
       timestamp: fechaActual,
       humedadSuelo: conductividad !== null ? convertirHumedadAPorcentaje(conductividad) : null,
