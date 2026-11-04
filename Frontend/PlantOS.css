@@ -6,6 +6,7 @@ html, body {
     overflow: hidden;
 }
 
+
 .wireframe {
     width: 100%;
     min-height: 100vh;
@@ -17,11 +18,13 @@ html, body {
     object-fit: contain;
 }
 
+
 .wireframe * {
     max-width: 100%;
     min-width: 0;
     box-sizing: border-box;
 }
+
 
 .inicio {
     display: flex;
@@ -32,6 +35,7 @@ html, body {
     margin-top: 0;
 }
 
+
 .header-arriba {
     width: 100%;
     display: flex;
@@ -39,6 +43,7 @@ html, body {
     align-items: center;
     padding: 1rem 0;
 }
+
 
 .icono-registro {
     width: 3.125rem;
@@ -49,6 +54,7 @@ html, body {
     align-items: center;
 }
 
+
 .centro-titulos {
     display: flex;
     flex-direction: column;
@@ -58,6 +64,8 @@ html, body {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
 }
+
+
 
 
 .title {
@@ -73,6 +81,7 @@ html, body {
     text-align: center;
 }
 
+
 .title2 {
     width: 100%;
     color: #000;
@@ -83,6 +92,7 @@ html, body {
     margin: 0;
     box-sizing: border-box;
 }
+
 
 .info {
     height: auto;
@@ -100,19 +110,22 @@ html, body {
     line-height: 1.4;
 }
 
+
 .title5 {
     width: 19.4375rem;
     height: 2.6875rem;
     white-space: nowrap;
     color: #0D6B41;
     font-family:"Playfair Display";
-    font-size: 32px;
+    font-size: 2rem;
     font-weight: 600;
     word-wrap: break-word;
     margin: 0;
     padding: 0;
     line-height: 1;
 }
+
+
 
 
 .tarjetas-inicio {
@@ -126,12 +139,13 @@ html, body {
     width: 100%;
 }
 
+
 .tarjeta-inicio {
     width: 16.25rem;
     height: 8.75rem;
     background: white;
     border-radius: 0.75rem;
-    border: 1px solid #9E9E9E;
+    border: 0.0625rem solid #9E9E9E;
     text-decoration: none;
     display: flex;
     flex-direction: column;
@@ -151,6 +165,7 @@ html, body {
     object-fit: contain;
 }
 
+
 .titulo {
     width: 9.125rem;
     height: 1rem;
@@ -165,8 +180,9 @@ html, body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    gap: 0px;
+    gap: 0rem;
 }
+
 
 .medida {
     display: flex;
@@ -182,8 +198,9 @@ html, body {
     font-weight: 700;
     line-height: 1.2;
     margin-top: 0.5rem;
-    gap: 0px;
+    gap: 0rem;
 }
+
 
 .conclucion {
     display: flex;
@@ -200,8 +217,9 @@ html, body {
     font-weight: 500;
     line-height: 1.2;
     margin-top: 0.5rem;
-    gap: 0px;
+    gap: 0rem;
 }
+
 
 .barra-navegacion {
     display: flex;
@@ -215,6 +233,7 @@ html, body {
     box-shadow: 0rem -0.25rem 0.75rem rgba(0, 0, 0, 0.06);
     text-decoration: none;
 }
+
 
 .opcion-navegacion {
     white-space: nowrap;
@@ -234,12 +253,15 @@ html, body {
     gap: 0.5rem;
 }
 
+
 .emojis {
     width: 1.3265rem;
     height: 1.3265rem;
     aspect-ratio: 1/1;
     object-fit: contain;
 }
+
+
 
 
 .bienvenido {
@@ -249,11 +271,14 @@ html, body {
     gap: 1.25rem;
 }
 
+
 .logo-bienvenido {
     width: 15.3125rem;
     height: 13.5625rem;
     aspect-ratio: 35/31;
 }
+
+
 
 
 .tarjeta-bienvenido {
@@ -270,16 +295,19 @@ html, body {
 }
 
 
+
+
 .bloque-imagen {
     color: #2D6A4F;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-family: "Poppins", sans-serif;
     font-weight: 500;
-    line-height: 30.99px;
+    line-height: 1.936875rem;
     justify-content: center;
     display: flex;
     align-items: center;
 }
+
 
 .bloque-texto {
     width: 100%;
@@ -288,12 +316,13 @@ html, body {
     align-items: center;
     text-align: center;
     color: #2D6A4F;
-    font-size: 20px;
+    font-size: 1.25rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    line-height: 30.99px;
+    line-height: 1.936875rem;
     margin: 0 auto;
 }
+
 
 .Configuracion {
     width: 34.375rem;
@@ -301,7 +330,7 @@ html, body {
     border-radius: 1.25rem;
     background: #447B3A;
     color: white;
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-family: "Inter", sans-serif;
     font-weight: 800;
     justify-content: center;
@@ -310,12 +339,14 @@ html, body {
     text-decoration: none;
 }
 
+
 .pantalla-inicial {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.25rem;
 }
+
 
 .logo-inicial {
     width: 15.3125rem;
@@ -326,6 +357,8 @@ html, body {
     align-items: center;
     justify-content: flex-start;
 }
+
+
 
 
 .contenedor-botones {
@@ -340,13 +373,14 @@ html, body {
     gap: 3.125rem;
 }
 
+
 .Iniciar-sesion {
     width: 34.375rem;
     height: 3.125rem;
     border-radius: 1.25rem;
     background: #447B3A;
     color: #FFFFFF;
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-family: "Inter", sans-serif;
     font-weight: 800;
     justify-content: center;
@@ -355,23 +389,25 @@ html, body {
     text-decoration: none;
 }
 
+
 .rectangulo {
     width: 45.3125rem;
     height: 16.25rem;
     border-radius: 1rem;
     background: rgba(255, 255, 255, 0.85);
-    border: 1px solid #9E9E9E;
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
+    border: 0.0625rem solid #9E9E9E;
+    box-shadow: 0 0.25rem 0.75rem 0 rgba(0, 0, 0, 0.06);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
 
+
 .Registrarse {
     width: 34.375rem;
     height: 3.125rem;
     border-radius: 1.25rem;
-    border: 1.5px solid #447B3A;
+    border: 0.09375rem solid #447B3A;
     color: #447B3A;
     font-family: "Inter", sans-serif;
     font-weight: 800;
@@ -379,8 +415,9 @@ html, body {
     display: flex;
     align-items: center;
     text-decoration: none;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 }
+
 
 .registrarse {
     display: flex;
@@ -388,6 +425,7 @@ html, body {
     align-items: center;
     gap: 1.125rem;
 }
+
 
 .logo-registrarse {
     display: flex;
@@ -398,12 +436,14 @@ html, body {
     margin-top: -5rem;
 }
 
+
 .campo-registro {
     display: flex;
     flex-direction: column;
     gap: 0.3125rem;
     margin-top: -1rem;
 }
+
 
 .etiqueta-registro {
     width: 3.375rem;
@@ -417,11 +457,12 @@ html, body {
     white-space: nowrap;
 }
 
+
 .input-registro {
     width: 35.0625rem;
     height: 3.30163rem;
     border-radius: 0.5rem;
-    border: 1px solid #447B3A;
+    border: 0.0625rem solid #447B3A;
     background: #FFF;
     color: #9E9E9E;
     font-family: "Inter", sans-serif;
@@ -431,19 +472,21 @@ html, body {
     line-height: normal;
 }
 
+
 .Registrarme {
     width: 34.375rem;
     height: 3.125rem;
     border-radius: 1.25rem;
     background: #447B3A;
     color: white;
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-family: "Inter", sans-serif;
     font-weight: 800;
     justify-content: center;
     display: flex;
     align-items: center;
 }
+
 
 .texto-registro {
     width: 13.5625rem;
@@ -458,6 +501,7 @@ html, body {
     padding: 0;
     line-height: 1;
 }
+
 
 .texto-registro2 {
     width: 13.5625rem;
@@ -479,6 +523,7 @@ html, body {
     line-height: 1;
 }
 
+
 .header-superior {
     width: 100%;
     display: flex;
@@ -486,12 +531,14 @@ html, body {
     align-items: center;
 }
 
+
 .blanco {
     width: 1.625rem;
     height: 1.1875rem;
     background: #D9D9D9;
     align-self: flex-start;
 }
+
 
 .iniciar-sesion {
     width: 100%;
@@ -501,6 +548,7 @@ html, body {
     align-items: center;
     gap: 1.125rem;
 }
+
 
 .logo-login {
     display: flex;
@@ -514,6 +562,7 @@ html, body {
     padding: 0;
     line-height: 1;
 }
+
 
 .texto-login {
     width: 11.25rem;
@@ -530,6 +579,7 @@ html, body {
     white-space: nowrap;
 }
 
+
 .detalle-temperatura {
     display: flex;
     flex-direction: column;
@@ -540,6 +590,7 @@ html, body {
     box-sizing: border-box;
 }
 
+
 .detalle-conductividad {
     display: flex;
     flex-direction: column;
@@ -549,6 +600,7 @@ html, body {
     margin: 0;
     box-sizing: border-box;
 }
+
 
 .detalle-humedad {
     display: flex;
@@ -574,13 +626,14 @@ html, body {
     border-radius: 1.5625rem;
     opacity: 0.8;
     background: #D7D7D7;;
-    box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 0.25rem 0.75rem 0 rgba(0, 0, 0, 0.06);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.25rem;
 }
+
 
 .dato-estado {
     color: #000;
@@ -591,6 +644,7 @@ html, body {
     line-height: normal;
     margin-top: -0.3rem;
 }
+
 
 .valor-estado {
     width: auto;
@@ -608,6 +662,7 @@ html, body {
     margin-top: -1rem;
 }
 
+
 .subtitulo-humedad {
     color: #000;
     font-family: "Inter", sans-serif;
@@ -623,6 +678,7 @@ html, body {
     justify-content: center;
     align-items: center;
 }
+
 
 .subtitulo-ver{
     display: flex;
@@ -656,7 +712,7 @@ html, body {
     width: 35rem;
     height: 15.3125rem;
     background: white;
-    box-shadow: 0 -4px 12px 0 rgba(0, 0, 0, 0.06);
+    box-shadow: 0 -0.25rem 0.75rem 0 rgba(0, 0, 0, 0.06);
     border-radius: 1rem;
     display: flex;
     align-items: flex-end;
@@ -664,11 +720,14 @@ html, body {
     box-sizing: border-box;
 }
 
+
 .grafico-interior {
     width: 20.4375rem;
     height: 9.8125rem;
     background: white;
 }
+
+
 
 
 .tarjeta-informacion {
@@ -678,6 +737,7 @@ html, body {
     align-items: center;
     width: 100%;
 }
+
 
 .informacion-interior {
     width: 19.625rem;
@@ -693,6 +753,7 @@ html, body {
     background: #D7D7D7;
 }
 
+
 .acerca-proyecto {
     display: flex;
     flex-direction: column;
@@ -702,6 +763,7 @@ html, body {
     margin: 0;
     box-sizing: border-box;
 }
+
 
 .tarjeta-proyecto {
     display: flex;
@@ -714,6 +776,7 @@ html, body {
     background: white;
     flex-direction: column;
 }
+
 
 .contenido-proyecto {
     width: 25.125rem;
@@ -730,8 +793,9 @@ html, body {
     flex-direction: column;
     text-align: center;
     margin: 0;
-    gap: 0px;
+    gap: 0rem;
 }
+
 
 .contenido-proyecto2 {
     width: 25.125rem;
@@ -747,9 +811,10 @@ html, body {
     align-items: center;
     flex-direction: column;
     text-align: center;
-    gap: 0px;
+    gap: 0rem;
     margin: 0;
 }
+
 
 .tarjeta-informacion-proyecto {
     display: flex;
@@ -765,6 +830,7 @@ html, body {
     margin-top: 1rem;
 }
 
+
 .informacion-proyecto {
     width: 32.5rem;
     height: auto;
@@ -779,7 +845,7 @@ html, body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    gap: 0px;
+    gap: 0rem;
 }
 .informacion-proyecto2 {
     width: 32.5rem;
@@ -794,8 +860,9 @@ html, body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    gap: 0px;
+    gap: 0rem;
 }
+
 
 .mi-perfil {
     display: flex;
@@ -814,7 +881,7 @@ html, body {
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.9375rem;
-    border: 1px solid #000;
+    border: 0.0625rem solid #000;
     background: #FFF;
     color: #000;
     font-family: "Poppins", sans-serif;
@@ -824,12 +891,14 @@ html, body {
     line-height: normal;
 }
 
+
 .foto-perfil {
     width: 7.186875rem;
     height: 7.150625rem;
     background: #D9D9D9;
     border-radius: 100%;
 }
+
 
 .avatar-inicial {
     display: flex;
@@ -843,6 +912,7 @@ html, body {
     user-select: none;
 }
 
+
 .nombre-perfil {
     display: flex;
     width: 20.6875rem;
@@ -852,7 +922,7 @@ html, body {
     align-items: center;
     gap: 0.625rem;
     border-radius: 6.25rem;
-    border: 1px solid #000;
+    border: 0.0625rem solid #000;
     color: #000;
     font-family: "Inter", sans-serif;
     font-size: 1.5rem;
@@ -860,6 +930,7 @@ html, body {
     font-weight: 400;
     line-height: normal;
 }
+
 
 .descripcion-perfil {
     width: 9rem;
@@ -876,6 +947,7 @@ html, body {
     justify-content: center;
     white-space: nowrap;
 }
+
 
 .tarjeta-datos-perfil {
     width: 27.4375rem;
@@ -894,7 +966,7 @@ html, body {
     height: 2rem;
     background: white;
     border-radius: 6.25rem;
-    border: 1px solid #2D6A4F;
+    border: 0.0625rem solid #2D6A4F;
     color: black;
     font-family:'Poppins', sans-serif;
     font-size: 0.875rem;
@@ -912,6 +984,8 @@ html, body {
 }
 
 
+
+
 .rectangulo {
     width: 45.3125rem;
     height: 16.25rem;
@@ -925,11 +999,14 @@ html, body {
 }
 
 
+
+
 .contenido-izquierdo {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
+
 
 .title3 {
     margin-top: -3rem;
@@ -945,6 +1022,8 @@ html, body {
 }
 
 
+
+
 .contenido-centro {
     width: auto;
     height: 11.75rem;
@@ -955,6 +1034,7 @@ html, body {
     justify-content: center;
 }
 
+
 .contenido-derecho {
     width: 35%;
     display: flex;
@@ -963,12 +1043,14 @@ html, body {
     gap: 1.5rem;
 }
 
+
 .estado {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 0.6rem;
 }
+
 
 .icono-estado {
     display: flex;
@@ -982,10 +1064,12 @@ html, body {
     background: rgba(86, 218, 159, 0.45);
 }
 
+
 .texto-estado {
     display: flex;
     flex-direction: column;
 }
+
 
 .titulo-estado {
     color: #000;
@@ -997,6 +1081,7 @@ html, body {
     margin: 0;
 }
 
+
 .subtitulo-estado {
     color: rgba(0, 0, 0, 0.75);
     font-family: "Inter", sans-serif;
@@ -1006,3 +1091,4 @@ html, body {
     line-height: normal;
     margin: 0;
 }
+
