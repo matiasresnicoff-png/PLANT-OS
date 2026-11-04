@@ -143,10 +143,132 @@ async function cargarConductividad() {
   }
 }
 
+function obtenerUltimasMedicionesConductividad(historial) {
+  return Array.isArray(historial)
+    ? historial.filter(medicion => {
+        if (!medicion) return false;
+
+        const valorOriginal = medicion.conductividad;
+
+        return valorOriginal !== null &&
+          valorOriginal !== undefined &&
+          valorOriginal !== '' &&
+          Number.isFinite(Number(valorOriginal));
+      }).sort((a, b) => {
+        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
+        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
+
+        return (Number.isFinite(fechaA) ? fechaA : 0) -
+          (Number.isFinite(fechaB) ? fechaB : 0);
+      }).slice(-9)
+    : [];
+}
+
+function etiquetaHoraMedicionCond(medicion, esUltima) {
+  if (esUltima) return 'AHORA';
+  const fechaMedicion = medicion.fecha || medicion.createdAt || medicion.timestamp;
+  if (!fechaMedicion) return '--:--';
+  const fechaObj = new Date(fechaMedicion);
+  if (Number.isNaN(fechaObj.getTime())) return '--:--';
+  return new Intl.DateTimeFormat('es-AR', {
+    timeZone: 'America/Argentina/Buenos_Aires',
+    hour: '2-digit', minute: '2-digit', hour12: false
+  }).format(fechaObj);
+}
+
+// Mismo patrón que humedad.js y temperatura.js: Chart.js si está
+// disponible, y si no, el gráfico de respaldo con divs que ya andaba.
+let graficoConductividadChartJs = null;
+
 function dibujarGraficoConductividad(historial) {
   const contenedor = document.getElementById('grafico-conductividad');
   if (!contenedor) return;
 
+  const ultimos = obtenerUltimasMedicionesConductividad(historial);
+
+  try {
+    if (typeof Chart === 'undefined') {
+      throw new Error('Chart.js no está disponible');
+    }
+    dibujarGraficoConductividadConChartJs(contenedor, ultimos);
+  } catch (error) {
+    console.error('No se pudo usar Chart.js, muestro el gráfico de respaldo:', error);
+    dibujarGraficoConductividadRespaldo(contenedor, ultimos);
+  }
+}
+
+function dibujarGraficoConductividadConChartJs(contenedor, ultimos) {
+  contenedor.innerHTML = '';
+  contenedor.style.position = 'relative';
+  contenedor.style.width = '100%';
+  contenedor.style.height = '175px';
+  contenedor.style.boxSizing = 'border-box';
+
+  if (ultimos.length === 0) {
+    const mensaje = document.createElement('div');
+    mensaje.textContent = 'No hay mediciones disponibles.';
+    mensaje.style.position = 'absolute';
+    mensaje.style.top = '50%';
+    mensaje.style.left = '50%';
+    mensaje.style.transform = 'translate(-50%, -50%)';
+    mensaje.style.fontSize = '12px';
+    mensaje.style.color = '#777';
+    contenedor.appendChild(mensaje);
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  contenedor.appendChild(canvas);
+
+  const etiquetas = ultimos.map((medicion, index) =>
+    etiquetaHoraMedicionCond(medicion, index === ultimos.length - 1));
+  const valores = ultimos.map((medicion) => Number(medicion.conductividad));
+  const colores = valores.map((valor) => COLORES_CONDUCTIVIDAD[calcularEstadoConductividad(valor)]);
+
+  if (graficoConductividadChartJs) {
+    graficoConductividadChartJs.destroy();
+  }
+
+  graficoConductividadChartJs = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: etiquetas,
+      datasets: [{
+        data: valores,
+        backgroundColor: colores,
+        borderRadius: 6,
+        maxBarThickness: 25
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.parsed.y} µS/cm`
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: ESCALA_CONDUCTIVIDAD,
+          ticks: { font: { size: 9 }, color: '#555' },
+          grid: { color: 'rgba(0,0,0,0.1)' }
+        },
+        x: {
+          ticks: { font: { size: 9 }, color: '#555' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+function dibujarGraficoConductividadRespaldo(contenedor, ultimos) {
   contenedor.innerHTML = '';
   contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
@@ -191,25 +313,6 @@ function dibujarGraficoConductividad(historial) {
 
     contenedor.appendChild(etiquetaEje);
   });
-
-  const ultimos = Array.isArray(historial)
-    ? historial.filter(medicion => {
-        if (!medicion) return false;
-
-        const valorOriginal = medicion.conductividad;
-
-        return valorOriginal !== null &&
-          valorOriginal !== undefined &&
-          valorOriginal !== '' &&
-          Number.isFinite(Number(valorOriginal));
-      }).sort((a, b) => {
-        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
-        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
-
-        return (Number.isFinite(fechaA) ? fechaA : 0) -
-          (Number.isFinite(fechaB) ? fechaB : 0);
-      }).slice(-9)
-    : [];
 
   if (ultimos.length === 0) {
     const mensaje = document.createElement('div');
