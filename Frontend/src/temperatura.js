@@ -1,4 +1,3 @@
-
 const UMBRAL_TEMPERATURA = { bajo: 15, alto: 32 };
 const ESCALA_TEMPERATURA = 40;
 
@@ -177,9 +176,6 @@ function etiquetaHoraMedicionTemp(medicion, esUltima) {
   }).format(fechaObj);
 }
 
-// Mismo patrón que humedad.js: Chart.js si está disponible, y si no, el
-// gráfico de respaldo con divs que ya andaba (para no arriesgar nada el
-// día de la presentación).
 let graficoTemperaturaChartJs = null;
 
 function dibujarGraficoTemperatura(historial) {

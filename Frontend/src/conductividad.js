@@ -1,4 +1,3 @@
-
 const UMBRAL_CONDUCTIVIDAD = { bajo: 200, alto: 2000 };
 const ESCALA_CONDUCTIVIDAD = 3000;
 
@@ -176,8 +175,6 @@ function etiquetaHoraMedicionCond(medicion, esUltima) {
   }).format(fechaObj);
 }
 
-// Mismo patrón que humedad.js y temperatura.js: Chart.js si está
-// disponible, y si no, el gráfico de respaldo con divs que ya andaba.
 let graficoConductividadChartJs = null;
 
 function dibujarGraficoConductividad(historial) {

@@ -141,10 +141,6 @@ function etiquetaHoraMedicion(medicion, esUltima) {
   }).format(fechaObj);
 }
 
-// Gráfico con Chart.js (lo que pidió Tomi). Si por algún motivo Chart.js no
-// está disponible (no cargó el script, sin internet, etc.) se cae
-// automáticamente al gráfico de barras hecho con divs que ya andaba, para
-// no arriesgar nada el día de la presentación.
 let graficoHumedadChartJs = null;
 
 function dibujarGraficoHumedad(historial) {
