@@ -113,10 +113,129 @@ async function cargarHumedad() {
   }
 }
 
+function obtenerUltimasMedicionesHumedad(historial) {
+  return Array.isArray(historial)
+    ? historial.filter(medicion => {
+        if (!medicion) return false;
+        const valorOriginal = medicion.humedadSuelo;
+        return valorOriginal !== null && valorOriginal !== undefined &&
+          valorOriginal !== '' && Number.isFinite(Number(valorOriginal));
+      }).sort((a, b) => {
+        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
+        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
+        return (Number.isFinite(fechaA) ? fechaA : 0) -
+          (Number.isFinite(fechaB) ? fechaB : 0);
+      }).slice(-9)
+    : [];
+}
+
+function etiquetaHoraMedicion(medicion, esUltima) {
+  if (esUltima) return 'AHORA';
+  const fechaMedicion = medicion.fecha || medicion.createdAt || medicion.timestamp;
+  if (!fechaMedicion) return '--:--';
+  const fechaObj = new Date(fechaMedicion);
+  if (Number.isNaN(fechaObj.getTime())) return '--:--';
+  return new Intl.DateTimeFormat('es-AR', {
+    timeZone: 'America/Argentina/Buenos_Aires',
+    hour: '2-digit', minute: '2-digit', hour12: false
+  }).format(fechaObj);
+}
+
+// Gráfico con Chart.js (lo que pidió Tomi). Si por algún motivo Chart.js no
+// está disponible (no cargó el script, sin internet, etc.) se cae
+// automáticamente al gráfico de barras hecho con divs que ya andaba, para
+// no arriesgar nada el día de la presentación.
+let graficoHumedadChartJs = null;
+
 function dibujarGraficoHumedad(historial) {
   const contenedor = document.getElementById('grafico-humedad');
   if (!contenedor) return;
 
+  const ultimos = obtenerUltimasMedicionesHumedad(historial);
+
+  try {
+    if (typeof Chart === 'undefined') {
+      throw new Error('Chart.js no está disponible');
+    }
+    dibujarGraficoHumedadConChartJs(contenedor, ultimos);
+  } catch (error) {
+    console.error('No se pudo usar Chart.js, muestro el gráfico de respaldo:', error);
+    dibujarGraficoHumedadRespaldo(contenedor, ultimos);
+  }
+}
+
+function dibujarGraficoHumedadConChartJs(contenedor, ultimos) {
+  contenedor.innerHTML = '';
+  contenedor.style.position = 'relative';
+  contenedor.style.width = '100%';
+  contenedor.style.height = '175px';
+  contenedor.style.boxSizing = 'border-box';
+
+  if (ultimos.length === 0) {
+    const mensaje = document.createElement('div');
+    mensaje.textContent = 'No hay mediciones disponibles.';
+    mensaje.style.position = 'absolute';
+    mensaje.style.top = '50%';
+    mensaje.style.left = '50%';
+    mensaje.style.transform = 'translate(-50%, -50%)';
+    mensaje.style.fontSize = '12px';
+    mensaje.style.color = '#777';
+    contenedor.appendChild(mensaje);
+    return;
+  }
+
+  const canvas = document.createElement('canvas');
+  contenedor.appendChild(canvas);
+
+  const etiquetas = ultimos.map((medicion, index) =>
+    etiquetaHoraMedicion(medicion, index === ultimos.length - 1));
+  const valores = ultimos.map((medicion) => Number(medicion.humedadSuelo));
+  const colores = valores.map((valor) => COLORES_HUMEDAD[calcularEstadoHumedad(valor)]);
+
+  if (graficoHumedadChartJs) {
+    graficoHumedadChartJs.destroy();
+  }
+
+  graficoHumedadChartJs = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: etiquetas,
+      datasets: [{
+        data: valores,
+        backgroundColor: colores,
+        borderRadius: 6,
+        maxBarThickness: 25
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (ctx) => `${ctx.parsed.y}%`
+          }
+        }
+      },
+      scales: {
+        y: {
+          min: 0,
+          max: ESCALA_HUMEDAD,
+          ticks: { stepSize: 25, font: { size: 9 }, color: '#555' },
+          grid: { color: 'rgba(0,0,0,0.1)' }
+        },
+        x: {
+          ticks: { font: { size: 9 }, color: '#555' },
+          grid: { display: false }
+        }
+      }
+    }
+  });
+}
+
+function dibujarGraficoHumedadRespaldo(contenedor, ultimos) {
   contenedor.innerHTML = '';
   contenedor.style.position = 'relative';
   contenedor.style.display = 'flex';
@@ -155,20 +274,6 @@ function dibujarGraficoHumedad(historial) {
     etiquetaEje.style.zIndex = '2';
     contenedor.appendChild(etiquetaEje);
   });
-
-  const ultimos = Array.isArray(historial)
-    ? historial.filter(medicion => {
-        if (!medicion) return false;
-        const valorOriginal = medicion.humedadSuelo;
-        return valorOriginal !== null && valorOriginal !== undefined &&
-          valorOriginal !== '' && Number.isFinite(Number(valorOriginal));
-      }).sort((a, b) => {
-        const fechaA = new Date(a.fecha || a.createdAt || a.timestamp).getTime();
-        const fechaB = new Date(b.fecha || b.createdAt || b.timestamp).getTime();
-        return (Number.isFinite(fechaA) ? fechaA : 0) -
-          (Number.isFinite(fechaB) ? fechaB : 0);
-      }).slice(-9)
-    : [];
 
   if (ultimos.length === 0) {
     const mensaje = document.createElement('div');
